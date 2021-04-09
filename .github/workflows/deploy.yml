@@ -27,13 +27,6 @@ jobs:
           key: ${{ secrets.LIGHTSAIL_OHIO_PEM }}
           name: lightsail-ohio.pem
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
-
-      - name: Install SSH key as ID_RSA
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.LIGHTSAIL_OHIO_PEM }}
-          name: id_rsa
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
     
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
