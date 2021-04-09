@@ -35,8 +35,9 @@ def get_source_code(server):
     # get the code from Git
     # server.run("cd ~/projects; git clone --depth 1 https://github.com/drdelozier/swift.git", hide=False)
     # server.run("cd ~/projects/swift; rm -rf .git", hide=False)
-    print("scp -r -i /home/runner/lightsail-ohio.pem /runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects/swift")
-    os.system("scp -r -i /home/runner/lightsail-ohio.pem /runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects/swift")
+    print("scp -r -i /home/runner/.ssh/lightsail-ohio.pem /runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects/swift")
+    os.system("scp -r -i /home/runner/.ssh/lightsail-ohio.pem /runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects/swift")
+    print("app copy complete")
 
     # verify the code was deployed
     stdout, _ = server.run("ls ~/projects/swift")
