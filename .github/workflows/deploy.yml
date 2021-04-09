@@ -26,5 +26,7 @@ jobs:
         run: |
           ls ~
           ls -la ~
-          echo Add other actions to build,
+          cd ~/work
+          ls -la 
+          echo Done
           echo test, and deploy your project.
