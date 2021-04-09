@@ -37,7 +37,8 @@ def get_source_code(server):
     # server.run("cd ~/projects/swift; rm -rf .git", hide=False)
     
     # transfer the code to the target machine
-    server.local("pushd /home/runner/work/swift; tar cvf /home/runner/swift.tar . ; popd", hide=False)
+    server.local("rm -rf /home/runner/work/swift/swift/.git")
+    server.local("pushd /home/runner/work/swift/swift; tar cvf /home/runner/swift.tar . ; popd", hide=False)
     server.local("ls -la", hide=False)
     server.local("tar tvf /home/runner/swift.tar", hide=False)
 
