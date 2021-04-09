@@ -32,13 +32,13 @@ jobs:
       - name: Run a multi-line script
         run: |
           ls -la ~
-          ls -la ~/.ssh
-          ls -la /home/runner/.ssh
-          pushd deploy
-          python3 --version
-          pip3 --version
-          pip3 install fabric
-          #python3 server.py
-          python3 setup-swift.py
-          popd
+          #ls -la ~/.ssh
+          #ls -la /home/runner/.ssh
+          #pushd deploy
+          #python3 --version
+          #pip3 --version
+          #pip3 install fabric
+          ##python3 server.py
+          #python3 setup-swift.py
+          #popd
           echo Done
