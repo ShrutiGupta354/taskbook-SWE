@@ -14,6 +14,10 @@ class Server(object):
                                      user=user,
                                      connect_kwargs={"key_filename":key_filename})
 
+    def local(self, command, stdin="", hide=True):
+        result = self.connection.local(command, hide=hide)
+        return result.stdout, result.stderr
+    
     def run(self, command, stdin="", hide=True):
         result = self.connection.run(command, hide=hide)
         return result.stdout, result.stderr
