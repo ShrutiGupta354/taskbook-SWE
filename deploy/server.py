@@ -1,6 +1,7 @@
 import os
 
 from fabric import Connection
+from fabric.transfer import Transfer
 
 # class
 class Server(object):
@@ -13,6 +14,7 @@ class Server(object):
         self.connection = Connection(host=host,
                                      user=user,
                                      connect_kwargs={"key_filename":key_filename})
+        self.transfer = Transfer(self.connection)
 
     def local(self, command, stdin="", hide=True):
         result = self.connection.local(command, hide=hide)
@@ -25,6 +27,14 @@ class Server(object):
     def sudo(self, command, stdin="", hide=True):
         result = self.connection.sudo(command, hide=hide)
         return result.stdout, result.stderr
+
+    def get(self, remote, local=None, preserve_mode=True):
+        self.transfer.get(remote, local, preserve_mode)
+        return None
+
+    def put(self, local, remote=None, preserve_mode=True):
+        self.transfer.put(local, remote, preserve_mode)
+        return None
 
     def get_operating_system(self):
         stdout, _ = self.run("uname -s")
@@ -268,7 +278,12 @@ def test_uninstall_pip3_packages():
     server.uninstall_pip3_packages(["bottle"])
     assert not server.pip3_package_is_installed("bottle")
 
-
+def test_put_get():
+    server = get_current_server()
+    server.run("ls -la", hide=False)
+    server.put("server.py","temp123")
+    server.run("ls -la", hide=False)
+    server.get("temp123","temp456")
 
 # main
 if __name__ == "__main__":
