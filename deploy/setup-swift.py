@@ -86,7 +86,7 @@ def verify_application_processes(server):
 
 
 if __name__ == "__main__":
-    server = Server( host = "3.142.150.181", user="ubuntu", key_filename="/home/greg/.ssh/lightsail-ohio.pem")
+    server = Server( host = "3.142.150.181", user="ubuntu", key_filename="/home/runner/.ssh/lightsail-ohio.pem")
 
     print("stopping application processes")
     stop_application_processes(server)
