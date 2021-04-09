@@ -27,5 +27,6 @@ jobs:
           cd deploy
           python3 --version
           pip3 --version
-          # python3 server.py
+          pip3 install fabric
+          python3 server.py
           echo Done
