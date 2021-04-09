@@ -33,6 +33,7 @@ jobs:
         run: |
           ls -la ~
           ls -la ~/.ssh
+          ls -la /home/runner/.ssh
           # cd deploy
           # python3 --version
           # pip3 --version
