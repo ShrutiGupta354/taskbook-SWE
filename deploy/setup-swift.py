@@ -42,6 +42,8 @@ def get_source_code(server):
     server.local("pushd /home/runner/work/swift/swift; tar cvf /home/runner/swift.tar . ; popd", hide=False)
     server.local("ls -la", hide=False)
     server.local("tar tvf /home/runner/swift.tar", hide=False)
+    server.put("/home/runner/swift.tar","/home/ubuntu/swift.tar")
+    server.run("tar tvf /home/ubuntu/swift.tar", hide=False)
 
     # verify the code was deployed
     stdout, _ = server.run("ls ~/projects/swift")
