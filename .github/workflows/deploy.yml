@@ -34,9 +34,10 @@ jobs:
           ls -la ~
           ls -la ~/.ssh
           ls -la /home/runner/.ssh
-          cd deploy
+          pushd deploy
           python3 --version
           pip3 --version
           pip3 install fabric
           python3 server.py
+          popd
           echo Done
