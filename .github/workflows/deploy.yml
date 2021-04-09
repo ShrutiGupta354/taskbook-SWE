@@ -32,7 +32,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           ls -la ~
-          la -la ~/.ssh
+          ls -la ~/.ssh
           # cd deploy
           # python3 --version
           # pip3 --version
