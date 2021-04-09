@@ -36,7 +36,7 @@ def get_source_code(server):
     # server.run("cd ~/projects; git clone --depth 1 https://github.com/drdelozier/swift.git", hide=False)
     # server.run("cd ~/projects/swift; rm -rf .git", hide=False)
     #print("scp -r -i /home/runner/.ssh/lightsail-ohio.pem /home/runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects/swift")
-    stdout, stderr = server.local("scp -i ~/.ssh/lightsail-ohio.pem -r /home/runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects")
+    stdout, stderr = server.local("scp -i /home/runner/.ssh/lightsail-ohio.pem -r /home/runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects")
     print(stdout)
     print(stderr)
     # server.connection.local("echo HI; ls -la; pwd")
