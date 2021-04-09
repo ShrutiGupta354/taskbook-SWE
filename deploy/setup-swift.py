@@ -1,4 +1,5 @@
 from server import Server
+import os
 
 def install_apt_packages(server):
     server.update_apt_packages()
@@ -22,8 +23,8 @@ def install_pip3_packages(server):
 def get_source_code(server):
 
     # make sure we have git
-    version = server.get_git_version()
-    assert version.startswith("2.")
+    # version = server.get_git_version()
+    # assert version.startswith("2.")
 
     # make sure we have a projects directory
     server.run("mkdir -p ~/projects")
@@ -32,8 +33,10 @@ def get_source_code(server):
     server.run("rm -rf ~/projects/swift")
 
     # get the code from Git
-    server.run("cd ~/projects; git clone --depth 1 https://github.com/drdelozier/swift.git", hide=False)
-    server.run("cd ~/projects/swift; rm -rf .git", hide=False)
+    # server.run("cd ~/projects; git clone --depth 1 https://github.com/drdelozier/swift.git", hide=False)
+    # server.run("cd ~/projects/swift; rm -rf .git", hide=False)
+    print("scp -r -i /home/runner/lightsail-ohio.pem /runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects/swift")
+    os.system("scp -r -i /home/runner/lightsail-ohio.pem /runner/work/swift/swift ubuntu@3.142.150.181:/home/ubuntu/projects/swift")
 
     # verify the code was deployed
     stdout, _ = server.run("ls ~/projects/swift")
