@@ -25,9 +25,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           pwd
-          ls ~
-          ls -la ~
-          cd ~/work/swift
-          ls -la 
+          ls -la
+          cd deploy
+          ls -la
           echo Done
-          echo test, and deploy your project.
