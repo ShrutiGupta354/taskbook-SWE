@@ -20,13 +20,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.BUILD_MACHINE_PEM }}
+          name: id_rsa # optional
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          cd deploy
-          python3 --version
-          pip3 --version
-          pip3 install fabric
-          python3 server.py
+          ls -la ~
+          la -la ~/.ssh
+          # cd deploy
+          # python3 --version
+          # pip3 --version
+          # pip3 install fabric
+          # python3 server.py
           echo Done
