@@ -38,6 +38,7 @@ def get_source_code(server):
     
     # transfer the code to the target machine
     server.local("rm -rf /home/runner/work/swift/swift/.git")
+    server.local("rm -rf /home/runner/work/swift/swift/deploy/__pycache__")
     server.local("pushd /home/runner/work/swift/swift; tar cvf /home/runner/swift.tar . ; popd", hide=False)
     server.local("ls -la", hide=False)
     server.local("tar tvf /home/runner/swift.tar", hide=False)
