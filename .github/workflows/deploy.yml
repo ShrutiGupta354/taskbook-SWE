@@ -25,5 +25,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           cd deploy
-          python3 server.py
+          python3 --version
+          pip3 --version
+          # python3 server.py
           echo Done
