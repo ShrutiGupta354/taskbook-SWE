@@ -25,7 +25,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.LIGHTSAIL_OHIO_PEM }}
-          name: lightsail_ohio.pem
+          name: lightsail-ohio.pem
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
     
       # Runs a set of commands using the runners shell
