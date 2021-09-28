@@ -11,7 +11,7 @@ from bottle import route, get, put, post, delete
 from bottle import template
 
 # development server
-from bottle import run 
+from bottle import run, default_app 
 
 # ---------------------------
 # web application routes
@@ -125,6 +125,6 @@ def delete_task():
     response.headers['Content-Type'] = 'application/json'
     return json.dumps({'success': True})
 
+application = default_app()
 if __name__ == "__main__":
-
     run(host='0.0.0.0', port=8080, debug=True)
