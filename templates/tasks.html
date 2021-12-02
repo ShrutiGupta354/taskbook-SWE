@@ -1,5 +1,5 @@
-% include("header.tpl")
-% include("banner.tpl")
+{% include 'header.html' %}
+{% include 'banner.html' %}
 
 <style>
   .save_edit, .undo_edit, .move_task, .description, .edit_task, .delete_task {
@@ -238,4 +238,4 @@ $(document).ready(function() {
 });
 
 </script>
-% include("footer.tpl")
+{% include 'footer.html' %}
