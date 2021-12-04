@@ -5,7 +5,6 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-import hashlib
 
 # the base Flask object
 app = Flask(__name__)
