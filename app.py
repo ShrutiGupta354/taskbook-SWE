@@ -5,6 +5,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+import hashlib
 
 # the base Flask object
 app = Flask(__name__)
@@ -22,13 +23,21 @@ def tasks():
 def tasks_w3():
     return render_template("tasks-w3.html") 
 
-@app.get('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template("login.html") 
+    if(request.method=='GET'):
+        return render_template("login.html") 
+    else:
+        # if posted, log the user in
+        return 'LOGIN DATA POSTED'
 
-@app.get('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template("register.html") 
+    if(request.method=='GET'):
+        return render_template("register.html") 
+    else:
+        # if post request, then sign up the user
+        return 'SIGN UP DATA POSTED'
 
 # ---------------------------
 # task REST api 

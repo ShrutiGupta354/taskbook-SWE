@@ -1,4 +1,41 @@
 {% include 'header.html' %}
 {% include 'banner.html' %}
-LOGIN
+
+<div class="container">
+
+    <div class="row text-center mt-3">
+        <div class="col">
+            <h1>Log In</h1>
+        </div>
+    </div>
+
+    <div class="row w-50 mt-4" style="margin-left: 30%;">
+        <div class="col">
+            <form action="/login" method="POST">
+                <div class="my-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        required>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-outline-success">Submit</button>
+            </form>
+        </div>
+    </div> <!-- end of row-->
+
+    <div class="row mt-5" style="margin-left: 30%;">
+        <div class="col">
+            <h4>Not singed up yet?</h4>
+            <a href="/register" class="text-uppercase btn btn-outline-danger mt-3">Sign Up</a>
+        </div>
+    </div>
+
+
+    <!-- end of container -->
+</div>
+
 {% include 'footer.html' %}
