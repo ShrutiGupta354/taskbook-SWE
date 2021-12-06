@@ -10,4 +10,7 @@ if __name__ == "__main__":
         {"time":0.5, "description":"Do something fantastic", "list":"today", "completed":False},
         {"time":0.3, "description":"Do something remarkable", "list":"tomorrow", "completed":False},
         {"time":0.7, "description":"Do something unusual", "list":"tomorrow", "completed":True}
-    ]) 
+    ])
+    # this will have user's credentials for login
+    user_cred_table = taskbook_db.create_table('user_cred')
+     

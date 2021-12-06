@@ -1,0 +1,14 @@
+
+/* to set the global varaibles */
+:root{
+    /* for example: */
+    --color-primary : #9C27B0;
+}
+
+.content{
+    background-color: white;
+    box-shadow: 0 0 5px 5px rgba(0,0,0, 0.5);
+    padding: 4rem 1rem;
+    margin: 5%;
+}
+
