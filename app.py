@@ -14,6 +14,11 @@ app = Flask(__name__)
 # ---------------------------
 
 @app.get('/')
+
+@app.get('/calendar')
+def calendar():
+    return render_template("calendar.html")
+    
 @app.get('/tasks')
 def tasks():
     return render_template("tasks.html") 
