@@ -1,0 +1,73 @@
+{% include 'header.html' %}
+{% include 'banner.html' %}
+
+<style>
+    /* * {
+        border: solid 1px black;
+    } */
+</style>
+
+<!--This div holds the entire calender grid-->
+<div class="border container">
+    <!--The first row of the grid will be the month header-->
+    <div class="row">
+        <div class="col">
+            <i class="bi bi-arrow-left-circle" ></i>
+        </div>
+        <div class="col">
+            <h1>December</h1>
+            <h5>Monday December 6 2021</h5>
+        </div>
+        <dic class="col">
+            <i class="bi bi-arrow-right-circle"></i>
+        </div>
+    </div>
+    <!--The next row of the grid is the weekday headers-->
+    <div class="row">
+        <div class="border col">
+            <h5>Sunday</h5>
+            <!--Inside here we would get all the tasks for this date from the database-->
+        </div>
+        <div class="border col">
+            <h5>Monday</h5>
+        </div>
+        <div class="border col">
+            <h5>Tuesday</h5>
+        </div>
+        <div class="border col">
+            <h5>Wednesday</h5>
+        </div>
+        <div class="border col">
+            <h5>Thursday</h5>
+        </div>
+        <div class="border col">
+            <h5>Friday</h5>
+        </div>
+        <div class="border col">
+            <h5>Saturday</h5>
+        </div>
+    </div>
+    <!--There will be a for loop here for the number of weeks in the month, and then a new row added for each week-->
+    <div class="row">
+        <div class="border col">1</div>
+        <div class="border col">2</div>
+        <div class="border col">3</div>
+        <div class="border col">4</div>
+        <div class="border col">5</div>
+        <div class="border col">6</div>
+        <div class="border col">7</div>
+    </div>
+</div>
+
+<!--This div is for the left aligned elements below the calendar-->
+<div class="">
+    <a href=""><i class="bi bi-plus-circle"></i></a>
+</div>
+
+<!--This div is for the right aligned elements below the calendar-->
+<div class="">
+    <a href=""><i class="bi bi-calendar-range"></i></a>
+    <a href="/tasks"><i class="bi bi-calendar2-check"></i></a>
+</div>
+
+{% include 'footer.html' %}
