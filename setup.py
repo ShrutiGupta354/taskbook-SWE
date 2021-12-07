@@ -6,10 +6,10 @@ if __name__ == "__main__":
     # task_table.drop()
     task_table = taskbook_db.create_table('task')
     task_table.insert_many([
-        {"time":0.0, "description":"Do something useful", "list":"today", "completed":True},
-        {"time":0.5, "description":"Do something fantastic", "list":"today", "completed":False},
-        {"time":0.3, "description":"Do something remarkable", "list":"tomorrow", "completed":False},
-        {"time":0.7, "description":"Do something unusual", "list":"tomorrow", "completed":True}
+        {"date":1/31/22, "description":"Do something useful", "completed":True},
+        {"date":1/31/22, "description":"Do something fantastic", "completed":False},
+        {"date":1/31/22, "description":"Do something remarkable",  "completed":False},
+        {"date":1/31/22, "description":"Do something unusual",  "completed":True}
     ])
     # this will have user's credentials for login
     user_cred_table = taskbook_db.create_table('user_cred')
