@@ -16,3 +16,43 @@
     font-size: 72px;
     letter-spacing: 5px;
 }
+
+.homepage-hero-feature{
+    font-size: 80px;
+    letter-spacing: 5px;
+    margin-top: 20px;
+    background: linear-gradient(to right,#F44336,black);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+}
+
+/* for animation on home page */
+.reveal{
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.reveal.active{
+    transform: translateY(0px);
+    opacity: 1;
+
+}
+
+/* for the up arrow on homepage */
+.bottom{
+    margin-top: 5px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.img-up{
+    transition: transform 200ms linear;
+}
+
+.img-up:hover{
+    transform: translateY(-1em);
+}
