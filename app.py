@@ -14,6 +14,9 @@ app = Flask(__name__)
 # ---------------------------
 
 @app.get('/')
+@app.get('/home')
+def homepage():
+    return render_template("homepage.html")
 
 @app.get('/calendar')
 def calendar():
