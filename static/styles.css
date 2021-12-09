@@ -102,7 +102,7 @@ header{
 /* custom buttons */
 .btn-yellow{
     color: var(--primary-black);
-    border-radius: 12px;
+    border-radius: 8px;
     border: 2px solid var(--primary-yellow);
     font-size: 20px;
     letter-spacing: 2px;
@@ -114,7 +114,7 @@ header{
 
 .btn-blue{
     color: var(--primary-black);
-    border-radius: 12px;
+    border-radius: 8px;
     border: 2px solid var(--primary-blue);
     font-size: 20px;
     letter-spacing: 2px;
