@@ -5,7 +5,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-
+# from datetime import datetime
 # the base Flask object
 app = Flask(__name__)
 
@@ -14,6 +14,9 @@ app = Flask(__name__)
 # ---------------------------
 
 @app.get('/')
+@app.get('/home')
+def homepage():
+    return render_template("homepage.html")
 
 @app.get('/calendar')
 def calendar():

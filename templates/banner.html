@@ -1,4 +1,16 @@
-<div class="px-3 bg-black text-white">
-  <div class="display-4"><b>Taskbook 3.14159</b></div>
-</div>
+<!-- <div class="px-3 bg-black text-white">
+  <div class="display-4"><b> <a href="{{url_for('homepage')}}" class="text-white" style="text-decoration: none;">Taskbook</a></b></div>
+</div> -->
 
+<header>
+  <nav class="navbar navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand homepage-navbar-title" href="{{url_for('homepage')}}" style="margin-left: 15%;"><i class="bi bi-journal"></i> TASKBOOK</a>
+      {% if 'login' not in request.url and 'register' not in request.url: %}
+      <form class="d-flex" style="margin-right: 15%;">
+        <a class="btn btn-yellow" href="{{url_for('login')}}" >Login</a>
+      </form>
+      {% endif %}  
+    </div>
+  </nav>
+</header>
