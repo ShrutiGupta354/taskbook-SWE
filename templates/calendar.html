@@ -15,6 +15,7 @@
             <i class="bi bi-arrow-left-circle" ></i>
         </div>
         <div class="col">
+            <!-- use JS to render date dynamically -->
             <h1>December</h1>
             <h5>Monday December 6 2021</h5>
         </div>
@@ -61,7 +62,41 @@
 
 <!--This div is for the left aligned elements below the calendar-->
 <div class="">
-    <a href=""><i class="bi bi-plus-circle"></i></a>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Add Task <i class="bi bi-plus-circle"></i>
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- let user input date and data for the task -->
+                        <!-- the form body to insert the task with date and content -->
+                        <!-- output for date is MM-DD-YYYY -->
+                        <div class="mb-3">
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control datepicker" id="date" name="date" type="date" value="" data-date-format="mm/dd/yyyy" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Task</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description"></textarea>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <!-- don't click submit for now -->
+                        <button type="submit" class="btn btn-outline-primary" id="add-task">Add Task</button>
+                    <button type="button" id="close-add-task" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--This div is for the right aligned elements below the calendar-->
@@ -69,5 +104,32 @@
     <a href=""><i class="bi bi-calendar-range"></i></a>
     <a href="/tasks"><i class="bi bi-calendar2-check"></i></a>
 </div>
+
+<!-- script to add tasks to the database -->
+<script>
+    // since we don't have centralized javascript code, I had to copy paste this code below from tasks.html with minor tweaks
+    function api_create_task(task, success_function) {
+        console.log("creating task with:", task)
+        $.ajax({
+            url: "api/tasks", type: "POST",
+            data: JSON.stringify(task),
+            contentType: "application/json; charset=utf-8",
+            success: success_function
+        });
+    }
+
+
+    // use this function call
+    // when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
+    $("#add-task").on('click', function(){
+        api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
+            function (result) {
+                console.log(result);
+                $("#current_input").val("")
+            });
+        $("#close-add-task").click();
+    });
+
+</script>
 
 {% include 'footer.html' %}

@@ -69,7 +69,7 @@ def create_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["description"], f"Illegal key '{key}'"
+            assert key in ["description", "date"], f"Illegal key '{key}'"
         assert type(data['description']) is str, "Description is not a string."
         assert len(data['description'].strip()) > 0, "Description is length zero."
     except Exception as e:

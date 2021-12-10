@@ -6,8 +6,8 @@
   <nav class="navbar navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand homepage-navbar-title" href="{{url_for('homepage')}}" style="margin-left: 15%;"><i class="bi bi-journal"></i> TASKBOOK</a>
-      {% if 'login' not in request.url and 'register' not in request.url: %}
-      <form class="d-flex" style="margin-right: 15%;">
+      {% if 'login' not in request.url and 'register' not in request.url : %}
+      <form class="d-flex d-none d-sm-none d-md-block" style="margin-right: 15%;">
         <a class="btn btn-yellow" href="{{url_for('login')}}" >Login</a>
       </form>
       {% endif %}  
