@@ -80,18 +80,20 @@
                     <!-- let user input date and data for the task -->
                         <!-- the form body to insert the task with date and content -->
                         <!-- output for date is MM-DD-YYYY -->
+                    <form id="add-task-form">
                         <div class="mb-3">
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control datepicker" id="date" name="date" type="date" value="" data-date-format="mm/dd/yyyy" />
+                            <input class="form-control datepicker" id="date" name="date" type="date" value="" data-date-format="mm/dd/yyyy" required />
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Task</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description" required></textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
                         <!-- don't click submit for now -->
                         <button type="submit" class="btn btn-outline-primary" id="add-task">Add Task</button>
+                    </form>
                     <button type="button" id="close-add-task" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -122,12 +124,21 @@
     // use this function call
     // when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
     $("#add-task").on('click', function(){
-        api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
-            function (result) {
-                console.log(result);
-                $("#current_input").val("")
-            });
-        $("#close-add-task").click();
+        // validate input client-side and then only send the data to create a task
+        var date_field = $('#date');
+        var text_field = $('#exampleFormControlTextarea1');
+        if(date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == ""){
+            $('#add-task-form').reset();
+        }
+        else{
+            api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
+                function (result) {
+                    console.log(result);
+                    $("#current_input").val("")
+                });
+            $("#close-add-task").click();
+        }
+
     });
 
 </script>
