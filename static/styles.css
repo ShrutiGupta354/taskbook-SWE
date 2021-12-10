@@ -144,3 +144,19 @@ header{
 .social-icon:hover{
     color: var(--primary-white);
 }
+
+/* for sticky footer */
+/* app-wide styles */
+html,body{
+    min-height: 100vh !important;
+}
+
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+.footer{
+   margin-top: auto;
+}
