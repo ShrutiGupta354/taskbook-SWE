@@ -14,13 +14,10 @@ if __name__ == "__main__":
     ])
     # this will have user's credentials for login
     user_cred_table = taskbook_db.create_table('user_cred')
-<<<<<<< HEAD
     user_cred_table.drop()
     user_cred_table = taskbook_db.create_table('user_cred')
     user_cred_table.insert_many([
-        {"email": "default@gmail.com", "username": "default", "password": "password", "view": "calendar"},
-        {"email": "admin@gmail.com", "username": "admin", "password": "admin", "view": "calendar"}
+        {"email": "default@gmail.com", "password": "password", "view": "calendar"},
+        {"email": "admin@gmail.com", "password": "admin", "view": "calendar"}
     ])
-=======
->>>>>>> main
      
