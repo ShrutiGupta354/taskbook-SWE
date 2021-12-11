@@ -6,38 +6,50 @@
 
 <div class="container">
 
-    <div class="row text-center mt-3">
-        <div class="col">
-            <h1>Create an account!</h1>
-        </div>
-    </div>
+    <div class="row content flex align-items-center justify-content-center">
+        
+        <div class="col-md-6">
+            <!-- left form -->
+            <div class="row text-center mt-3">
+                <div class="col">
+                    <h1 style="margin-left: 25%;">Create an account!</h1>
+                </div>
+            </div>
 
-    <div class="row w-50 mt-4" style="margin-left: 30%;" >
-        <div class="col">
-            <form action="/register" method="POST">
-                <div class="my-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <div class="row w-50 mt-4" style="margin-left: 30%;">
+                <div class="col">
+                    <form action="/register" method="POST">
+                        <div class="my-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="confirm_password" required>
+                        </div>
+                        <button type="submit" class="btn btn-blue">Submit</button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="confirm_password" required>
-                </div>
-                <button type="submit" class="btn btn-outline-success">Submit</button>
-            </form>
-        </div>
-    </div> <!-- end of row-->
+            </div> <!-- end of row-->
 
-    <div class="row mt-5" style="margin-left: 30%;">
-        <div class="col">
-            <h4>Already have an account?</h4>
-            <a href="/login" class="text-uppercase btn btn-outline-danger mt-3" >Log In</a>
+            <div class="row mt-5" style="margin-left: 30%;">
+                <div class="col">
+                    <h4>Already have an account?</h4>
+                    <a href="/login" class="text-uppercase btn btn-yellow mt-3">Log In</a>
+                </div>
+            </div>
         </div>
+
+        <div class="col-md-6">
+            <!-- right image -->
+            <img src="/static/taskbook_join_logo.svg" alt="join_svg" class="img-fluid mt-3">
+        </div>
+
     </div>
 
 

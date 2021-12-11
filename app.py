@@ -5,8 +5,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-import hashlib
-
+# from datetime import datetime
 # the base Flask object
 app = Flask(__name__)
 
@@ -15,6 +14,14 @@ app = Flask(__name__)
 # ---------------------------
 
 @app.get('/')
+@app.get('/home')
+def homepage():
+    return render_template("homepage.html")
+
+@app.get('/calendar')
+def calendar():
+    return render_template("calendar.html")
+    
 @app.get('/tasks')
 def tasks():
     return render_template("tasks.html") 
@@ -62,19 +69,17 @@ def create_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["description","list"], f"Illegal key '{key}'"
+            assert key in ["description", "date"], f"Illegal key '{key}'"
         assert type(data['description']) is str, "Description is not a string."
         assert len(data['description'].strip()) > 0, "Description is length zero."
-        assert data['list'] in ["today","tomorrow"], "List must be 'today' or 'tomorrow'"
     except Exception as e:
         print(400, str(e))
         return ("400 Bad Request:"+str(e), 400)
     try:
         task_table = taskbook_db.get_table('task')
         task_table.insert({
-            "time": time.time(),
             "description":data['description'].strip(),
-            "list":data['list'],
+            "date":data['date'],
             "completed":False
         })
     except Exception as e:
@@ -89,20 +94,18 @@ def update_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["id","description","completed","list"], f"Illegal key '{key}'"
+            assert key in ["id","description","completed"], f"Illegal key '{key}'"
         assert type(data['id']) is int, f"id '{id}' is not int"
         if "description" in data:
             assert type(data['description']) is str, "Description is not a string."
             assert len(data['description'].strip()) > 0, "Description is length zero."
         if "completed" in data:
             assert type(data['completed']) is bool, "Completed is not a bool."
-        if "list" in data:
-            assert data['list'] in ["today","tomorrow"], "List must be 'today' or 'tomorrow'"
     except Exception as e:
         print(400, str(e))
         return ("400 Bad Request:"+str(e), 400)
-    if 'list' in data: 
-        data['time'] = time.time()
+    if 'date' in data: 
+        data['date'] = data['date']
     try:
         task_table = taskbook_db.get_table('task')
         task_table.update(row=data, keys=['id'])
