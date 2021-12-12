@@ -26,7 +26,6 @@
 <script>
 
 /* API CALLS */
-
 function api_get_tasks(success_function) {
   $.ajax({url:"api/tasks", type:"GET", 
           success:success_function});
@@ -128,7 +127,7 @@ function save_edit(event) {
                       $("#current_input").val("")
                     } );
   } else {
-    api_create_task({description:$("#input-" + id).val(), list:id},
+    api_create_task({description:$("#input-" + id).val(), date:"12-09-2021"},
                     function(result) { 
                       console.log(result);
                       get_current_tasks();
