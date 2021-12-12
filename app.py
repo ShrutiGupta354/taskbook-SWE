@@ -2,12 +2,18 @@
 # Web Application for Task Management 
 
 # flask web objects
+from auth import auth
 from flask import Flask
 from flask import render_template
-from flask import request
-# from datetime import datetime
+from flask import request, session, flash
+import dataset
+
+taskbook_db = dataset.connect('sqlite:///taskbook.db')
+
 # the base Flask object
 app = Flask(__name__)
+# for cookies and sesion encryption
+app.config['SECRET_KEY'] = 'walsh-swe'
 
 # ---------------------------
 # web application routes
@@ -16,45 +22,41 @@ app = Flask(__name__)
 @app.get('/')
 @app.get('/home')
 def homepage():
+    if session.get('user_authenticated'):
+        flash('Log out first to log back in.')
+        return render_template('tasks.html')
     return render_template("homepage.html")
 
 @app.get('/calendar')
 def calendar():
-    return render_template("calendar.html")
+    if session.get('user_authenticated'):
+        return render_template("calendar.html", user=session['user_email'])
+    flash('You need to be logged in first', category='error')
+    return render_template("login.html")
     
 @app.get('/tasks')
 def tasks():
-    return render_template("tasks.html") 
+    if session.get('user_authenticated'):
+        return render_template("tasks.html", user=session['user_email'])
+    flash('You need to be logged in first', category='error')
+    return render_template("login.html")
 
 @app.get('/tasks-w3')
 def tasks_w3():
-    return render_template("tasks-w3.html") 
+    if session.get('user_authenticated'):
+        return render_template("tasks-w3.html", user=session['user_email'])
+    flash('You need to be logged in first', category='error')
+    return render_template("login.html")
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if(request.method=='GET'):
-        return render_template("login.html") 
-    else:
-        # if posted, log the user in
-        return 'LOGIN DATA POSTED'
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if(request.method=='GET'):
-        return render_template("register.html") 
-    else:
-        # if post request, then sign up the user
-        return 'SIGN UP DATA POSTED'
+#--------------------
+# For authentication
+#-------------------
+# we need this so that we can "import" login/logout/signup functions from auth.py
+app.register_blueprint(auth, url_prefix='/')
 
 # ---------------------------
 # task REST api 
 # ---------------------------
-
-import json
-import dataset
-import time
-
-taskbook_db = dataset.connect('sqlite:///taskbook.db')  
 
 @app.get('/api/tasks')
 def get_tasks():
