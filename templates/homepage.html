@@ -10,7 +10,8 @@
         <h1 class="fw-light homepage-hero-h1">Welcome to TaskBook</h1>
         <p class="fs-3">Organizing tasks made easy. Simply log into your account and have all your tasks at one place
         </p>
-        <a href="{{url_for('register')}}" class="btn btn-yellow fs-3">Sign Up</a>
+        <!-- had to change to auth.register because of auth.py -->
+        <a href="{{url_for('auth.register')}}" class="btn btn-yellow fs-3">Sign Up</a>
     </div>
     <div class="column2">
         <!-- illustration -->
