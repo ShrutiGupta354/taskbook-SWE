@@ -1,0 +1,115 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Colors: 
+    #eef78b -- white
+    #21b0c0 -- light blue
+    #011a2b -- dark blue
+    #ffe45e -- yellow
+*/
+
+.calendar {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.month {
+    width: 100%;
+    height: 8em;
+    color: #011a2b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border-bottom: 3px solid #011a2b;
+}
+
+.month i {
+    font-size: 2em;
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+.date h1 {
+    font-size: 3em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 10px 0;
+}
+
+.date p {
+    font-size: 1em;
+}
+
+.weekdays {
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+}
+
+.weekdays div {
+    font-size: 1.2em;
+    font-weight: 400;
+    width: calc(100%/7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.days {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.days div {
+    font-size: 1em;
+    width: calc(100%/7);
+    height: 6em;
+    text-align: right;
+    transition: background-color .2s;
+    border: 1px solid #011a2b;
+    padding: 0 5px;
+}
+
+.days div:hover:not(today) {
+    background-color: rgb(194, 194, 194);
+    color: #eef7fb;
+    cursor: pointer;
+}
+
+.today {
+    background-color: #011a2b;
+    color: #eef7fb;
+}
+
+.prev-days, .next-days {
+    opacity: 0.4;
+}
+
+.view {
+    list-style: none;
+    padding: 0;
+}
+
+.view li {
+    display: inline-block;
+    display: inline;
+    font-size: 18px;
+    color: #011a2b;
+    margin-right: 20px;
+}
+
+.view a {
+    font-size: 22px;
+    color: #011a2b;
+    text-decoration: none;
+    margin-right: 5px;
+}
