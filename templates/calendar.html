@@ -68,9 +68,9 @@
 <!--This div is for the left aligned elements below the calendar-->
 <div class="">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <!-- <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Add Task <i class="bi bi-plus-circle"></i>
-    </button>
+    </button> -->
     
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -104,14 +104,13 @@
             </div>
         </div>
     </div>
-</div>
 
+</div>
     <ul class="view">
-        <li><a href="#"><i class="bi bi-plus-circle"></i></a>Add Task</li>
-        <li><a href="#"><i class="bi bi-calendar-range"></i></a>Weekly View</li>
-        <li><a href="/tasks"><i class="bi bi-calendar2-check"></i></a>Task View</li>
+        <li><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a><i class="bi bi-plus-circle"></i>Add Task</a></button></li>
+        <li><button type="button" class="btn btn-outline-success"><a href="/weekly"><i class="bi bi-calendar-range"></i>Weekly View</a></button></li>
+        <li><button type="button" class="btn btn-outline-success"><a href="/tasks"><i class="bi bi-calendar2-check"></i>Task View</a></button></li>
     </ul>
-    
 </div> <!-- End Calendar-->
 
 <!-- script to add tasks to the database -->
