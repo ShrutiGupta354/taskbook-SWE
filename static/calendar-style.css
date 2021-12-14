@@ -1,0 +1,126 @@
+/* to set the global varaibles */
+:root{
+    /* for example: */
+    --primary-blue: #21b0c0;
+    --primary-yellow: #ffe45e;
+    --primary-black: #011a2b;
+    --primary-white: #eef7fb;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Colors: 
+    #eef78b -- white
+    #21b0c0 -- light blue
+    #011a2b -- dark blue
+    #ffe45e -- yellow
+*/
+
+.calendar {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.month {
+    width: 100%;
+    height: 8em;
+    color: #011a2b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border-bottom: 3px solid #011a2b;
+}
+
+.month i {
+    font-size: 2em;
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+.date h1 {
+    font-size: 3em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 10px 0;
+}
+
+.date p {
+    font-size: 1em;
+}
+
+.weekdays {
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+}
+
+.weekdays div {
+    font-size: 1.2em;
+    font-weight: 400;
+    width: calc(100%/7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.days {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.days div {
+    font-size: 1em;
+    width: calc(100%/7);
+    height: 6em;
+    text-align: right;
+    transition: background-color .2s;
+    border: 1px solid var(--primary-black);
+    padding: 0 5px;
+}
+
+.days div:hover:not(today) {
+    background-color: var(--primary-yellow);
+    color: var(--primary-blue);
+    cursor: pointer;
+}
+
+.today {
+    background-color: var(--primary-blue);
+    color: var(--primary-white);
+}
+
+.prev-days, .next-days {
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+}
+
+.view {
+    list-style: none;
+    padding: 1em;
+    padding-bottom: 5em;
+}
+
+.view li {
+    display: inline-block;
+    display: inline;
+    font-size: 18px;
+    color: #011a2b;
+    margin-right: 20px;
+}
+
+.view a {
+    font-size: 22px;
+    color: #011a2b;
+    text-decoration: none;
+    margin-right: 5px;
+}

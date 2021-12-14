@@ -101,6 +101,7 @@ header{
 }
 /* custom buttons */
 .btn-yellow{
+    background-color: transparent;
     color: var(--primary-black);
     border-radius: 8px;
     border: 2px solid var(--primary-yellow);
@@ -113,6 +114,7 @@ header{
 }
 
 .btn-blue{
+    background-color: transparent;
     color: var(--primary-black);
     border-radius: 8px;
     border: 2px solid var(--primary-blue);
