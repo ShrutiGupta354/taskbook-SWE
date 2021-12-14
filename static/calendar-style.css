@@ -107,6 +107,7 @@
 .view {
     list-style: none;
     padding: 1em;
+    padding-bottom: 5em;
 }
 
 .view li {
