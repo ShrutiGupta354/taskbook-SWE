@@ -113,3 +113,9 @@
     text-decoration: none;
     margin-right: 5px;
 }
+
+.cal-task {
+    font-size: 18px;
+    color: #011a2b;
+    text-decoration: none;
+}
