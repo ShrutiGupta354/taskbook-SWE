@@ -1,3 +1,12 @@
+/* to set the global varaibles */
+:root{
+    /* for example: */
+    --primary-blue: #21b0c0;
+    --primary-yellow: #ffe45e;
+    --primary-black: #011a2b;
+    --primary-white: #eef7fb;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -75,23 +84,24 @@
     height: 6em;
     text-align: right;
     transition: background-color .2s;
-    border: 1px solid #011a2b;
+    border: 1px solid var(--primary-black);
     padding: 0 5px;
 }
 
 .days div:hover:not(today) {
-    background-color: rgb(194, 194, 194);
-    color: #eef7fb;
+    background-color: var(--primary-yellow);
+    color: var(--primary-blue);
     cursor: pointer;
 }
 
 .today {
-    background-color: #011a2b;
-    color: #eef7fb;
+    background-color: var(--primary-blue);
+    color: var(--primary-white);
 }
 
 .prev-days, .next-days {
-    opacity: 0.4;
+    background-color: var(--primary-white);
+    color: var(--primary-black);
 }
 
 .view {
