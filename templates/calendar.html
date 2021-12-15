@@ -1,7 +1,7 @@
 {% include 'header.html' %}
 {% include 'banner.html' %}
 
-<div class="calendar">
+<div class="calendar mb-3">
     <div class="month">
         <i class="bi bi-caret-left-fill prev"></i>
         <div class="date">
@@ -20,10 +20,17 @@
         <div>Saturday</div>
     </div>
     <div class="days"></div>
+    <div class="my-3">
+        <div class="d-flex float-start">
+            <button type="button" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i> Add Task</button>
+        </div>
+        <div class="d-flex float-end">
+            <button type="button" class="btn btn-yellow me-3" onclick="location.href='/weekly';"><i class="bi bi-calendar-range"></i> Weekly View</a>
+            <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/tasks';"><i class="bi bi-calendar2-check"></i> Task View</a>
+        </div>
+    </div>
 </div> <!-- End Calendar-->
-
 <script src="../static/calendar.js"></script>
-
 
 <!--This div is for the left aligned elements below the calendar-->
 <div class="">
@@ -31,7 +38,6 @@
     <!-- <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Add Task <i class="bi bi-plus-circle"></i>
     </button> -->
-    
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
