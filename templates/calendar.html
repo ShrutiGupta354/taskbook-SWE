@@ -3,12 +3,12 @@
 
 <div class="calendar">
     <div class="month">
-        <i class="bi bi-caret-left-fill"></i>
+        <i class="bi bi-caret-left-fill prev"></i>
         <div class="date">
-            <h1>December</h1>
-            <p>Wednesday December 8, 2021</p>
+            <h1></h1>
+            <p></p>
         </div>
-        <i class="bi bi-caret-right-fill"></i>
+        <i class="bi bi-caret-right-fill next"></i>
     </div>
     <div class="weekdays">
         <div>Sunday</div>
@@ -19,51 +19,11 @@
         <div>Friday</div>
         <div>Saturday</div>
     </div>
-    <div class="days">
-        <div class="prev-days">26</div>
-        <div class="prev-days">27</div>
-        <div class="prev-days">28</div>
-        <div class="prev-days">29</div>
-        <div class="prev-days">30</div>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div class="today">8</div>
-        <div>9</div>
-        <div>10</div>
-        <div>11</div>
-        <div>12</div>
-        <div>13</div>
-        <div>14</div>
-        <div>15</div>
-        <div>16</div>
-        <div>17</div>
-        <div>18</div>
-        <div>19</div>
-        <div>20</div>
-        <div>21</div>
-        <div>22</div>
-        <div>23</div>
-        <div>24</div>
-        <div>25</div>
-        <div>26</div>
-        <div>27</div>
-        <div>28</div>
-        <div>29</div>
-        <div>30</div>
-        <div>31</div>
-        <div class="next-days">1</div>
-        <div class="next-days">2</div>
-        <div class="next-days">3</div>
-        <div class="next-days">4</div>
-        <div class="next-days">5</div>
-        <div class="next-days">6</div>
-    </div>
-</div>
+    <div class="days"></div>
+</div> <!-- End Calendar-->
+
+<script src="../static/calendar.js"></script>
+
 
 <!--This div is for the left aligned elements below the calendar-->
 <div class="">
@@ -115,7 +75,6 @@
             <li><button type="button" class="btn-yellow"><a href="/tasks"><i class="bi bi-calendar2-check"></i>Task View</a></button></li>
         </div>
     </ul>
-</div> <!-- End Calendar-->
 
 <!-- script to add tasks to the database -->
 <script>
@@ -131,26 +90,28 @@
     }
 
 
-    // use this function call
-    // when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
-    $("#add-task").on('click', function(){
-        // validate input client-side and then only send the data to create a task
-        var date_field = $('#date');
-        var text_field = $('#exampleFormControlTextarea1');
-        if(date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == ""){
-            $('#add-task-form').reset();
-        }
-        else{
-            api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
-                function (result) {
-                    console.log(result);
-                    $("#current_input").val("")
-                });
-            $("#close-add-task").click();
-        }
+// use this function call
+// when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
+$("#add-task").on('click', function(){
+    // validate input client-side and then only send the data to create a task
+    var date_field = $('#date');
+    var text_field = $('#exampleFormControlTextarea1');
+    if(date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == ""){
+        $('#add-task-form').reset();
+    }
+    else{
+        api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
+            function (result) {
+                console.log(result);
+                $("#current_input").val("")
+            });
+        $("#close-add-task").click();
+    }
 
-    });
+});
 
 </script>
+
+
 
 {% include 'footer.html' %}
