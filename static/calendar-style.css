@@ -79,7 +79,7 @@
     padding: 0 5px;
 }
 
-.days div:hover:not(today) {
+.days div:hover:not(.today) {
     background-color: var(--primary-yellow);
     color: var(--primary-blue);
     cursor: pointer;
