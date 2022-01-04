@@ -88,6 +88,7 @@
 .today {
     background-color: var(--primary-blue);
     color: var(--primary-white);
+    cursor: pointer;
 }
 
 .prev-days, .next-days {
