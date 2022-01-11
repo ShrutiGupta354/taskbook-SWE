@@ -1,12 +1,3 @@
-/* to set the global varaibles */
-:root{
-    /* for example: */
-    --primary-blue: #21b0c0;
-    --primary-yellow: #ffe45e;
-    --primary-black: #011a2b;
-    --primary-white: #eef7fb;
-}
-
 * {
     padding: 0;
     margin: 0;
@@ -88,7 +79,7 @@
     padding: 0 5px;
 }
 
-.days div:hover:not(today) {
+.days div:hover:not(.today) {
     background-color: var(--primary-yellow);
     color: var(--primary-blue);
     cursor: pointer;
@@ -97,6 +88,7 @@
 .today {
     background-color: var(--primary-blue);
     color: var(--primary-white);
+    cursor: pointer;
 }
 
 .prev-days, .next-days {
