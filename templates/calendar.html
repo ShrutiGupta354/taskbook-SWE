@@ -1,72 +1,43 @@
 {% include 'header.html' %}
 {% include 'banner.html' %}
 
-<style>
-    /* * {
-        border: solid 1px black;
-    } */
-</style>
-
-<!--This div holds the entire calender grid-->
-<div class="border container">
-    <!--The first row of the grid will be the month header-->
-    <div class="row">
-        <div class="col">
-            <i class="bi bi-arrow-left-circle" ></i>
+<div class="calendar mb-3">
+    <div class="month">
+        <i class="bi bi-caret-left-fill prev"></i>
+        <div class="date">
+            <h1></h1>
+            <p></p>
         </div>
-        <div class="col">
-            <!-- use JS to render date dynamically -->
-            <h1>December</h1>
-            <h5>Monday December 6 2021</h5>
+        <i class="bi bi-caret-right-fill next"></i>
+    </div>
+    <div class="weekdays">
+        <div>Sunday</div>
+        <div>Monday</div>
+        <div>Tuesday</div>
+        <div>Wednesday</div>
+        <div>Thursday</div>
+        <div>Friday</div>
+        <div>Saturday</div>
+    </div>
+    <div class="days"></div>
+    <div class="my-3">
+        <div class="d-flex float-start">
+            <button type="button" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i> Add Task</button>
         </div>
-        <dic class="col">
-            <i class="bi bi-arrow-right-circle"></i>
+        <div class="d-flex float-end">
+            <button type="button" class="btn btn-yellow me-3" onclick="location.href='/weekly';"><i class="bi bi-calendar-range"></i> Weekly View</a>
+            <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/tasks';"><i class="bi bi-calendar2-check"></i> Task View</a>
         </div>
     </div>
-    <!--The next row of the grid is the weekday headers-->
-    <div class="row">
-        <div class="border col">
-            <h5>Sunday</h5>
-            <!--Inside here we would get all the tasks for this date from the database-->
-        </div>
-        <div class="border col">
-            <h5>Monday</h5>
-        </div>
-        <div class="border col">
-            <h5>Tuesday</h5>
-        </div>
-        <div class="border col">
-            <h5>Wednesday</h5>
-        </div>
-        <div class="border col">
-            <h5>Thursday</h5>
-        </div>
-        <div class="border col">
-            <h5>Friday</h5>
-        </div>
-        <div class="border col">
-            <h5>Saturday</h5>
-        </div>
-    </div>
-    <!--There will be a for loop here for the number of weeks in the month, and then a new row added for each week-->
-    <div class="row">
-        <div class="border col">1</div>
-        <div class="border col">2</div>
-        <div class="border col">3</div>
-        <div class="border col">4</div>
-        <div class="border col">5</div>
-        <div class="border col">6</div>
-        <div class="border col">7</div>
-    </div>
-</div>
+</div> <!-- End Calendar-->
+<script src="../static/calendar.js"></script>
 
 <!--This div is for the left aligned elements below the calendar-->
 <div class="">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <!-- <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Add Task <i class="bi bi-plus-circle"></i>
-    </button>
-    
+    </button> -->
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -99,12 +70,7 @@
             </div>
         </div>
     </div>
-</div>
 
-<!--This div is for the right aligned elements below the calendar-->
-<div class="">
-    <a href=""><i class="bi bi-calendar-range"></i></a>
-    <a href="/tasks"><i class="bi bi-calendar2-check"></i></a>
 </div>
 
 <!-- script to add tasks to the database -->
@@ -121,26 +87,28 @@
     }
 
 
-    // use this function call
-    // when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
-    $("#add-task").on('click', function(){
-        // validate input client-side and then only send the data to create a task
-        var date_field = $('#date');
-        var text_field = $('#exampleFormControlTextarea1');
-        if(date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == ""){
-            $('#add-task-form').reset();
-        }
-        else{
-            api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
-                function (result) {
-                    console.log(result);
-                    $("#current_input").val("")
-                });
-            $("#close-add-task").click();
-        }
+// use this function call
+// when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
+$("#add-task").on('click', function(){
+    // validate input client-side and then only send the data to create a task
+    var date_field = $('#date');
+    var text_field = $('#exampleFormControlTextarea1');
+    if(date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == ""){
+        $('#add-task-form').reset();
+    }
+    else{
+        api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
+            function (result) {
+                console.log(result);
+                $("#current_input").val("")
+            });
+        $("#close-add-task").click();
+    }
 
-    });
+});
 
 </script>
+
+
 
 {% include 'footer.html' %}
