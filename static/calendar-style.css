@@ -116,3 +116,9 @@
     text-decoration: none;
     margin-right: 5px;
 }
+
+.task_col {
+    background-color: var(--primary-white);
+    border: 2px solid var(--primary-white);
+    border-radius: 10px;
+}
