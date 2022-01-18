@@ -118,7 +118,6 @@
 }
 
 .task_col {
-    background-color: var(--primary-white);
-    border: 2px solid var(--primary-white);
+    border: 2px solid var(--primary-blue);
     border-radius: 10px;
 }
