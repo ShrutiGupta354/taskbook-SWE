@@ -75,22 +75,6 @@
 
 <!-- script to add tasks to the database -->
 <script>
-    // since we don't have centralized javascript code, I had to copy paste this code below from tasks.html with minor tweaks
-    function api_create_task(task, success_function) {
-        console.log("creating task with:", task)
-        $.ajax({
-            url: "api/tasks", type: "POST",
-            data: JSON.stringify(task),
-            contentType: "application/json; charset=utf-8",
-            success: success_function
-        });
-    }
-
-    // More functions for displaying tasks --Sean
-    function api_get_tasks(success_function) {
-    $.ajax({url:"api/tasks", type:"GET", 
-          success:success_function});
-    }
 
     function display_task(x) {
         completed = "";
@@ -102,7 +86,7 @@
         $("#"+x.date).append(t)
     }
 
-    function get_current_tasks() {
+    function display_current_tasks() {
         api_get_tasks(function(result){
             for (const task of result.tasks) {
             display_task(task);
@@ -130,7 +114,7 @@ $("#add-task").on('click', function(){
 
 });
 
-    get_current_tasks();
+    display_current_tasks();
 </script>
 
 
