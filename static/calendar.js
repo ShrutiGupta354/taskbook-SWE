@@ -5,6 +5,12 @@ const renderCalendar = () => {
 
   const monthDays = document.querySelector(".days");
 
+  const lastDay = new Date(
+    date.getFullYear(),
+    date.getMonth() + 1,
+    0
+  ).getDate();
+
   const prevLastDay = new Date(
     date.getFullYear(),
     date.getMonth(),
@@ -72,5 +78,21 @@ document.querySelector(".next").addEventListener("click", () => {
   date.setMonth(date.getMonth() + 1);
   renderCalendar();
 });
+
+// Function to display tasks in calendar view
+function displayTasks(key) {
+  let taskDesc = "";
+  let count = 0;
+  api_get_tasks(function(result){
+    for (const task of result.tasks) {
+      count++;
+  if (count < 3) {
+    taskDesc += "<p>" + task.description + "</p>";
+  }
+}
+  if (count > 3)
+    taskDesc += "<p>" + count - 2 + "More" + "</p>"
+});
+}
 
 renderCalendar();
