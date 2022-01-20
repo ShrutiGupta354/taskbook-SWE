@@ -77,18 +77,19 @@ const renderCalendar = () => {
 
   for (let i = 1; i <= lastDay; i++) {
     let id = date.getFullYear() + `-` + numbers[date.getMonth() + 1] + `-` + numbers[i];
+    let tasks = displayTasks(id)
     if (
       i === new Date().getDate() &&
       date.getMonth() === new Date().getMonth()
     ) {
       days += `<div id="`+ id +`" class="today">` +
                 `<p>${i}</p>` + 
-                displayTasks(id) + 
+                tasks + 
               `</div>`;
     } else {
       days += `<div id="`+ id +`">` +
                 `<p>${i}</p>` + 
-                displayTasks(id) + 
+                tasks + 
               `</div>`;
     }
   }
@@ -110,9 +111,11 @@ function displayTasks(key) {
   let count = 0;
   api_get_tasks(function(result){
     for (const task of result.tasks) {
-      count++;
-      if (count < 3) {
-        taskDesc += "<p>" + task.description + "</p>";
+      if(task.date == key){
+        count++;
+        if (count < 3) {
+          taskDesc += "<p>" + task.description + "</p>";
+        }
       }
     }
   if (count > 3)
