@@ -67,41 +67,40 @@ const renderCalendar = () => {
   for (let x = firstDayIndex; x > 0; x--) {
     let id = (date.getMonth() == 0 ? date.getFullYear()-1 : date.getFullYear()) + `-` + 
              numbers[(date.getMonth() == 0 ? 12 : date.getMonth())] + `-` + 
-             numbers[prevLastDay - x - 1];
+             numbers[prevLastDay - x + 1];
     
-    days += `<div id="`+ id +`" class="prev-date">` +
-              `<p>${prevLastDay - x + 1}</p>` + 
-              displayTasks(id) + 
+    days += `<div id="`+ id +`" class="prev-days">` +
+              `<p id="`+ id +`-num" class="day-number">${prevLastDay - x + 1}</p>` + 
             `</div>`;
+    
+    displayTasks(id);
   }
 
   for (let i = 1; i <= lastDay; i++) {
     let id = date.getFullYear() + `-` + numbers[date.getMonth() + 1] + `-` + numbers[i];
-    let tasks = displayTasks(id)
     if (
       i === new Date().getDate() &&
       date.getMonth() === new Date().getMonth()
     ) {
       days += `<div id="`+ id +`" class="today">` +
-                `<p>${i}</p>` + 
-                tasks + 
+                `<p id="`+ id +`-num" class="day-number">${i}</p>` + 
               `</div>`;
     } else {
       days += `<div id="`+ id +`">` +
-                `<p>${i}</p>` + 
-                tasks + 
+                `<p id="`+ id +`-num" class="day-number">${i}</p>` + 
               `</div>`;
     }
+    displayTasks(id);
   }
 
   for (let j = 1; j <= nextDays; j++) {
     let id = date.getFullYear() + `-` + numbers[date.getMonth() + 2] + `-` + numbers[j];
-    days += `<div id="`+ id +`" class="next-date">` +
-                `<p>${j}</p>` + 
-                displayTasks(id) + 
+    days += `<div id="`+ id +`" class="next-days">` +
+                `<p id="`+ id +`-num" class="day-number">${j}</p>` + 
             `</div>`;
-    monthDays.innerHTML = days;
+    displayTasks(id);
   }
+  monthDays.innerHTML = days;
 };
 
 // Function to display tasks in calendar view
@@ -114,15 +113,17 @@ function displayTasks(key) {
       if(task.date == key){
         count++;
         if (count < 3) {
-          taskDesc += "<p>" + task.description + "</p>";
+          taskDesc += `<p class="taskdesc">` + task.description + `</p>`;
         }
       }
     }
-  if (count > 3)
-    taskDesc += "<p>" + count - 2 + " More" + "</p>"
+    if (count > 3)
+      taskDesc += `<p>${count - 2} More . . .</p>`
+    
+    //append to day number tag
+    console.log(taskDesc)
+    $(`#${key}-num`).append(taskDesc);
   });
-  
-  return taskDesc;
 }
 
 document.querySelector(".prev").addEventListener("click", () => {
