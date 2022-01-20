@@ -86,6 +86,29 @@
         });
     }
 
+    // More functions for displaying tasks --Sean
+    function api_get_tasks(success_function) {
+    $.ajax({url:"api/tasks", type:"GET", 
+          success:success_function});
+    }
+
+    function display_task(x) {
+        completed = "";
+        // Formatting here will need to be adjusted
+        // cal-task in calendar-style.css should be changed as well
+        t = '<div style="width:inherit;" id="' + x.id + '" class="cal-task ' +completed+ '">' +
+               x.description +
+            '</div>';
+        $("#"+x.date).append(t)
+    }
+
+    function get_current_tasks() {
+        api_get_tasks(function(result){
+            for (const task of result.tasks) {
+            display_task(task);
+            }
+        });
+    }
 
 // use this function call
 // when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
@@ -107,6 +130,7 @@ $("#add-task").on('click', function(){
 
 });
 
+    get_current_tasks();
 </script>
 
 
