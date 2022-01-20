@@ -65,36 +65,39 @@ const renderCalendar = () => {
   let days = "";
 
   for (let x = firstDayIndex; x > 0; x--) {
-    let id = date.getFullYear() + `-` + numbers[date.getMonth()] + `-` + numbers[prevLastDay - x - 1]
+    let id = (date.getMonth() == 0 ? date.getFullYear()-1 : date.getFullYear()) + `-` + 
+             numbers[(date.getMonth() == 0 ? 12 : date.getMonth())] + `-` + 
+             numbers[prevLastDay - x - 1];
+    
     days += `<div id="`+ id +`" class="prev-date">` +
               `<p>${prevLastDay - x + 1}</p>` + 
-              displayTasks(id);
+              displayTasks(id) + 
             `</div>`;
   }
 
   for (let i = 1; i <= lastDay; i++) {
-    let id = date.getFullYear() + `-` + numbers[date.getMonth() + 1] + `-` + numbers[i]
+    let id = date.getFullYear() + `-` + numbers[date.getMonth() + 1] + `-` + numbers[i];
     if (
       i === new Date().getDate() &&
       date.getMonth() === new Date().getMonth()
     ) {
       days += `<div id="`+ id +`" class="today">` +
                 `<p>${i}</p>` + 
-                displayTasks(id);
+                displayTasks(id) + 
               `</div>`;
     } else {
       days += `<div id="`+ id +`">` +
                 `<p>${i}</p>` + 
-                displayTasks(id);
+                displayTasks(id) + 
               `</div>`;
     }
   }
 
   for (let j = 1; j <= nextDays; j++) {
-    let id = date.getFullYear() + `-` + numbers[date.getMonth() + 2] + `-` + numbers[j]
+    let id = date.getFullYear() + `-` + numbers[date.getMonth() + 2] + `-` + numbers[j];
     days += `<div id="`+ id +`" class="next-date">` +
                 `<p>${j}</p>` + 
-                displayTasks(id);
+                displayTasks(id) + 
             `</div>`;
     monthDays.innerHTML = days;
   }
@@ -102,6 +105,7 @@ const renderCalendar = () => {
 
 // Function to display tasks in calendar view
 function displayTasks(key) {
+  console.log(key);
   let taskDesc = "";
   let count = 0;
   api_get_tasks(function(result){
@@ -112,8 +116,10 @@ function displayTasks(key) {
       }
     }
   if (count > 3)
-    taskDesc += "<p>" + count - 2 + "More" + "</p>"
+    taskDesc += "<p>" + count - 2 + " More" + "</p>"
   });
+  
+  return taskDesc;
 }
 
 document.querySelector(".prev").addEventListener("click", () => {
@@ -126,4 +132,6 @@ document.querySelector(".next").addEventListener("click", () => {
   renderCalendar();
 });
 
-renderCalendar();
+$(document).ready(function() {
+  renderCalendar();
+});
