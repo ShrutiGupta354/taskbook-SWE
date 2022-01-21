@@ -66,8 +66,10 @@ const renderCalendar = () => {
   //tells the user the current date and provides a link back to the current day
   document.querySelector(".current-date-header").innerHTML = `` + new Date().toDateString() + ``;
 
+  //variable that the calendar days are built in
   let days = "";
 
+  //build the previous month's days
   for (let x = firstDayIndex; x > 0; x--) {
     let id = (date.getMonth() == 0 ? date.getFullYear()-1 : date.getFullYear()) + `-` + 
              numbers[(date.getMonth() == 0 ? 12 : date.getMonth())] + `-` + 
@@ -80,6 +82,7 @@ const renderCalendar = () => {
     displayTasks(id);
   }
 
+  //build the current month's days
   for (let i = 1; i <= lastDay; i++) {
     let id = date.getFullYear() + `-` + numbers[date.getMonth() + 1] + `-` + numbers[i];
     if (
@@ -97,6 +100,7 @@ const renderCalendar = () => {
     displayTasks(id);
   }
 
+  //build the next month's days
   for (let j = 1; j <= nextDays; j++) {
     let id = date.getFullYear() + `-` + numbers[date.getMonth() + 2] + `-` + numbers[j];
     days += `<div id="`+ id +`" class="next-days">` +
@@ -104,6 +108,8 @@ const renderCalendar = () => {
             `</div>`;
     displayTasks(id);
   }
+
+  //put the calendar in the month days div
   monthDays.innerHTML = days;
 };
 
@@ -112,6 +118,8 @@ function displayTasks(key) {
   console.log(key);
   let taskDesc = "";
   let count = 0;
+
+  //fetch teh tasks and filter the ones needed based on key
   api_get_tasks(function(result){
     for (const task of result.tasks) {
       if(task.date == key){
@@ -130,16 +138,19 @@ function displayTasks(key) {
   });
 }
 
+//event listener for the arrow to the previous month
 document.querySelector(".prev").addEventListener("click", () => {
   date.setMonth(date.getMonth() - 1);
   renderCalendar();
 });
 
+//event listener for the arrow to the next month
 document.querySelector(".next").addEventListener("click", () => {
   date.setMonth(date.getMonth() + 1);
   renderCalendar();
 });
 
+//event listener for the date/link to the current month
 document.querySelector(".current-date-header").addEventListener("click", () => {
   date.setFullYear(new Date().getFullYear());
   date.setMonth(new Date().getMonth());
@@ -147,6 +158,7 @@ document.querySelector(".current-date-header").addEventListener("click", () => {
   renderCalendar();
 })
 
+//renders the calendar when the document is ready
 $(document).ready(function() {
   renderCalendar();
 });
