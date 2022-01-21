@@ -125,7 +125,9 @@ function displayTasks(key) {
       if(task.date == key){
         count++;
         if (count < 3) {
-          taskDesc += `<p class="taskdesc">` + task.description + `</p>`;
+          taskDesc += `<p class="taskdesc`;
+          if(task.completed) taskDesc += ` completed`;
+          taskDesc += `">` + task.description + `</p>`;
         }
       }
     }
