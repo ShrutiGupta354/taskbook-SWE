@@ -61,10 +61,10 @@ const renderCalendar = () => {
   
   
   //sets the header telling the user the current month and year displayed
-  document.querySelector(".date h1").innerHTML = months[date.getMonth()] + " " + date.getFullYear();
+  document.querySelector(".current-calendar-date").innerHTML = months[date.getMonth()] + " " + date.getFullYear();
 
   //tells the user the current date and provides a link back to the current day
-  document.querySelector(".date p").innerHTML = `` + new Date().toDateString() + ``;
+  document.querySelector(".current-date-header").innerHTML = `` + new Date().toDateString() + ``;
 
   let days = "";
 
