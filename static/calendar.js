@@ -1,11 +1,14 @@
 const date = new Date();
 
+//function to render the calendar days
 const renderCalendar = () => {
+  //set the date to the first of the month being rendered
   date.setDate(1);
 
+  //get the div that contains the days on the page
   const monthDays = document.querySelector(".days");
 
-  //gets last number
+  //gets last number of the current month
   const lastDay = new Date(
     date.getFullYear(),
     date.getMonth() + 1,
@@ -48,7 +51,7 @@ const renderCalendar = () => {
     "December",
   ];
   
-  //array of numbers so that all numbers are 2 digit for day and month
+  //array of numbers so that all numbers are 2 digit for day and month when created in id field
   const numbers = ["00",
     "01","02","03","04","05","06","07","08","09","10",
     "11","12","13","14","15","16","17","18","19","20",
@@ -57,10 +60,11 @@ const renderCalendar = () => {
   ];
   
   
-
+  //sets the header telling the user the current month and year displayed
   document.querySelector(".date h1").innerHTML = months[date.getMonth()] + " " + date.getFullYear();
 
-  document.querySelector(".date p").innerHTML = new Date().toDateString();
+  //tells the user the current date and provides a link back to the current day
+  document.querySelector(".date p").innerHTML = `` + new Date().toDateString() + ``;
 
   let days = "";
 
@@ -122,7 +126,7 @@ function displayTasks(key) {
     
     //append to day number tag
     console.log(taskDesc)
-    $(`#${key}-num`).append(taskDesc);
+    $(`#${key}`).append(taskDesc);
   });
 }
 
@@ -135,6 +139,13 @@ document.querySelector(".next").addEventListener("click", () => {
   date.setMonth(date.getMonth() + 1);
   renderCalendar();
 });
+
+document.querySelector(".current-date-header").addEventListener("click", () => {
+  date.setFullYear(new Date().getFullYear());
+  date.setMonth(new Date().getMonth());
+  date.setDate(new Date().getDate());
+  renderCalendar();
+})
 
 $(document).ready(function() {
   renderCalendar();

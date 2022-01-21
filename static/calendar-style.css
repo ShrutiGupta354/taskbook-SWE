@@ -43,8 +43,12 @@
     margin: 10px 0;
 }
 
-.date p {
+.current-date-header {
     font-size: 1em;
+}
+
+.current-date-header:hover {
+    cursor: pointer;
 }
 
 .weekdays {
@@ -80,16 +84,17 @@
 
 .days div p {
     text-align: left;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    white-space: nowrap;
 }
 
 .day-number {
     text-align: right !important;
 }
 
-.taskdesc {
-    margin-top: 0px;
-    margin-bottom: 5px;
-    white-space: nowrap;
+.taskdesc.completed {
+    text-decoration: line-through;
 }
 
 .days div:hover:not(.today) {
