@@ -1,5 +1,11 @@
 const date = new Date();
 
+//function to generate a date
+function generateDate(monthOffset, day = 0)
+{
+  return new Date(date.getFullYear(), date.getMonth() + monthOffset, day);
+}
+
 //function to render the calendar days
 const renderCalendar = () => {
   //set the date to the first of the month being rendered
@@ -9,28 +15,16 @@ const renderCalendar = () => {
   const monthDays = document.querySelector(".days");
 
   //gets last number of the current month
-  const lastDay = new Date(
-    date.getFullYear(),
-    date.getMonth() + 1,
-    0
-  ).getDate();
+  const lastDay = generateDate(1).getDate();
 
   //gets last number previous month
-  const prevLastDay = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    0
-  ).getDate();
+  const prevLastDay = generateDate(0).getDate();
 
   //gets weekday of first day of month
   const firstDayIndex = date.getDay();
 
   //gets weekday of last day of month
-  const lastDayIndex = new Date(
-    date.getFullYear(),
-    date.getMonth() + 1,
-    0
-  ).getDay();
+  const lastDayIndex = generateDate(0).getDay();
 
   //finds how many days of the next month to display
   const nextDays = 7 - lastDayIndex - 1;
@@ -87,7 +81,8 @@ const renderCalendar = () => {
     let id = date.getFullYear() + `-` + numbers[date.getMonth() + 1] + `-` + numbers[i];
     if (
       i === new Date().getDate() &&
-      date.getMonth() === new Date().getMonth()
+      date.getMonth() === new Date().getMonth() &&
+      date.getFullYear() === new Date().getFullYear()
     ) {
       days += `<div id="`+ id +`" class="today">` +
                 `<p id="`+ id +`-num" class="day-number">${i}</p>` + 
@@ -115,7 +110,6 @@ const renderCalendar = () => {
 
 // Function to display tasks in calendar view
 function displayTasks(key) {
-  console.log(key);
   let taskDesc = "";
   let count = 0;
 
@@ -135,7 +129,6 @@ function displayTasks(key) {
       taskDesc += `<p>${count - 2} More . . .</p>`
     
     //append to day number tag
-    console.log(taskDesc)
     $(`#${key}`).append(taskDesc);
   });
 }
