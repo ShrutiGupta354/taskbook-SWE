@@ -24,7 +24,7 @@ const renderCalendar = () => {
   const firstDayIndex = date.getDay();
 
   //gets weekday of last day of month
-  const lastDayIndex = generateDate(0).getDay();
+  const lastDayIndex = generateDate(1).getDay();
 
   //finds how many days of the next month to display
   const nextDays = 7 - lastDayIndex - 1;
