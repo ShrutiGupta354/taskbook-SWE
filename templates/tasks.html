@@ -9,32 +9,39 @@
   .description { padding-left:8px }
 </style>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <h1><i>Today</i></h1>
-      <table id="task-list-today">
-      </table>
-    </div>
-    <div class="col">
-      <h1><i>Tomorrow</i></h1>
-      <table id="task-list-tomorrow">
-      </table>
-    </div>
-</div>
-<input id="current_input" hidden value=""/>
+<div class="calendar mb-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col task_col">
+        <div class="date text-center">
+          <h1>Today</h1>
+        </div>
+        <table id="task-list-today">
+        </table>
+      </div>
+      <div style="width: 5px;"></div>
+      <div class="col task_col">
+        <div class="date text-center">
+          <h1>Upcoming</h1>
+        </div>
+        <table id="task-list-tomorrow">
+        </table>
+      </div>
+  </div>
+  <input id="current_input" hidden value=""/>
 
-<ul class="view">
-  <div style="display: inline; float: left">
-    <li><button type="button" class="btn btn-yellow"><a><i class="bi bi-plus-circle"></i>Add Task</a></button></li>
-  </div>
-  <div style="display: inline; float: right;">
-    <li><button type="button" class="btn btn-yellow"><a href="/calendar"><i class="bi bi-calendar"></i>Monthly
-          View</a></button></li>
-    <li><button type="button" class="btn btn-yellow"><a href="/weekly"><i class="bi bi-calendar-range"></i>Weekly
-          View</a></button></li>
-  </div>
-</ul>
+  <ul class="view">
+    <div style="display: inline; float: left">
+      <li><button type="button" class="btn btn-yellow"><a><i class="bi bi-plus-circle"></i>Add Task</a></button></li>
+    </div>
+    <div style="display: inline; float: right;">
+      <li><button type="button" class="btn btn-yellow"><a href="/calendar"><i class="bi bi-calendar"></i>Monthly
+            View</a></button></li>
+      <li><button type="button" class="btn btn-yellow"><a href="/weekly"><i class="bi bi-calendar-range"></i>Weekly
+            View</a></button></li>
+    </div>
+  </ul>
+</div>
 
 <script>
 

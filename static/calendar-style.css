@@ -135,8 +135,15 @@
     margin-right: 5px;
 }
 
+
 .cal-task {
     font-size: 18px;
     color: #011a2b;
     text-decoration: none;
 }
+
+.task_col {
+    border: 2px solid var(--primary-blue);
+    border-radius: 10px;
+}
+
