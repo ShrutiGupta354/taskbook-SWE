@@ -15,7 +15,7 @@ def login():
     # if user is already logged in and goes to /login, then send back to tasks.html
     if session.get('user_authenticated'):
         flash('Log out first to log back in.')
-        return render_template('tasks.html')
+        return redirect(url_for('tasks'))
 
     if(request.method == 'GET'):
         return render_template("login.html")
@@ -62,8 +62,8 @@ def logout():
 def register():
     # if user tries to sign up while logged in:
     if session.get('user_authenticated'):
-        flash('Log out first to sign up.')
-        return render_template('tasks.html')
+        flash('Log out first to sign up.', category='error')
+        return redirect(url_for('tasks'))
 
     if(request.method == 'GET'):
         return render_template("register.html")

@@ -43,8 +43,12 @@
     margin: 10px 0;
 }
 
-.date p {
+.current-date-header {
     font-size: 1em;
+}
+
+.current-date-header:hover {
+    cursor: pointer;
 }
 
 .weekdays {
@@ -72,11 +76,25 @@
 .days div {
     font-size: 1em;
     width: calc(100%/7);
-    height: 6em;
-    text-align: right;
+    height: 8em;
     transition: background-color .2s;
     border: 1px solid var(--primary-black);
     padding: 0 5px;
+}
+
+.days div p {
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+.day-number {
+    text-align: right !important;
+}
+
+.taskdesc.completed {
+    text-decoration: line-through;
 }
 
 .days div:hover:not(.today) {
@@ -117,7 +135,15 @@
     margin-right: 5px;
 }
 
+
+.cal-task {
+    font-size: 18px;
+    color: #011a2b;
+    text-decoration: none;
+}
+
 .task_col {
     border: 2px solid var(--primary-blue);
     border-radius: 10px;
 }
+
