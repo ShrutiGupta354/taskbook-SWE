@@ -32,7 +32,8 @@
 
   <ul class="view">
     <div style="display: inline; float: left">
-      <li><button type="button" class="btn btn-yellow"><a><i class="bi bi-plus-circle"></i>Add Task</a></button></li>
+      <!-- include the pup up to add task and the button that triggers that modal -->
+      <li>{% include 'add_task_button.html' %}</li>          
     </div>
     <div style="display: inline; float: right;">
       <li><button type="button" class="btn btn-yellow"><a href="/calendar"><i class="bi bi-calendar"></i>Monthly
