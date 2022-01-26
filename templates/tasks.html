@@ -33,13 +33,13 @@
   <ul class="view">
     <div class="d-flex float-start">
       <!-- include the pup up to add task and the button that triggers that modal -->
-      <li>{% include 'add_task_button.html' %}</li>          
+      {% include 'add_task_button.html' %}          
     </div>
     <div class="d-flex float-end">
-      <li><button type="button" class="btn btn-yellow"><a href="/calendar"><i class="bi bi-calendar"></i>Monthly
-            View</a></button></li>
-      <li><button type="button" class="btn btn-yellow"><a href="/weekly"><i class="bi bi-calendar-range"></i>Weekly
-            View</a></button></li>
+      <button type="button" class="btn btn-yellow"><a href="/calendar"><i class="bi bi-calendar"></i>Monthly
+            View</a></button>
+      <button type="button" class="btn btn-yellow"><a href="/weekly"><i class="bi bi-calendar-range"></i>Weekly
+            View</a></button>
     </div>
   </ul>
 </div>
