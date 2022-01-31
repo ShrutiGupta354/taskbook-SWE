@@ -5,8 +5,8 @@
     <div class="month">
         <i class="bi bi-caret-left-fill prev"></i>
         <div class="date">
-            <h1></h1>
-            <p></p>
+            <h1 class="current-calendar-date"></h1>
+            <p class="current-date-header"></p>
         </div>
         <i class="bi bi-caret-right-fill next"></i>
     </div>
@@ -75,18 +75,6 @@
 
 <!-- script to add tasks to the database -->
 <script>
-    // since we don't have centralized javascript code, I had to copy paste this code below from tasks.html with minor tweaks
-    function api_create_task(task, success_function) {
-        console.log("creating task with:", task)
-        $.ajax({
-            url: "api/tasks", type: "POST",
-            data: JSON.stringify(task),
-            contentType: "application/json; charset=utf-8",
-            success: success_function
-        });
-    }
-
-
 // use this function call
 // when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
 $("#add-task").on('click', function(){
@@ -104,9 +92,7 @@ $("#add-task").on('click', function(){
             });
         $("#close-add-task").click();
     }
-
 });
-
 </script>
 
 
