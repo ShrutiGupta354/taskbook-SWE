@@ -69,7 +69,7 @@ app.register_blueprint(auth, url_prefix='/')
 def get_tasks():
     'return a list of tasks sorted by submit/modify time'
     task_table = taskbook_db.get_table('task')
-    tasks = [dict(x) for x in task_table.find(order_by='date')]
+    tasks = [dict(x) for x in task_table.find(email=session['user_email'], order_by=['date', 'time'])]
     return { "tasks": tasks }
 
 @app.post('/api/tasks',)
