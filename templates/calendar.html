@@ -60,6 +60,10 @@
                             <label for="exampleFormControlTextarea1" class="form-label">Task</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description" required></textarea>
                         </div>
+                        <div class="mb-3">
+                            <label for="time" class="form-label">Time</label>
+                            <input class="form-control" id="time" name="time" type="time" required></input>
+                        </div>
                 </div>
                 <div class="modal-footer">
                         <!-- don't click submit for now -->
@@ -81,11 +85,12 @@ $("#add-task").on('click', function(){
     // validate input client-side and then only send the data to create a task
     var date_field = $('#date');
     var text_field = $('#exampleFormControlTextarea1');
+    var time_field = $('#time');
     if(date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == ""){
         $('#add-task-form').reset();
     }
     else{
-        api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
+        api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val(), time: $("#time").val() },
             function (result) {
                 console.log(result);
                 $("#current_input").val("")
