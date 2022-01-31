@@ -17,3 +17,4 @@ Students:
 - Keaton
 - Evan
 - Richard
+- David
