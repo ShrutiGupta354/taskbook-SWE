@@ -40,18 +40,32 @@ function displayDayTasks(key){
 function displayNextTasks(key){
     let taskDesc = "";
     let count = 0;
+    var i = 0;
+    var taskArr = [];
 
+    //fetches tasks and stores them into array to be sorted by date
     api_get_tasks(function(result){
         for(const task of result.tasks){
-            //(bug) this does not account for next 10, its next 10 after the date in order they were added to db
-            if(task.date > key){
+            taskArr[i] = task;
+            i++;
+        }
+        
+        //sorts array date
+        taskArr.sort(function(a, b){
+            if (a.date < b.date) return -1;
+            if (a.date > b.date) return 1;
+            return 0;
+        });
+
+        //loops through sorted task array
+        for(let j = 0; j < taskArr.length; j++){
+            //if task is past current day and count less than 10, print tasks
+            if(taskArr[j].date > key && count < 10){
+                taskDesc += `<p class="taskdesc`;
+                if(taskArr[j].completed) taskDesc += ` completed`;
+                taskDesc += `">` + taskArr[j].description + `</p>`;
+                document.getElementById("next").innerHTML = taskDesc;
                 count++;
-                if(count < 11){
-                    taskDesc += `<p class="taskdesc`;
-                    if(task.completed) taskDesc += ` completed`;
-                    taskDesc += `">` + task.description + `</p>`;
-                    document.getElementById("next").innerHTML = taskDesc;
-                }
             }
         }
     });
