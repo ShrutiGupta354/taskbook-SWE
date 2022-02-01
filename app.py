@@ -24,8 +24,16 @@ app.config['SECRET_KEY'] = 'walsh-swe'
 def homepage():
     if session.get('user_authenticated'):
         flash('Log out first to log back in.')
-        return render_template('tasks.html')
+        return render_template('dashboard.html')
     return render_template("homepage.html")
+
+@app.get('/dashboard')
+def dashboard():
+    if session.get('user_authenticated'):
+        return render_template("dashboard.html", user=session['user_email'])
+    flash('You need to be logged in first', category='error')
+    return render_template("login.html")
+
 
 @app.get('/calendar')
 def calendar():
