@@ -1,0 +1,242 @@
+{% include 'header.html' %}
+{% include 'banner.html' %}
+
+<div class="calendar mb-3">
+    <div class="dash_heading text-center">
+        <h1>Your Dashboard</h1>
+    </div>
+
+    <div class="container-fluid">
+        <!--div for a custom section-->
+        <div class="row dash_margin task_border">
+            <div class="task_col dash_padding">
+                <h1>Progress</h1>
+                <p>
+                    This section might show your progress on tasks for today, this week, this month, or something else.
+                </p>
+
+                <!--progress bar-->
+                <div class="progress">
+                    <div class="progress_bar text-center">
+                        <h5>25%</h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--div for the views section-->
+        <div class="row dash_margin task_border">
+            <div class="task_col dash_padding">
+                <h1>Views</h1>
+                <p>
+                    There are 3 views that can be used to see your calendar. The first is the monthly view, which is
+                    simply the traditional monthly calendar.
+                    In this view, as many tasks as can fit are shown. To see all tasks, click on any day and you will be
+                    taken to the task view for that day.
+                    The second view is weekly view, which is a calendar zoomed in to just one week. It will show you all
+                    tasks for each day of the current week.
+                    The thris view is task view. This is a daily view, but with a twist. The current day and all tasks
+                    scheduled for that day will be shown on the left side.
+                    On the right side, your next 10 upcoming tasks (after today) are shown, so that you can start
+                    preparing for what you have to do next.
+                    Task view can also be customized to show differnt things in the right column, according to your
+                    preferences.
+                </p>
+
+                <!--Buttons-->
+                <div class="my-3">
+                    <div class="d-flex float-end">
+                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='/calendar';"><i
+                                class="bi bi-calendar3"></i> Monthly View</button>
+                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='/weekly';"><i
+                                class="bi bi-calendar3-week"></i> Weekly View</button>
+                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='/tasks';"><i
+                                class="bi bi-calendar3-event"></i> Task View</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--div for the customization section-->
+        <div class="row dash_margin task_border">
+            <div class="task_col dash_padding">
+                <h1>Customization</h1>
+                <p>
+                    In order to be more personal, this planner can be customized to fit your needs!
+                    You can customize the default colors, the task view, and the dashboard here.
+                </p>
+
+                <!--Color customization div-->
+                <div class="dash block">
+                    <h3>Color Customization</h3>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <label>Light: </label>
+                            </div>
+                            <div class="col">
+                                <input type="color" value="#EEF7FB">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Midtone 1: </label>
+                            </div>
+                            <div class="col">
+                                <input type="color" value="#FFE45E">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Midtone 2: </label>
+                            </div>
+                            <div class="col">
+                                <input type="color" value="#21B0C0">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Dark: </label>
+                            </div>
+                            <div class="col">
+                                <input type="color" value="#011A28">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Task View customization div-->
+                <div class="dash block">
+                    <h3>Task View Customization</h3>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <label>Left Column: </label>
+                            </div>
+                            <div class="col">
+                                <p>Current</p>
+                            </div>
+                            <div class="col">
+                                <input type="number" value=1>
+                            </div>
+                            <div class="col">
+                                <select>
+                                    <option value="Tasks">Task(s)</option>
+                                    <option value="Days" selected>Day(s)</option>
+                                    <option value="Weeks">Week(s)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Right Column: </label>
+                            </div>
+                            <div class="col">
+                                <p>Upcoming</p>
+                            </div>
+                            <div class="col">
+                                <input type="number" value=10>
+                            </div>
+                            <div class="col">
+                                <select>
+                                    <option value="Tasks" selected>Task(s)</option>
+                                    <option value="Days">Day(s)</option>
+                                    <option value="Weeks">Week(s)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Dashboard customization div-->
+                <div class="dash block">
+                    <h3>Dashboard Customization</h3>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <p>Views Box:
+                                <p>
+                            </div>
+                            <div class="col">
+                                <label class="switch"><input type="checkbox" checked><span
+                                        class="slider round"></span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p>Customization Box:
+                                <p>
+                            </div>
+                            <div class="col">
+                                <label class="switch"><input type="checkbox" checked><span
+                                        class="slider round"></span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p>Help Box:</p>
+                            </div>
+                            <div class="col">
+                                <label class="switch"><input type="checkbox" checked><span
+                                        class="slider round"></span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p>Progress Box:
+                                <p>
+                            </div>
+                            <div class="col">
+                                <label class="switch"><input type="checkbox" checked><span
+                                        class="slider round"></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Save button-->
+                <div class="my-3">
+                    <div class="d-flex float-end">
+                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='';"><i
+                                class="bi bi-save2-fill"></i> Save</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--div for the help section-->
+        <div class="row dash_margin task_border">
+            <div class="task_col dash_padding">
+                <h1>Help</h1>
+                <p>
+                    For help using this app, FAQs, and other information, check out these links.
+                </p>
+
+                <!--Buttons-->
+                <div class="my-3">
+                    <div class="d-flex float-end">
+                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='';"><i
+                                class="bi bi-info-circle"></i> Information</button>
+                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='';"><i
+                                class="bi bi-question-circle"></i> FAQs</button>
+                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='';"><i
+                                class="bi bi-envelope"></i> Contact</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- <style>
+    * {
+        border: 1px solid black;
+    }
+</style> -->
+
+{% include 'footer.html' %}

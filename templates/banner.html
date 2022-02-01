@@ -4,7 +4,7 @@
       {% if not(session['user_email']) %}
         <a class="navbar-brand homepage-navbar-title" href="{{url_for('homepage')}}" style="margin-left: 15%;"><i class="bi bi-journal"></i> TASKBOOK</a>
       {% else %}
-        <a class="navbar-brand homepage-navbar-title" href="{{url_for('tasks')}}" style="margin-left: 15%;"><i class="bi bi-journal"></i> TASKBOOK</a>
+        <a class="navbar-brand homepage-navbar-title" href="{{url_for('dashboard')}}" style="margin-left: 15%;"><i class="bi bi-journal"></i> TASKBOOK</a>
       {% endif %}
       <form class="d-flex d-none d-sm-none d-md-block" style="margin-right: 15%;">
         <!-- we had url_for('login') before but we need that auth.login because login route is inside the auth view (auth.py) -->
