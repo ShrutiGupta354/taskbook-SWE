@@ -8,9 +8,9 @@ const numbers = ["00",
 ];
 
 //find current day to use as key
-d = new Date();
+let date = new Date();
 
-let id = d.getFullYear() + '-' + numbers[d.getMonth()+1] + '-' + d.getDate()
+let id = date.getFullYear() + '-' + numbers[date.getMonth()+1] + '-' + numbers[date.getDate()];
 
 //displays tasks for today
 displayDayTasks(id);
@@ -20,7 +20,6 @@ displayNextTasks(id);
 //Function to display tasks in day view
 function displayDayTasks(key){
     let taskDesc = "";
-    let count = 0;
 
     //fetches tasks
     api_get_tasks(function(result){
@@ -30,43 +29,30 @@ function displayDayTasks(key){
                 taskDesc += `<p class="taskdesc`;
                 if(task.completed) taskDesc += ` completed`;
                 taskDesc += `">` + task.description + `</p>`;
-                document.getElementById("test").innerHTML = taskDesc;
             }
         }
+        //once all tasks are in the taskDesc, add them to list
+        document.getElementById("today-tasks").innerHTML = taskDesc;
     });
 }
 
 //Function to display next 10 tasks
 function displayNextTasks(key){
-    let taskDesc = "";
-    let count = 0;
-    var i = 0;
-    var taskArr = [];
+    let taskDesc = "";  //building the tasks into this variable
+    let count = 0;      //counting up to how many tasks are in this column (10 for time being)
 
     //fetches tasks and stores them into array to be sorted by date
     api_get_tasks(function(result){
         for(const task of result.tasks){
-            taskArr[i] = task;
-            i++;
-        }
-        
-        //sorts array date
-        taskArr.sort(function(a, b){
-            if (a.date < b.date) return -1;
-            if (a.date > b.date) return 1;
-            return 0;
-        });
-
-        //loops through sorted task array
-        for(let j = 0; j < taskArr.length; j++){
-            //if task is past current day and count less than 10, print tasks
-            if(taskArr[j].date > key && count < 10){
-                taskDesc += `<p class="taskdesc`;
-                if(taskArr[j].completed) taskDesc += ` completed`;
-                taskDesc += `">` + taskArr[j].description + `</p>`;
-                document.getElementById("next").innerHTML = taskDesc;
+            //Magic number 10 is how many upcoming tasks can be displayed, may be modified when customization comes in.
+            if(count >= 10) break;
+            if(task.date > key){
                 count++;
+                taskDesc += `<p class="taskdesc`;
+                if(task.completed) taskDesc += ` completed`;
+                taskDesc += `">` + task.description + `</p>`;
             }
         }
+        document.getElementById("upcoming-tasks").innerHTML = taskDesc;
     });
 }
