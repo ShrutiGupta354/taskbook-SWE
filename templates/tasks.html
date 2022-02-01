@@ -2,39 +2,61 @@
 {% include 'banner.html' %}
 
 <style>
-  .save_edit, .undo_edit, .move_task, .description, .edit_task, .delete_task {
+  .save_edit,
+  .undo_edit,
+  .move_task,
+  .description,
+  .edit_task,
+  .delete_task {
     cursor: pointer;
   }
-  .completed {text-decoration: line-through;}
-  .description { padding-left:8px }
+
+  .completed {
+    text-decoration: line-through;
+  }
+
+  .description {
+    padding-left: 8px
+  }
 </style>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <h1><i>Today</i></h1>
-      <table id="task-list-today">
-      </table>
+<div class="calendar mb-3">
+  <div class="date text-center">
+    <h1>January 29 2022</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col task_margin task_border task_col">
+        <h1>Today</h1>
+        <table id="task-list-today">
+        </table>
+        <script src="../static/day-view.js"></script>
+        <span id="today-tasks"></span>
+      </div>
+      <div class="col task_col task_border task_col">
+        <h1>Upcoming</h1>
+        <table id="task-list-tomorrow">
+        </table>
+        <span id="upcoming-tasks"></span>
+      </div>
     </div>
-    <div class="col">
-      <h1><i>Tomorrow</i></h1>
-      <table id="task-list-tomorrow">
-      </table>
-    </div>
-</div>
-<input id="current_input" hidden value=""/>
+  </div>
+  <input id="current_input" hidden value="" />
 
-<ul class="view">
-  <div style="display: inline; float: left">
-    <li><button type="button" class="btn btn-yellow"><a><i class="bi bi-plus-circle"></i>Add Task</a></button></li>
+  <ul class="view">
+    <div class="d-flex float-start">
+      <!-- include the pop up to add task and the button that triggers that modal -->
+      {% include 'add_task_button.html' %}          
+    </div>
+
+    <div class="d-flex float-end">
+      <button type="button" class="btn btn-yellow me-3" onclick="location.href='/weekly';"><i
+          class="bi bi-calendar3-week"></i> Weekly View</button>
+      <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/calendar';"><i
+          class="bi bi-calendar3"></i>Monthly View</button>
+    </div>
   </div>
-  <div style="display: inline; float: right;">
-    <li><button type="button" class="btn btn-yellow"><a href="/calendar"><i class="bi bi-calendar"></i>Monthly
-          View</a></button></li>
-    <li><button type="button" class="btn btn-yellow"><a href="/weekly"><i class="bi bi-calendar-range"></i>Weekly
-          View</a></button></li>
-  </div>
-</ul>
+</div>
 
 <script>
 
@@ -153,19 +175,19 @@ function display_task(x) {
   arrow = (x.list == "today") ? "arrow_forward" : "arrow_back";
   completed = x.completed ? " completed" : "";
   if ((x.id == "today") | (x.id == "tomorrow")) {
-    t = '<tr id="task-'+x.id+'" class="task">' +
-        '  <td style="width:36px"></td>' +  
-        '  <td><span id="editor-'+x.id+'">' + 
-        '        <input id="input-'+x.id+'" style="height:22px" '+ 
-        '          type="text" autofocus placeholder="Add an item..."/>'+
-        '      </span>' + 
-        '  </td>' +
-        '  <td style="width:72px">' +
-        '    <span id="filler-'+x.id+'" class="material-icons">more_horiz</span>' + 
-        '    <span id="save_edit-'+x.id+'" hidden class="save_edit material-icons">done</span>' + 
-        '    <span id="undo_edit-'+x.id+'" hidden class="undo_edit material-icons">cancel</span>' +
-        '  </td>' +
-        '</tr>';
+    // t = '<tr id="task-'+x.id+'" class="task">' +
+    //     '  <td style="width:36px"></td>' +  
+    //     '  <td><span id="editor-'+x.id+'">' + 
+    //     '        <input id="input-'+x.id+'" style="height:22px" '+ 
+    //     '          type="text" autofocus placeholder="Add an item..."/>'+
+    //     '      </span>' + 
+    //     '  </td>' +
+    //     '  <td style="width:72px">' +
+    //     '    <span id="filler-'+x.id+'" class="material-icons">more_horiz</span>' + 
+    //     '    <span id="save_edit-'+x.id+'" hidden class="save_edit material-icons">done</span>' + 
+    //     '    <span id="undo_edit-'+x.id+'" hidden class="undo_edit material-icons">cancel</span>' +
+    //     '  </td>' +
+    //     '</tr>';
   } else {
     t = '<tr id="task-'+x.id+'" class="task">' + 
         '  <td><span id="move_task-'+x.id+'" class="move_task '+x.list+' material-icons">' + arrow + '</span></td>' +
