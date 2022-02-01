@@ -113,7 +113,7 @@ function displayTasks(key) {
   let taskDesc = "";
   let count = 0;
 
-  //fetch teh tasks and filter the ones needed based on key
+  //fetch the tasks and filter the ones needed based on key
   api_get_tasks(function(result){
     for (const task of result.tasks) {
       if(task.date == key){
@@ -125,7 +125,7 @@ function displayTasks(key) {
         }
       }
     }
-    if (count > 3)
+    if (count >= 3)
       taskDesc += `<p>${count - 2} More . . .</p>`
     
     //append to day number tag
