@@ -24,8 +24,16 @@ app.config['SECRET_KEY'] = 'walsh-swe'
 def homepage():
     if session.get('user_authenticated'):
         flash('Log out first to log back in.')
-        return render_template('tasks.html')
+        return render_template('dashboard.html')
     return render_template("homepage.html")
+
+@app.get('/dashboard')
+def dashboard():
+    if session.get('user_authenticated'):
+        return render_template("dashboard.html", user=session['user_email'])
+    flash('You need to be logged in first', category='error')
+    return render_template("login.html")
+
 
 @app.get('/calendar')
 def calendar():
@@ -69,7 +77,7 @@ app.register_blueprint(auth, url_prefix='/')
 def get_tasks():
     'return a list of tasks sorted by submit/modify time'
     task_table = taskbook_db.get_table('task')
-    tasks = [dict(x) for x in task_table.find(order_by='date')]
+    tasks = [dict(x) for x in task_table.find(email=session['user_email'], order_by=['date', 'time'])]
     return { "tasks": tasks }
 
 @app.post('/api/tasks',)
@@ -78,7 +86,7 @@ def create_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["description", "date"], f"Illegal key '{key}'"
+            assert key in ["description", "date", "time"], f"Illegal key '{key}'"
         assert type(data['description']) is str, "Description is not a string."
         assert len(data['description'].strip()) > 0, "Description is length zero."
     except Exception as e:
@@ -87,8 +95,10 @@ def create_task():
     try:
         task_table = taskbook_db.get_table('task')
         task_table.insert({
+            "email":session['user_email'],
             "description":data['description'].strip(),
             "date":data['date'],
+            "time":data['time'],
             "completed":False
         })
     except Exception as e:
