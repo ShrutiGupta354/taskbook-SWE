@@ -48,12 +48,6 @@ def weekly():
     flash('You need to be logged in first', category='error')
     return render_template("login.html")
 
-@app.get('/tasks-w3')
-def tasks_w3():
-    if session.get('user_authenticated'):
-        return render_template("tasks-w3.html", user=session['user_email'])
-    flash('You need to be logged in first', category='error')
-    return render_template("login.html")
 
 #--------------------
 # For authentication
