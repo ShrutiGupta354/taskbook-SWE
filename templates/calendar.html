@@ -22,7 +22,8 @@
     <div class="days"></div>
     <div class="my-3">
         <div class="d-flex float-start">
-            <button type="button" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i> Add Task</button>
+            <!-- include the Add Task button and its code here -->
+            {% include 'add_task_button.html' %}
         </div>
         <div class="d-flex float-end">
             <button type="button" class="btn btn-yellow me-3" onclick="location.href='/weekly';"><i class="bi bi-calendar3-week"></i> Weekly View</a>
@@ -99,7 +100,6 @@ $("#add-task").on('click', function(){
     }
 });
 </script>
-
 
 
 {% include 'footer.html' %}

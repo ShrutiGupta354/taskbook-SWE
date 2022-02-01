@@ -40,11 +40,12 @@
   </div>
   <input id="current_input" hidden value="" />
 
-  <div class="my-3">
+  <ul class="view">
     <div class="d-flex float-start">
-      <button type="button" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-          class="bi bi-plus-circle"></i> Add Task</button>
+      <!-- include the pop up to add task and the button that triggers that modal -->
+      {% include 'add_task_button.html' %}          
     </div>
+
     <div class="d-flex float-end">
       <button type="button" class="btn btn-yellow me-3" onclick="location.href='/weekly';"><i
           class="bi bi-calendar3-week"></i> Weekly View</button>
