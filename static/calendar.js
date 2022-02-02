@@ -97,6 +97,16 @@ const renderCalendar = () => {
 
   //put the calendar in the month days div
   monthDays.innerHTML = days;
+  
+  //puts an event handler on each day to redirect to its view as day page
+  //Kinda cruddy way to do it if we move to using the url directions to show a specific
+  //month, but this works for now
+  dayDivs = document.querySelectorAll('.days div')
+  dayDivs.forEach(element => {
+    element.addEventListener('click', function(){
+    window.location.href = "/tasks/" + element.id;
+    console.log(this.id);
+  })});
 };
 
 // Function to display tasks in calendar view
