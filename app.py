@@ -4,7 +4,7 @@
 # flask web objects
 from auth import auth
 from flask import Flask
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask import request, session, flash
 import dataset
 
@@ -19,42 +19,46 @@ app.config['SECRET_KEY'] = 'walsh-swe'
 # web application routes
 # ---------------------------
 
+# Home/Default Route
 @app.get('/')
 @app.get('/home')
 def homepage():
     if session.get('user_authenticated'):
         flash('Log out first to log back in.')
-        return render_template('dashboard.html')
+        return redirect(url_for('dashboard'))
     return render_template("homepage.html")
 
+# Dashboard Route
 @app.get('/dashboard')
 def dashboard():
     if session.get('user_authenticated'):
         return render_template("dashboard.html", user=session['user_email'])
     flash('You need to be logged in first', category='error')
-    return render_template("login.html")
+    return redirect(url_for('auth.login'))
 
-
+# Calendar Route
 @app.get('/calendar')
 def calendar():
     if session.get('user_authenticated'):
         return render_template("calendar.html", user=session['user_email'])
     flash('You need to be logged in first', category='error')
-    return render_template("login.html")
-    
+    return redirect(url_for('auth.login'))
+
+#Task View Route
 @app.get('/tasks')
 def tasks():
     if session.get('user_authenticated'):
         return render_template("tasks.html", user=session['user_email'])
     flash('You need to be logged in first', category='error')
-    return render_template("login.html")
+    return redirect(url_for('auth.login'))
 
+#Weekly Route
 @app.get('/weekly')
 def weekly():
     if session.get('user_authenticated'):
         return render_template("weekly.html", user=session['user_email'])
     flash('You need to be logged in first', category='error')
-    return render_template("login.html")
+    return redirect(url_for('auth.login'))
 
 
 #--------------------
