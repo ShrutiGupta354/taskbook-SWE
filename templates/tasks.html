@@ -42,21 +42,22 @@
 
 <script>
 
-  let id;
+  //key variable that represents the current day
+  let currentDay;
 
-  if(window.location.href.endsWith('tasks')) {
-    let date = new Date();
-    id = date.getFullYear() + '-' + numbers[date.getMonth()+1] + '-' + numbers[date.getDate()];
+  if(window.location.href.search(/tasks\/\d{4}-\d{1,2}-\d{1,2}/) != -1) {
+    currentDay = '{{year}}-' + appendZero('{{month}}') + '-' +  appendZero('{{day}}');
   } else {
-    id = '{{year}}-' + appendZero('{{month}}') + '-' +  appendZero('{{day}}')
+    let date = new Date();
+    currentDay = date.getFullYear() + '-' + numbers[date.getMonth()+1] + '-' + numbers[date.getDate()];
   }
 
   //check if path is set to just today
   
   //displays tasks for today
-  displayDayTasks(id);
+  displayDayTasks(currentDay);
   //displays next 10 tasks
-  displayNextTasks(id);
+  displayNextTasks(currentDay);
 
 </script>
 

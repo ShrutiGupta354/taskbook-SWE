@@ -55,6 +55,9 @@ def tasks():
 @app.get('/tasks/<int:year>-<int:month>-<int:day>')
 def tasks_day(year, month, day):
     if session.get('user_authenticated'):
+        #this check is so they don't put completely ludicrous dates in.
+        if(month > 12 or day > 31 or year < 1800):
+            return redirect(url_for('tasks'))
         return render_template("tasks.html", user=session['user_email'], year=year, month=month, day=day)
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
