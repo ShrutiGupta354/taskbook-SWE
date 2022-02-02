@@ -59,12 +59,15 @@
             $('#add-task-form').reset();
         }
         else {
-            api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val(), time: $("#time").val() },
-                function (result) {
-                    console.log(result);
-                    $("#current_input").val("")
-                });
             $("#close-add-task").click();
+            api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val(), time: $("#time").val()},
+                // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
+                function (result) {
+                    // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
+                    // in other words, it removes the GET variables from the url
+                    let urlToSendTo = window.location.href.split("?")[0];
+                    window.location.replace(urlToSendTo);
+                });
         }
     });
 </script>
