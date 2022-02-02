@@ -3,8 +3,8 @@
 
 # flask web objects
 from auth import auth
-from flask import Flask, redirect, url_for
-from flask import render_template
+from flask import Flask
+from flask import render_template, redirect, url_for
 from flask import request, session, flash
 import dataset
 
