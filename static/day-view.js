@@ -7,15 +7,6 @@ const numbers = ["00",
 "31"
 ];
 
-//find current day to use as key
-let date = new Date();
-
-let id = date.getFullYear() + '-' + numbers[date.getMonth()+1] + '-' + numbers[date.getDate()];
-
-//displays tasks for today
-displayDayTasks(id);
-//displays next 10 tasks
-displayNextTasks(id);
 
 //Function to display tasks in day view
 function displayDayTasks(key){

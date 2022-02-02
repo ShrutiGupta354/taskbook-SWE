@@ -44,7 +44,7 @@ def calendar():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
-#Task View Route
+# Task View Route
 @app.get('/tasks')
 def tasks():
     if session.get('user_authenticated'):
@@ -52,7 +52,14 @@ def tasks():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
-#Weekly Route
+@app.get('/tasks/<int:year>-<int:month>-<int:day>')
+def tasks_day(year, month, day):
+    if session.get('user_authenticated'):
+        return render_template("tasks.html", user=session['user_email'], year=year, month=month, day=day)
+    flash('You need to be logged in first', category='error')
+    return redirect(url_for('auth.login'))
+
+# Weekly Route
 @app.get('/weekly')
 def weekly():
     if session.get('user_authenticated'):

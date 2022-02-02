@@ -40,6 +40,24 @@
   </div>
 </div>
 
-<script>console.log("{{user}}");</script>
+<script>
+
+  let id;
+
+  if(window.location.href.endsWith('tasks')) {
+    let date = new Date();
+    id = date.getFullYear() + '-' + numbers[date.getMonth()+1] + '-' + numbers[date.getDate()];
+  } else {
+    id = '{{year}}-' + appendZero('{{month}}') + '-' +  appendZero('{{day}}')
+  }
+
+  //check if path is set to just today
+  
+  //displays tasks for today
+  displayDayTasks(id);
+  //displays next 10 tasks
+  displayNextTasks(id);
+
+</script>
 
 {% include 'footer.html' %}
