@@ -1,40 +1,51 @@
-<!-- this is not a whole page. Instead, just the pop-up and the scripts that allows us to use the same pop-up to add a task wherever we want -->
-<button type="button" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-        class="bi bi-plus-circle"></i> Add Task</button>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Add New Task</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- let user input date and data for the task -->
-                <!-- the form body to insert the task with date and content -->
-                <!-- output for date is MM-DD-YYYY -->
-                <form id="add-task-form">
-                    <div class="mb-3">
-                        <label class="control-label" for="date">Date</label>
-                        <input class="form-control datepicker" id="date" name="date" type="date" value=""
-                            data-date-format="mm/dd/yyyy" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Task</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description"
-                            required></textarea>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <!-- don't click submit for now -->
-                <button type="submit" class="btn btn-outline-primary" id="add-task">Add Task</button>
-                </form>
-                <button type="button" id="close-add-task" class="btn btn-outline-danger"
-                    data-bs-dismiss="modal">Close</button>
+<!--This div is for the left aligned elements below the calendar-->
+<div class="">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Add Task <i class="bi bi-plus-circle"></i>
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- let user input date and data for the task -->
+                    <!-- the form body to insert the task with date and content -->
+                    <!-- output for date is MM-DD-YYYY -->
+                    <form id="add-task-form">
+                        <div class="mb-3">
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control datepicker" id="date" name="date" type="date" value=""
+                                data-date-format="mm/dd/yyyy" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Task</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description"
+                                required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="time" class="form-label">Time</label>
+                            <input class="form-control" id="time" name="time" type="time" required></input>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- don't click submit for now -->
+                    <button type="submit" class="btn btn-outline-primary" id="add-task">Add Task</button>
+                    </form>
+                    <button type="button" id="close-add-task" class="btn btn-outline-danger"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
+
 <!-- script to add tasks to the database -->
 <script>
     // use this function call
@@ -43,13 +54,14 @@
         // validate input client-side and then only send the data to create a task
         var date_field = $('#date');
         var text_field = $('#exampleFormControlTextarea1');
+        var time_field = $('#time');
         if (date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == "") {
             $('#add-task-form').reset();
         }
         else {
             $("#close-add-task").click();
-            api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val() },
-            // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
+            api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val(), time: $("#time").val()},
+                // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
                 function (result) {
                     // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
                     // in other words, it removes the GET variables from the url
