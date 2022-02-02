@@ -28,6 +28,7 @@ def homepage():
         return redirect(url_for('dashboard'))
     return render_template("homepage.html")
 
+# Dashboard Route
 @app.get('/dashboard')
 def dashboard():
     if session.get('user_authenticated'):
@@ -35,14 +36,15 @@ def dashboard():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
-
+# Calendar Route
 @app.get('/calendar')
 def calendar():
     if session.get('user_authenticated'):
         return render_template("calendar.html", user=session['user_email'])
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
-    
+
+#Task View Route
 @app.get('/tasks')
 def tasks():
     if session.get('user_authenticated'):
@@ -50,6 +52,7 @@ def tasks():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
+#Weekly Route
 @app.get('/weekly')
 def weekly():
     if session.get('user_authenticated'):
