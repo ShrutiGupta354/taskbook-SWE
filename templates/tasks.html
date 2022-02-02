@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col task_margin task_border task_col">
         <h1>Today</h1>
-        <script src="static/day-view.js"></script>
+        <script src="{{url_for('static', filename='day-view.js')}}"></script>
         <span id="today-tasks"></span>
       </div>
       <div class="col task_col task_border task_col">
@@ -32,12 +32,14 @@
     </div>
 
     <div class="d-flex float-end">
-      <button type="button" class="btn btn-yellow me-3" onclick="location.href='/weekly';"><i
+      <button type="button" class="btn btn-yellow me-3" onclick="location.href='{{url_for('weekly')}}';"><i
           class="bi bi-calendar3-week"></i> Weekly View</button>
-      <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/calendar';"><i
+      <button type="button" class="btn btn-yellow ms-3" onclick="location.href='{{url_for('calendar')}}';"><i
           class="bi bi-calendar3"></i>Monthly View</button>
     </div>
   </div>
 </div>
+
+<script>console.log("{{user}}");</script>
 
 {% include 'footer.html' %}
