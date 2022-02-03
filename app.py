@@ -6,10 +6,11 @@ from auth import auth
 from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request, session, flash
+from datetime import date
 import dataset
 
 taskbook_db = dataset.connect('sqlite:///taskbook.db')
-
+today = date.today()
 # the base Flask object
 app = Flask(__name__)
 # for cookies and sesion encryption
@@ -46,14 +47,8 @@ def calendar():
 
 # Task View Route
 @app.get('/tasks')
-def tasks():
-    if session.get('user_authenticated'):
-        return render_template("tasks.html", user=session['user_email'])
-    flash('You need to be logged in first', category='error')
-    return redirect(url_for('auth.login'))
-
 @app.get('/tasks/<int:year>-<int:month>-<int:day>')
-def tasks_day(year, month, day):
+def tasks_day(year=today.year, month=today.month, day=today.day):
     if session.get('user_authenticated'):
         #this check is so they don't put completely ludicrous dates in.
         if(month > 12 or day > 31 or year < 1800):
