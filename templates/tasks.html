@@ -15,12 +15,14 @@
     <div class="row">
       <div class="col task_margin task_border task_col">
         <h1>Today</h1>
-        <script src="{{url_for('static', filename='day-view.js')}}"></script>
-        <span id="today-tasks"></span>
+        <div class="toast-container" id="toast-container-today">
+        </div>
       </div>
+      <script src="{{url_for('static', filename='day-view.js')}}"></script>
       <div class="col task_col task_border task_col">
         <h1>Upcoming</h1>
-        <span id="upcoming-tasks"></span>
+          <div class="toast-container flex-wrap" id="toast-container-upcoming">
+          </div>
       </div>
     </div>
   </div>
