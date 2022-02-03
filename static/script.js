@@ -55,10 +55,3 @@ function api_delete_task(task, success_function) {
           success:success_function});
 }
 
-// This is for weekly view
-let dropdownContent = document.querySelectorAll(".dropdown-content");
-dropdownContent.forEach(element => {
-    element.addEventListener('click', function(){
-        element.style.display = 'block';
-    })
-})
