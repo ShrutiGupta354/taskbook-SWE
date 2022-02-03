@@ -43,6 +43,22 @@
     margin: 10px 0;
 }
 
+.date h2 {
+    font-size: 2em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 10px 0;
+}
+
+.date h3 {
+    font-size: 1.25em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 10px 0;
+}
+
 .current-date-header {
     font-size: 1em;
 }
@@ -142,55 +158,10 @@
     text-decoration: none;
 }
 
-/* Classes for tasks*/
-.task_border {
+/* class for rounded blue border used throughout*/
+.blue_border {
     border: 2px solid var(--primary-blue);
     border-radius: 10px;
-}
-
-.task_margin {
-    margin-right: 20px;
-}
-
-.task_col h1 {
-    font-size: 2em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 10px 0;
-}
-
-.date h2 {
-    font-size: 2em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 10px 0;
-}
-
-/*classes for dashboard*/
-.dash_margin {
-    margin-bottom: 20px;
-}
-
-.dash_heading h1 {
-    font-size: 3em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 10px 10px 20px 10px;
-}
-
-.dash_padding {
-    padding-bottom: 10px;
-}
-
-.dash h3 {
-    font-size: 1.25em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 10px 0;
 }
 
 /*for the progress bar in progress section*/
