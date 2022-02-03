@@ -36,6 +36,14 @@ def dashboard():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
+# Settings route
+@app.get('/settings')
+def settings():
+    if session.get('user_authenticated'):
+        return render_template("settings.html", user=session['user_email'])
+    flash('You need to be logged in first', category='error')
+    return redirect(url_for('auth.login'))
+
 # Calendar Route
 @app.get('/calendar')
 def calendar():
