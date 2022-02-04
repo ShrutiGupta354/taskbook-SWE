@@ -162,3 +162,7 @@ body{
 .footer{
    margin-top: auto;
 }
+
+.toast:hover > .toast-header{
+    background-color: var(--primary-yellow);
+}
