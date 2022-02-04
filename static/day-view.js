@@ -7,8 +7,8 @@ const numbers = ["00",
 "31"
 ];
 
+// this will take the data of the task and send it to the modal
 function sendDataToModal(id,desc,date,time,completed){
-    // description = task.description;
     document.getElementById("task_id").value = id;
     document.getElementById("new_description").value=desc;
     document.getElementById("new_date").value=date;
