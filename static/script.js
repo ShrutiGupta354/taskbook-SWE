@@ -3,7 +3,6 @@
 window.addEventListener('scroll', reveal);
 function reveal(){
     var reveal_items = document.querySelectorAll('.reveal');
-    console.log(reveal_items);
     for(var i=0; i<reveal_items.length; i++){
         var windowHeight = window.innerHeight;
         var revealTop = reveal_items[i].getBoundingClientRect().top;
@@ -18,38 +17,39 @@ function reveal(){
 }
 // end of script for homepage animation
 
+function appendZero(num){
+  if(num < 10){
+    return "0" + num;
+  }
+  return num;
+}
+
 
 /* API CALLS */
 function api_get_tasks(success_function) {
-    console.log("api_get_tasks is being called :)")
-  $.ajax({url:"api/tasks", type:"GET", 
+
+  $.ajax({url:$API_PATH, type:"GET", 
           success:success_function});
 }
 
 function api_create_task(task, success_function) {
-    console.log("api_create_tasks is being called :)")
-  console.log("creating task with:", task)
-  $.ajax({url:"api/tasks", type:"POST", 
+  $.ajax({url:$API_PATH, type:"POST", 
           data:JSON.stringify(task), 
           contentType:"application/json; charset=utf-8",
           success:success_function});
 }
 
 function api_update_task(task, success_function) {
-    console.log("api_update_tasks is being called :)")
-  console.log("updating task with:", task)
   task.id = parseInt(task.id)
-  $.ajax({url:"api/tasks", type:"PUT", 
+  $.ajax({url:$API_PATH, type:"PUT", 
           data:JSON.stringify(task), 
           contentType:"application/json; charset=utf-8",
           success:success_function});
 }
 
 function api_delete_task(task, success_function) {
-    console.log("api_delete_tasks is being called :)")
-  console.log("deleting task with:", task)
   task.id = parseInt(task.id)
-  $.ajax({url:"api/tasks", type:"DELETE", 
+  $.ajax({url:$API_PATH, type:"DELETE", 
           data:JSON.stringify(task), 
           contentType:"application/json; charset=utf-8",
           success:success_function});

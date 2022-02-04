@@ -4,9 +4,12 @@
 # flask web objects
 from auth import auth
 from flask import Flask
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask import request, session, flash
 import dataset
+from datetime import date
+
+today = date.today()
 
 taskbook_db = dataset.connect('sqlite:///taskbook.db')
 
@@ -19,41 +22,51 @@ app.config['SECRET_KEY'] = 'walsh-swe'
 # web application routes
 # ---------------------------
 
+# Home/Default Route
 @app.get('/')
 @app.get('/home')
 def homepage():
     if session.get('user_authenticated'):
         flash('Log out first to log back in.')
-        return render_template('tasks.html')
+        return redirect(url_for('dashboard'))
     return render_template("homepage.html")
 
+# Dashboard Route
+@app.get('/dashboard')
+def dashboard():
+    if session.get('user_authenticated'):
+        return render_template("dashboard.html", user=session['user_email'])
+    flash('You need to be logged in first', category='error')
+    return redirect(url_for('auth.login'))
+
+# Calendar Route
 @app.get('/calendar')
 def calendar():
     if session.get('user_authenticated'):
         return render_template("calendar.html", user=session['user_email'])
     flash('You need to be logged in first', category='error')
-    return render_template("login.html")
-    
-@app.get('/tasks')
-def tasks():
-    if session.get('user_authenticated'):
-        return render_template("tasks.html", user=session['user_email'])
-    flash('You need to be logged in first', category='error')
-    return render_template("login.html")
+    return redirect(url_for('auth.login'))
 
+# Task View Route
+@app.get('/tasks')
+@app.get('/tasks/<int:year>-<int:month>-<int:day>')
+def tasks(year=today.year, month=today.month, day=today.day):
+    if session.get('user_authenticated'):
+        #this check is so they don't put completely ludicrous dates in.
+        if(month > 12 or day > 31 or year < 1800):
+            return redirect(url_for('tasks'))
+        return render_template("tasks.html", user=session['user_email'], year=year, month=month, day=day)
+    flash('You need to be logged in first', category='error')
+    return redirect(url_for('auth.login'))
+
+# Weekly Route
 @app.get('/weekly')
 def weekly():
     if session.get('user_authenticated'):
         return render_template("weekly.html", user=session['user_email'])
     flash('You need to be logged in first', category='error')
-    return render_template("login.html")
+    return redirect(url_for('auth.login'))
 
-@app.get('/tasks-w3')
-def tasks_w3():
-    if session.get('user_authenticated'):
-        return render_template("tasks-w3.html", user=session['user_email'])
-    flash('You need to be logged in first', category='error')
-    return render_template("login.html")
 
 #--------------------
 # For authentication
@@ -69,7 +82,7 @@ app.register_blueprint(auth, url_prefix='/')
 def get_tasks():
     'return a list of tasks sorted by submit/modify time'
     task_table = taskbook_db.get_table('task')
-    tasks = [dict(x) for x in task_table.find(order_by='time')]
+    tasks = [dict(x) for x in task_table.find(email=session['user_email'], order_by=['date', 'time'])]
     return { "tasks": tasks }
 
 @app.post('/api/tasks',)
@@ -78,7 +91,7 @@ def create_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["description", "date"], f"Illegal key '{key}'"
+            assert key in ["description", "date", "time"], f"Illegal key '{key}'"
         assert type(data['description']) is str, "Description is not a string."
         assert len(data['description'].strip()) > 0, "Description is length zero."
     except Exception as e:
@@ -87,8 +100,10 @@ def create_task():
     try:
         task_table = taskbook_db.get_table('task')
         task_table.insert({
+            "email":session['user_email'],
             "description":data['description'].strip(),
             "date":data['date'],
+            "time":data['time'],
             "completed":False
         })
     except Exception as e:

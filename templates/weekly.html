@@ -5,16 +5,18 @@
 <div class="date text-center">
     <h1>January 30 - February 5</h1>
 </div>
-
 <div class="my-3">
     <div class="d-flex float-start">
-        <button type="button" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i> Add Task</button>
+        {% include 'add_task_button.html' %}
     </div>
     <div class="d-flex float-end">
-        <button type="button" class="btn btn-yellow me-3" onclick="location.href='/calendar';"><i class="bi bi-calendar"></i> Monthly View</a>
-        <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/tasks';"><i class="bi bi-calendar2-check"></i> Task View</a>
+        <button type="button" class="btn btn-yellow me-3" onclick="location.href='/calendar';"><i
+                class="bi bi-calendar3"></i> Monthly View</button>
+        <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/tasks';"><i
+                class="bi bi-calendar3-event"></i> Task View</button>
     </div>
 </div>
+
 
 <!--Weekly view dropdowns-->
 <div>
@@ -65,7 +67,5 @@
     })
   });
 </script>
-
-
 
 {% include 'footer.html' %}
