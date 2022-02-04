@@ -91,6 +91,13 @@
     60% {transform: translateY(-15px);} 
 }
 
+@keyframes bounce { 
+    0% {transform: translateY(0);} 
+    50% {transform: translateY(-8px);}
+    80% {transform: translateY(-2px);}
+    100% {transform: translateY(-4px);}
+}
+
 .img-up:hover{
     animation: none;
 }
@@ -165,4 +172,9 @@ body{
 
 .toast:hover > .toast-header{
     background-color: var(--primary-yellow);
+}
+
+.toast:hover{
+    margin-bottom: 20px;
+    animation: bounce .25s ease-in both;
 }
