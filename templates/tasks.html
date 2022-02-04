@@ -7,39 +7,43 @@
   }
 </style>
 
-<div class="calendar mb-3">
+<div class="mb-3">
   <div class="date text-center">
     <h1 id="today-date"></h1>
   </div>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col task_margin task_border task_col">
-        <h1>Today</h1>
-        <div class="toast-container" id="toast-container-today">
+  <div class="container mt-5">
+    <div class="row gap-5">
+      <!-- <div class="col task_margin task_border task_col"> -->
+      <div class="col task_border d-flex align-items-center flex-column shadow w-75">
+        <div class="mt-4">
+          <h1>TODAY</h1>
+        </div>
+        <div class="toast-container mb-5" id="toast-container-today">
         </div>
       </div>
-      <div class="col task_col task_border task_col">
-        <h1>Upcoming</h1>
-          <div class="toast-container flex-wrap" id="toast-container-upcoming">
-          </div>
+      <!-- <div class="col task_col task_border task_col"> -->
+      <div class="col task_border d-flex align-items-center flex-column shadow">
+        <div class="mt-4">
+          <h1>UPCOMING</h1>
+        </div>
+        <div class="toast-container mb-5" id="toast-container-upcoming">
+        </div>
       </div>
     </div>
-  </div>
 
-  <ul class="view">
-    <div class="d-flex float-start">
-      <!-- include the pop up to add task and the button that triggers that modal -->
-      {% include 'add_task_button.html' %}          
+    <div class="d-flex justify-content-between my-4">
+      <div class="d-flex float-start">
+        {% include 'add_task_button.html' %}
+      </div>
+      <div class="d-flex float-end">
+        <button type="button" class="btn btn-yellow me-3" onclick="location.href=`{{url_for('weekly')}}`;"><i
+            class="bi bi-calendar3-week"></i> Weekly View</button>
+        <button type="button" class="btn btn-yellow ms-3" onclick="location.href=`{{url_for('calendar')}}`;"><i
+            class="bi bi-calendar3"></i>Monthly View</button>
+      </div>
     </div>
 
-    <div class="d-flex float-end">
-      <button type="button" class="btn btn-yellow me-3" onclick="location.href=`{{url_for('weekly')}}`;"><i
-          class="bi bi-calendar3-week"></i> Weekly View</button>
-      <button type="button" class="btn btn-yellow ms-3" onclick="location.href=`{{url_for('calendar')}}`;"><i
-          class="bi bi-calendar3"></i>Monthly View</button>
-    </div>
   </div>
-</div>
 {% include 'edit_task_modal.html' %}
 <script src="{{url_for('static', filename='day-view.js')}}"></script>
 <script>

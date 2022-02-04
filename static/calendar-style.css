@@ -144,8 +144,8 @@
 
 /* Classes for tasks*/
 .task_border {
-    border: 2px solid var(--primary-blue);
-    border-radius: 10px;
+    border: 1px solid var(--primary-blue);
+    border-radius: 30px;
 }
 
 .task_margin {
