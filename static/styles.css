@@ -6,6 +6,7 @@
     --primary-yellow: #ffe45e;
     --primary-black: #011a2b;
     --primary-white: #eef7fb;
+    --triadic-color:#42d1e1;
 }
 
 .content{
@@ -152,6 +153,9 @@ header{
 }
 .social-icon:hover{
     color: var(--primary-white);
+}
+.bg-triadic{
+    background: var(--triadic-color);
 }
 
 /* for sticky footer */
