@@ -7,6 +7,9 @@ from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request, session, flash
 import dataset
+from datetime import date
+
+today = date.today()
 
 taskbook_db = dataset.connect('sqlite:///taskbook.db')
 
@@ -44,15 +47,19 @@ def calendar():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
-#Task View Route
+# Task View Route
 @app.get('/tasks')
-def tasks():
+@app.get('/tasks/<int:year>-<int:month>-<int:day>')
+def tasks(year=today.year, month=today.month, day=today.day):
     if session.get('user_authenticated'):
-        return render_template("tasks.html", user=session['user_email'])
+        #this check is so they don't put completely ludicrous dates in.
+        if(month > 12 or day > 31 or year < 1800):
+            return redirect(url_for('tasks'))
+        return render_template("tasks.html", user=session['user_email'], year=year, month=month, day=day)
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
-#Weekly Route
+# Weekly Route
 @app.get('/weekly')
 def weekly():
     if session.get('user_authenticated'):

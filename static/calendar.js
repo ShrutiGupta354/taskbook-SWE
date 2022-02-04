@@ -45,15 +45,6 @@ const renderCalendar = () => {
     "December",
   ];
   
-  //array of numbers so that all numbers are 2 digit for day and month when created in id field
-  const numbers = ["00",
-    "01","02","03","04","05","06","07","08","09","10",
-    "11","12","13","14","15","16","17","18","19","20",
-    "21","22","23","24","25","26","27","28","29","30",
-    "31"
-  ];
-  
-  
   //sets the header telling the user the current month and year displayed
   document.querySelector(".current-calendar-date").innerHTML = months[date.getMonth()] + " " + date.getFullYear();
 
@@ -66,8 +57,8 @@ const renderCalendar = () => {
   //build the previous month's days
   for (let x = firstDayIndex; x > 0; x--) {
     let id = (date.getMonth() == 0 ? date.getFullYear()-1 : date.getFullYear()) + `-` + 
-             numbers[(date.getMonth() == 0 ? 12 : date.getMonth())] + `-` + 
-             numbers[prevLastDay - x + 1];
+             appendZero(date.getMonth() == 0 ? 12 : date.getMonth()) + `-` + 
+             appendZero(prevLastDay - x + 1);
     
     days += `<div id="`+ id +`" class="prev-days">` +
               `<p id="`+ id +`-num" class="day-number">${prevLastDay - x + 1}</p>` + 
@@ -78,7 +69,7 @@ const renderCalendar = () => {
 
   //build the current month's days
   for (let i = 1; i <= lastDay; i++) {
-    let id = date.getFullYear() + `-` + numbers[date.getMonth() + 1] + `-` + numbers[i];
+    let id = date.getFullYear() + `-` + appendZero(date.getMonth() + 1) + `-` + appendZero(i);
     if (
       i === new Date().getDate() &&
       date.getMonth() === new Date().getMonth() &&
@@ -97,7 +88,7 @@ const renderCalendar = () => {
 
   //build the next month's days
   for (let j = 1; j <= nextDays; j++) {
-    let id = date.getFullYear() + `-` + numbers[date.getMonth() + 2] + `-` + numbers[j];
+    let id = date.getFullYear() + `-` + appendZero(date.getMonth() + 2) + `-` + appendZero(j);
     days += `<div id="`+ id +`" class="next-days">` +
                 `<p id="`+ id +`-num" class="day-number">${j}</p>` + 
             `</div>`;
@@ -106,6 +97,16 @@ const renderCalendar = () => {
 
   //put the calendar in the month days div
   monthDays.innerHTML = days;
+  
+  //puts an event handler on each day to redirect to its view as day page
+  //Kinda cruddy way to do it if we move to using the url directions to show a specific
+  //month, but this works for now
+  dayDivs = document.querySelectorAll('.days div')
+  dayDivs.forEach(element => {
+    element.addEventListener('click', function(){
+    window.location.href = "/tasks/" + element.id;
+    console.log(this.id);
+  })});
 };
 
 // Function to display tasks in calendar view

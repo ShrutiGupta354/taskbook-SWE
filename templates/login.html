@@ -6,7 +6,7 @@
     <div class="row content flex justify-content-center align-items-center">
         <!-- left SVG -->
         <div class="col-md-6">
-            <img src="/static/taskbook_fingerprint_logo.svg" alt="fingerprint_svg" class="img-fluid mt-3" >
+            <img src="{{url_for('static', filename='taskbook_fingerprint_logo.svg')}}" alt="fingerprint_svg" class="img-fluid mt-3" >
         </div>
 
         <!-- right form  -->
@@ -37,7 +37,7 @@
             <div class="row mt-5" style="margin-left: 30%;">
                 <div class="col">
                     <h4>Not signed up yet?</h4>
-                    <a href="/register" class="text-uppercase btn btn-yellow mt-3">Sign Up</a>
+                    <a href="{{url_for('register')}}" class="text-uppercase btn btn-yellow mt-3">Sign Up</a>
                 </div>
             </div>
         </div>
