@@ -49,7 +49,7 @@
     currentDay = '{{year}}-' + appendZero('{{month}}') + '-' +  appendZero('{{day}}');
   } else {
     let date = new Date();
-    currentDay = date.getFullYear() + '-' + numbers[date.getMonth()+1] + '-' + numbers[date.getDate()];
+    currentDay = date.getFullYear() + '-' + appendZero(date.getMonth()+1) + '-' + appendZero(date.getDate());
   }
 
   //check if path is set to just today
