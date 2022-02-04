@@ -1,63 +1,79 @@
 <!-- Modal -->
     <div class="modal fade" id="edit_task_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        aria-labelledby="edit_task_modal_label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Edit Task</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="edit_task_modal_label">Edit Task</h5>
+                    <button type="button" id="close_button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <!-- let user input date and data for the task -->
-                    <!-- the form body to insert the task with date and content -->
-                    <!-- output for date is MM-DD-YYYY -->
-                        <div class="mb-3">
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control datepicker" id="new_date" name="new_date" type="date" value=""
-                                data-date-format="mm/dd/yyyy" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Task</label>
-                            <textarea class="form-control" id="new_description" rows="2" name="new_description"
-                                required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="time" class="form-label">Time</label>
-                            <input class="form-control" id="new_time" name="new_time" type="time" required></input>
-                        </div>
-                        <input type="hidden" name="task_id" id="task_id" />
-                </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <!-- don't click submit for now -->
-                    <button type="button" id="close-add-task" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="bi bi-trash"></i> Delete</button>
-                    <button type="submit" class="btn btn-outline-success" id="add-task"><i class="bi bi-pencil-square"></i> Update</button>
-                </div>
+                <form id="edit_task_form"></form>
+                    <div class="modal-body">
+                        <!-- let user input date and data for the task -->
+                        <!-- the form body to insert the task with date and content -->
+                        <!-- output for date is MM-DD-YYYY -->
+                            <div class="mb-3">
+                                <label class="control-label" for="date">Date</label>
+                                <input class="form-control datepicker" id="new_date" name="new_date" type="date" value=""
+                                    data-date-format="mm/dd/yyyy" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Task</label>
+                                <textarea class="form-control" id="new_description" rows="2" name="new_description"
+                                    required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="time" class="form-label">Time</label>
+                                <input class="form-control" id="new_time" name="new_time" type="time" required></input>
+                            </div>
+                            <input type="hidden" name="task_id" id="task_id" />
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <!-- don't click submit for now -->
+                        <button type="button" id="delete_task" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
+                        <button type="submit" class="btn btn-outline-success" id="update_task"><i class="bi bi-pencil-square"></i> Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
 <!-- script to add tasks to the database -->
 <script>
-    // // use this function call
-    // // when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
-    // $("#add-task").on('click', function () {
-    //     // validate input client-side and then only send the data to create a task
-    //     var date_field = $('#date');
-    //     var text_field = $('#exampleFormControlTextarea1');
-    //     var time_field = $('#time');
-    //     if (date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == "") {
-    //         $('#add-task-form').reset();
-    //     }
-    //     else {
-    //         $("#close-add-task").click();
-    //         api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val(), time: $("#time").val() },
-    //             // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
-    //             function (result) {
-    //                 // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
-    //                 // in other words, it removes the GET variables from the url
-    //                 let urlToSendTo = window.location.href.split("?")[0];
-    //                 window.location.replace(urlToSendTo);
-    //             });
-    //     }
-    // });
+    // code for Update button
+    $("#update_task").on('click',() =>{
+        // get the id, new date, new description, and new time
+        let task_id = $("#task_id").val();
+        let new_date = $("#new_date").val();
+        let new_description = $("#new_description").val();
+        let new_time = $("#new_time").val();
+
+        // send ajax request to update the task
+        // create the task object first
+        let task = {
+            "id": task_id,
+            "date": new_date,
+            "description": new_description,
+            "time": new_time,
+            "completed": false,
+        };
+        api_update_task(task, () => {
+            let urlToSendTo = window.location.href;
+            window.location.href = urlToSendTo;
+        });
+
+    });
+
+    // code for Delete button
+    $("#delete_task").on('click',() => {
+        // get the id
+        let task_id = $("#task_id").val();
+        let task = {
+            "id": task_id,
+        };
+        api_delete_task(task, () => {
+            let urlToSendTo = window.location.href;
+            window.location.href = urlToSendTo;
+        });
+    })
 </script>
