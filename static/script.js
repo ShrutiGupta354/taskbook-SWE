@@ -54,3 +54,4 @@ function api_delete_task(task, success_function) {
           contentType:"application/json; charset=utf-8",
           success:success_function});
 }
+
