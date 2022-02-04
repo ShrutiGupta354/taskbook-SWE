@@ -89,3 +89,6 @@ function displayNextTasks(key){
         }
     });
 }
+
+// dynamically generate today's date to render in the front-end
+document.getElementById("today-date").innerHTML = new Date().toDateString();
