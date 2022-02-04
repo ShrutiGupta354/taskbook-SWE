@@ -94,5 +94,6 @@ function displayNextTasks(key){
 // the tricky bit is that, if we are at /task or today then it is the current day but if someone comes to this page from clicking on a date from calendar,
 // then, we need to display that date. So I had to look at the URL and then based on that, dynamically generate the date.
 // what is does is, if we are at a route /tasks/whatever, then we display that date. If we are at /task then we display today's date.
-let urlDate = window.location.href.split("/").length > 4 ? new Date(window.location.href.split("/")[4].replace(/-/g,'/')).toDateString() : new Date().toDateString();
+var urlDate = window.location.href.split("?")[0];
+urlDate = urlDate.split("/").length > 4 ? new Date(urlDate.split("/")[4].replace(/-/g,'/')).toDateString() : new Date().toDateString();
 document.getElementById("today-date").innerHTML = urlDate;

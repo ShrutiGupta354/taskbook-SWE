@@ -60,7 +60,7 @@
         }
         else {
             $("#close-add-task").click();
-            api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val(), time: $("#time").val()},
+            api_create_task({ description: text_field.val(), date: date_field.val(), time: time_field.val() },
                 // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
                 function (result) {
                     // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
