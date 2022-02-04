@@ -8,6 +8,9 @@ from flask import render_template, redirect, url_for
 from flask import request, session, flash
 from datetime import date
 import dataset
+from datetime import date
+
+today = date.today()
 
 taskbook_db = dataset.connect('sqlite:///taskbook.db')
 today = date.today()
@@ -48,7 +51,7 @@ def calendar():
 # Task View Route
 @app.get('/tasks')
 @app.get('/tasks/<int:year>-<int:month>-<int:day>')
-def tasks_day(year=today.year, month=today.month, day=today.day):
+def tasks(year=today.year, month=today.month, day=today.day):
     if session.get('user_authenticated'):
         #this check is so they don't put completely ludicrous dates in.
         if(month > 12 or day > 31 or year < 1800):
