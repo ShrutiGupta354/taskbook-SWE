@@ -1,0 +1,63 @@
+<!-- Modal -->
+    <div class="modal fade" id="edit_task_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Edit Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- let user input date and data for the task -->
+                    <!-- the form body to insert the task with date and content -->
+                    <!-- output for date is MM-DD-YYYY -->
+                        <div class="mb-3">
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control datepicker" id="new_date" name="new_date" type="date" value=""
+                                data-date-format="mm/dd/yyyy" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Task</label>
+                            <textarea class="form-control" id="new_description" rows="2" name="new_description"
+                                required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="time" class="form-label">Time</label>
+                            <input class="form-control" id="new_time" name="new_time" type="time" required></input>
+                        </div>
+                        <input type="hidden" name="task_id" id="task_id" />
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- don't click submit for now -->
+                    <button type="button" id="close-add-task" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="bi bi-trash"></i> Delete</button>
+                    <button type="submit" class="btn btn-outline-success" id="add-task"><i class="bi bi-pencil-square"></i> Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- script to add tasks to the database -->
+<script>
+    // // use this function call
+    // // when "Add Task" button is clicked, then call the api_create_task function with the appropriate data
+    // $("#add-task").on('click', function () {
+    //     // validate input client-side and then only send the data to create a task
+    //     var date_field = $('#date');
+    //     var text_field = $('#exampleFormControlTextarea1');
+    //     var time_field = $('#time');
+    //     if (date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == "") {
+    //         $('#add-task-form').reset();
+    //     }
+    //     else {
+    //         $("#close-add-task").click();
+    //         api_create_task({ description: $("#exampleFormControlTextarea1").val(), date: $("#date").val(), time: $("#time").val() },
+    //             // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
+    //             function (result) {
+    //                 // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
+    //                 // in other words, it removes the GET variables from the url
+    //                 let urlToSendTo = window.location.href.split("?")[0];
+    //                 window.location.replace(urlToSendTo);
+    //             });
+    //     }
+    // });
+</script>

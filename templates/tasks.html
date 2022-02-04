@@ -18,7 +18,6 @@
         <div class="toast-container" id="toast-container-today">
         </div>
       </div>
-      <script src="{{url_for('static', filename='day-view.js')}}"></script>
       <div class="col task_col task_border task_col">
         <h1>Upcoming</h1>
           <div class="toast-container flex-wrap" id="toast-container-upcoming">
@@ -41,7 +40,8 @@
     </div>
   </div>
 </div>
-
+{% include 'edit_task_modal.html' %}
+<script src="{{url_for('static', filename='day-view.js')}}"></script>
 <script>
 
   //key variable that represents the current day

@@ -7,9 +7,17 @@ const numbers = ["00",
 "31"
 ];
 
+function sendDataToModal(id,desc,date,time){
+    // description = task.description;
+    document.getElementById("task_id").value = id;
+    document.getElementById("new_description").value=desc;
+    document.getElementById("new_date").value=date;
+    document.getElementById("new_time").value=time;
+}
+
 // since we are repeating code:
 function makeDescriptionHTML(task,taskDesc){
-    taskDesc += `<div class="toast show mb-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="cursor:pointer" onclick="window.location.href='/tasks'">`;
+    taskDesc += `<div class="toast show mb-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="cursor:pointer" onclick="sendDataToModal('${task.id}','${task.description}','${task.date}','${task.time}')" data-bs-toggle="modal" data-bs-target="#edit_task_modal">`;
         taskDesc += `<div class="toast-header justify-content-between">`;
             // for now I have added the blue sun as the icon but that will change depending on the tag (low, med, high)
             taskDesc += `<strong><i class="bi bi-brightness-high-fill" style="color:blue"></i></strong>`;
