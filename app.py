@@ -6,13 +6,11 @@ from auth import auth
 from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request, session, flash
-import dataset
 from datetime import date
-
-today = date.today()
+import dataset
 
 taskbook_db = dataset.connect('sqlite:///taskbook.db')
-
+today = date.today()
 # the base Flask object
 app = Flask(__name__)
 # for cookies and sesion encryption
@@ -118,7 +116,7 @@ def update_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["id","description","completed"], f"Illegal key '{key}'"
+            assert key in ["id","description","completed", "date", "time"], f"Illegal key '{key}'"
         assert type(data['id']) is int, f"id '{id}' is not int"
         if "description" in data:
             assert type(data['description']) is str, "Description is not a string."
