@@ -8,9 +8,6 @@ from flask import render_template, redirect, url_for
 from flask import request, session, flash
 from datetime import date
 import dataset
-from datetime import date
-
-today = date.today()
 
 taskbook_db = dataset.connect('sqlite:///taskbook.db')
 today = date.today()
