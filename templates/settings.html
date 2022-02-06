@@ -3,23 +3,349 @@
 <!-- div to add margins to whole page -->
 <div class = "calendar mb-3">
     <!--div for the heading-->
-    <div class = "date text-center">
+    <div class="date mb-3 text-center">
         <h1>Settings</h1>
     </div>
 
-    <!--div for account settings-->
-    <!--email reset, password reset-->
-
-    <!--div for notification settings-->
-
-    <!--div for appearance settings-->
-    <!--dark mode, font size, font type-->
-
-    <!--div for views settings-->
-    <!--default view, task view settings, week view settings-->
-
-    <!--div for dashboard settings-->
-
-    <!--div for information/about-->
+    <div class = "container-fluid">       
+        <!--div for account settings-->
+        <!--email reset, password reset-->
+        <div class="row blue_border mb-3 pb-2">
+            <div class = "date">
+                <h2>Account</h2>
+                <h3>Change Username</h3>
+                <!--grid for change username-->
+                <div class = "container">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label>Current Username</label>
+                        </div>
+                        <div class = "col">
+                            <input type = "text">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>New Username</label>
+                        </div>
+                        <div class="col">
+                            <input type="text">
+                        </div>
+                    </div>
+                </div>
+                <!--save button-->
+                <div class="d-flex float-end">
+                    <input class="btn btn-yellow me-3" type="submit">
+                </div>
+                <br>
+                <h3>Change Password</h3>
+                <!--grid for change password-->
+                <div class="container">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label>Current Password</label>
+                        </div>
+                        <div class="col">
+                            <input type="password">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label>New Password</label>
+                        </div>
+                        <div class="col">
+                            <input type="password">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label>Confirm New Password</label>
+                        </div>
+                        <div class="col">
+                            <input type="password">
+                        </div>
+                    </div>
+                </div>
+                <!--save button-->
+                <div class="d-flex float-end">
+                    <input class="btn btn-yellow me-3" type="submit">
+                </div>
+                <br>
+            </div>
+        </div>
+        
+        <!--div for notification settings-->
+        <div class=" row blue_border mb-3 pb-2">
+            <div class="date">
+                <h2>Notifications</h2>
+                <h3>Email Notifications</h3>
+                <div class = "container">
+                    <div class = "row">
+                        <div class = "col">
+                            <p>Today's events</p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Upcoming events</p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                </div>
+                <h3>Desktop Notifications</h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p>Today's events</p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Upcoming events</p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                </div>
+                <!--save button-->
+                <div class="d-flex float-end">
+                    <input class="btn btn-yellow me-3" type="submit">
+                </div>
+                <br>
+            </div>
+        </div>
+        
+        <!--div for appearance settings-->
+        <!--dark mode, font size, font type-->
+        <div class=" row blue_border mb-3 pb-2">
+            <div class="date">
+                <h2>Appearance</h2>
+                <h3>Font Settings</h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p>Font Type</p>
+                        </div>
+                        <div class="col">
+                            <select>
+                                <option value="Font 1" selected>Font 1</option>
+                                <option value="Font 2">Font 2</option>
+                                <option value="Font 3">Font 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Font Size</p>
+                        </div>
+                        <div class="col">
+                            <input type = "number">
+                        </div>
+                    </div>
+                </div>
+                <h3>App Theme</h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p>Dark Mode</p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                </div>
+                <!--save button-->
+                <div class="d-flex float-end">
+                    <input class="btn btn-yellow me-3" type="submit">
+                </div>
+                <br>
+            </div>
+        </div>
+        
+        <!--div for views settings-->
+        <!--default view, task view settings, week view settings-->
+        <div class="row blue_border mb-3 pb-2">
+            <div class="date">
+                <h2>View Customization</h2>
+                <h3>Default View</h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <label class="radio">Dashboard
+                                <input name="default_view" type="radio" class="checkbox" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="radio">Monthly View
+                                <input name="default_view" type="radio" class="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="radio">Weekly View
+                                <input name="default_view" type="radio" class="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="radio">Task View
+                                <input name="default_view" type="radio" class="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <h3>Task View Customization</h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <label>Left Column: </label>
+                        </div>
+                        <div class="col">
+                            <p>Current</p>
+                        </div>
+                        <div class="col">
+                            <input type="number" value=1>
+                        </div>
+                        <div class="col">
+                            <select>
+                                <option value="Tasks">Task(s)</option>
+                                <option value="Days" selected>Day(s)</option>
+                                <option value="Weeks">Week(s)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Right Column: </label>
+                        </div>
+                        <div class="col">
+                            <p>Upcoming</p>
+                        </div>
+                        <div class="col">
+                            <input type="number" value=10>
+                        </div>
+                        <div class="col">
+                            <select>
+                                <option value="Tasks" selected>Task(s)</option>
+                                <option value="Days">Day(s)</option>
+                                <option value="Weeks">Week(s)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <h3>Weekly View Customization</h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p>Start Week On: <p>
+                        </div>
+                        <div class="col">
+                            <label class="radio">Sunday
+                                <input name="week_start" type = "radio" class="checkbox" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class = "col">
+                            <label class="radio">Current Day
+                                <input name="week_start" type="radio" class="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Display Days As:</p>
+                        </div>
+                        <div class="col">
+                            <label class="radio">Boxes
+                                <input name="week_display" type="radio" class="checkbox" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="radio">Stacked Drop Downs
+                                <input name="week_display" type="radio" class="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!--save button-->
+                <div class="d-flex float-end">
+                    <input class="btn btn-yellow me-3" type="submit">
+                </div>
+                <br>
+            </div>
+        </div>
+        
+        <!--div for dashboard settings-->
+        <div class="row blue_border mb-3 pb-2">
+            <div class="date">
+                <h2>Dashboard Customization</h2>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p>Progress Box<p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Views Box<p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Customization Box<p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Help Box</p>
+                        </div>
+                        <div class="col">
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                </div>
+                <!--save button-->
+                <div class="d-flex float-end">
+                    <input class="btn btn-yellow me-3" type="submit">
+                </div>
+                <br>
+            </div>
+        
+        </div>
+        
+        <!--div for information/about-->
+        <div class="row blue_border mb-3 pb-2">
+            <div class="date">
+                <h2>About</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+        </div>
+    </div>
 </div>
 {% include 'footer.html' %}
