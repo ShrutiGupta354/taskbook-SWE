@@ -31,6 +31,7 @@ function makeDescriptionHTML(task,taskDesc){
 //Function to display tasks in day view
 function displayDayTasks(key){
     let taskDesc = "";
+    let count = 0;
     //fetches tasks
     api_get_tasks(function(result){
         for(const task of result.tasks){
