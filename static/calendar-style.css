@@ -247,3 +247,48 @@ input:checked + .slider:before {
 input[type=number] {
     width: 60px;
 }
+
+/*radio buttons*/
+/* Customize the label (the container) */
+.radio {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border: 2px solid var(--primary-yellow);
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio:hover input ~ .checkmark {
+  background-color: var(--primary-white);
+}
+
+/* When the radio button is checked, add a yellow background */
+.radio input:checked ~ .checkmark {
+  background-color: var(--primary-yellow);
+}
