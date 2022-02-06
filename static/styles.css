@@ -6,6 +6,7 @@
     --primary-yellow: #ffe45e;
     --primary-black: #011a2b;
     --primary-white: #eef7fb;
+    --triadic-color:#42d1e1;
 }
 
 .content{
@@ -91,6 +92,13 @@
     60% {transform: translateY(-15px);} 
 }
 
+@keyframes bounce { 
+    0% {transform: translateY(0);} 
+    50% {transform: translateY(-8px);}
+    80% {transform: translateY(-2px);}
+    100% {transform: translateY(-4px);}
+}
+
 .img-up:hover{
     animation: none;
 }
@@ -146,6 +154,9 @@ header{
 .social-icon:hover{
     color: var(--primary-white);
 }
+.bg-triadic{
+    background: var(--triadic-color);
+}
 
 /* for sticky footer */
 /* app-wide styles */
@@ -161,4 +172,13 @@ body{
 }
 .footer{
    margin-top: auto;
+}
+
+.toast:hover > .toast-header{
+    background-color: var(--primary-yellow);
+}
+
+.toast:hover{
+    margin-bottom: 20px;
+    animation: bounce .25s ease-in both;
 }
