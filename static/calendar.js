@@ -127,13 +127,11 @@ function displayTasks(key) {
       }
     }
 
-    // one additional task
-    if (count == 3)
-      taskDesc += `<p class="task-badge"><span>${count - 2} More Task</span></p>`
-
-    // more than one additional task
-    else if (count >= 4)
-      taskDesc += `<p class="task-badge"><span>${count - 2} More Tasks</span></p>`
+    //tell user how many more task/tasks there are
+    let singlePluralTask = (count-2) == 1 ? "task" : "tasks";
+    if (count > 2) { 
+      taskDesc += `<p class="task-badge"><span>${count - 2} More ${singlePluralTask}</span></p>` 
+    }
     
     //append to day number tag
     $(`#${key}`).append(taskDesc);
