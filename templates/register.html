@@ -44,14 +44,14 @@
             <div class="row mt-5" style="margin-left: 30%;">
                 <div class="col">
                     <h4>Already have an account?</h4>
-                    <a href="/login" class="text-uppercase btn btn-yellow mt-3">Log In</a>
+                    <a href="{{url_for('auth.login')}}" class="text-uppercase btn btn-yellow mt-3">Log In</a>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
             <!-- right image -->
-            <img src="/static/taskbook_join_logo.svg" alt="join_svg" class="img-fluid mt-3">
+            <img src="{{url_for('static', filename='taskbook_join_logo.svg')}}" alt="join_svg" class="img-fluid mt-3">
         </div>
 
     </div>

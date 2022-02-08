@@ -1,38 +1,57 @@
 
-//array of numbers so that all numbers are 2 digit for day and month when created in id field
-const numbers = ["00",
-"01","02","03","04","05","06","07","08","09","10",
-"11","12","13","14","15","16","17","18","19","20",
-"21","22","23","24","25","26","27","28","29","30",
-"31"
-];
 
-//find current day to use as key
-let date = new Date();
+// this will take the data of the task and send it to the modal
+function sendDataToModal(id,desc,date,time,completed){
+    document.getElementById("task_id").value = id;
+    document.getElementById("new_description").value=desc;
+    document.getElementById("new_date").value=date;
+    document.getElementById("new_time").value=time;
+    document.getElementById("mark_completed").checked = completed === 'true';
+    if(completed === 'true'){
+        document.getElementById("label_for_completed").innerHTML = "Mark as incomplete";
+    }
+}
 
-let id = date.getFullYear() + '-' + numbers[date.getMonth()+1] + '-' + numbers[date.getDate()];
+// since we are repeating code:
+function makeDescriptionHTML(task,taskDesc){
+    taskDesc += `<div class="toast show mb-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="cursor:pointer" onclick="sendDataToModal('${task.id}','${task.description}','${task.date}','${task.time}','${task.completed}')" data-bs-toggle="modal" data-bs-target="#edit_task_modal">`;
+        taskDesc += `<div class="toast-header justify-content-between">`;
+            // for now I have added the blue sun as the icon but that will change depending on the tag (low, med, high)
+            taskDesc += `<strong><i class="bi bi-brightness-high-fill" style="color:blue"></i></strong>`;
+            taskDesc += `<span class="fs-6">${task.date} | ${task.time}</span>`;
+        taskDesc += `</div>`;
+        taskDesc += `<div class="toast-body fs-6 ${task.completed ? "completed" : "" }">`;
+            taskDesc += task.description;
+        taskDesc += `</div>`;
+    taskDesc += `</div>`;
+    return taskDesc;
+}
 
-//displays tasks for today
-displayDayTasks(id);
-//displays next 10 tasks
-displayNextTasks(id);
 
 //Function to display tasks in day view
 function displayDayTasks(key){
     let taskDesc = "";
-
+    let count = 0;
     //fetches tasks
     api_get_tasks(function(result){
         for(const task of result.tasks){
             //if task matches current day, display it
             if(task.date == key){
-                taskDesc += `<p class="taskdesc`;
-                if(task.completed) taskDesc += ` completed`;
-                taskDesc += `">` + task.description + `</p>`;
+                taskDesc = makeDescriptionHTML(task,taskDesc);
+                document.getElementById("toast-container-today").innerHTML = taskDesc;
+                count++;
             }
         }
-        //once all tasks are in the taskDesc, add them to list
-        document.getElementById("today-tasks").innerHTML = taskDesc;
+        if(count==0){
+            let task = {
+                date:"-",
+                time:"-",
+                description:"<h4 class='ms-3'>No tasks for today!<h4>",
+            }
+            taskDesc = makeDescriptionHTML(task,taskDesc);
+            document.getElementById("toast-container-today").innerHTML =taskDesc;
+        }
+
     });
 }
 
@@ -48,11 +67,26 @@ function displayNextTasks(key){
             if(count >= 10) break;
             if(task.date > key){
                 count++;
-                taskDesc += `<p class="taskdesc`;
-                if(task.completed) taskDesc += ` completed`;
-                taskDesc += `">` + task.description + `</p>`;
+                taskDesc = makeDescriptionHTML(task,taskDesc);
+                document.getElementById("toast-container-upcoming").innerHTML = taskDesc;
             }
         }
-        document.getElementById("upcoming-tasks").innerHTML = taskDesc;
+        if(count==0){
+            let task = {
+                date:"-",
+                time:"-",
+                description:"<h4 class='ms-3'>No upcoming tasks!<h4>",
+            }
+            taskDesc = makeDescriptionHTML(task,taskDesc);
+            document.getElementById("toast-container-upcoming").innerHTML =taskDesc;
+        }
     });
 }
+
+// dynamically generate today's date to render in the front-end
+// the tricky bit is that, if we are at /task or today then it is the current day but if someone comes to this page from clicking on a date from calendar,
+// then, we need to display that date. So I had to look at the URL and then based on that, dynamically generate the date.
+// what is does is, if we are at a route /tasks/whatever, then we display that date. If we are at /task then we display today's date.
+var urlDate = window.location.href.split("?")[0];
+urlDate = urlDate.split("/").length > 4 ? new Date(urlDate.split("/")[4].replace(/-/g,'/')).toDateString() : new Date().toDateString();
+document.getElementById("today-date").innerHTML = urlDate;
