@@ -43,6 +43,22 @@
     margin: 10px 0;
 }
 
+.date h2 {
+    font-size: 2em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 10px 0;
+}
+
+.date h3 {
+    font-size: 1.25em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 10px 0;
+}
+
 .current-date-header {
     font-size: 1em;
 }
@@ -142,55 +158,10 @@
     text-decoration: none;
 }
 
-/* Classes for tasks*/
-.task_border {
-    border: 1px solid var(--primary-blue);
-    border-radius: 30px;
-}
-
-.task_margin {
-    margin-right: 20px;
-}
-
-.task_col h1 {
-    font-size: 2em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 10px 0;
-}
-
-.date h2 {
-    font-size: 2em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 10px 0;
-}
-
-/*classes for dashboard*/
-.dash_margin {
-    margin-bottom: 20px;
-}
-
-.dash_heading h1 {
-    font-size: 3em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 10px 10px 20px 10px;
-}
-
-.dash_padding {
-    padding-bottom: 10px;
-}
-
-.dash h3 {
-    font-size: 1.25em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 10px 0;
+/* class for rounded blue border used throughout*/
+.blue_border {
+    border: 2px solid var(--primary-blue);
+    border-radius: 10px;
 }
 
 /*for the progress bar in progress section*/
@@ -274,7 +245,7 @@ input:checked + .slider:before {
 }
 
 input[type=number] {
-    width: 50px;
+  width: 60px;
 }
 
 /* format tasks in calendar view */
@@ -298,13 +269,50 @@ input[type=number] {
 
 /* badge for more tasks in monthly view on today */
 .today .task-badge span {
-    display: inline-block;
-    border-radius: 10px;
-    padding: 0 5px;
     background-color: #fff;
     color: var(--primary-blue);
-    font-size: 14px;
-    min-width: 20px;
-    text-align: center;
-    font-weight: bold;
+
+/*radio buttons*/
+/* Customize the label (the container) */
+.radio {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border: 2px solid var(--primary-yellow);
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio:hover input ~ .checkmark {
+  background-color: var(--primary-white);
+}
+
+/* When the radio button is checked, add a yellow background */
+.radio input:checked ~ .checkmark {
+  background-color: var(--primary-yellow);
 }
