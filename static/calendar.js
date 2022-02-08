@@ -126,8 +126,14 @@ function displayTasks(key) {
         }
       }
     }
-    if (count >= 3)
-      taskDesc += `<p>${count - 2} More . . .</p>`
+
+    // one additional task
+    if (count == 3)
+      taskDesc += `<p class="task-badge"><span>${count - 2} More Task</span></p>`
+
+    // more than one additional task
+    else if (count >= 4)
+      taskDesc += `<p class="task-badge"><span>${count - 2} More Tasks</span></p>`
     
     //append to day number tag
     $(`#${key}`).append(taskDesc);

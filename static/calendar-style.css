@@ -276,3 +276,35 @@ input:checked + .slider:before {
 input[type=number] {
     width: 50px;
 }
+
+/* format tasks in calendar view */
+.taskdesc {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* badge for more tasks in monthly view */
+.task-badge span {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 0 5px;
+    background-color: var(--primary-blue);
+    color: #fff;
+    font-size: 14px;
+    min-width: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* badge for more tasks in monthly view on today */
+.today .task-badge span {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 0 5px;
+    background-color: #fff;
+    color: var(--primary-blue);
+    font-size: 14px;
+    min-width: 20px;
+    text-align: center;
+    font-weight: bold;
+}
