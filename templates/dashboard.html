@@ -2,15 +2,15 @@
 {% include 'banner.html' %}
 
 <div class="calendar mb-3">
-    <div class="dash_heading text-center">
+    <div class="date mb-3 text-center">
         <h1>Your Dashboard</h1>
     </div>
 
     <div class="container-fluid">
         <!--div for a custom section-->
-        <div class="row dash_margin task_border">
-            <div class="task_col dash_padding">
-                <h1>Progress</h1>
+        <div class="row mb-3 blue_border">
+            <div class="date pb-2">
+                <h2>Progress</h2>
                 <p>
                     This section might show your progress on tasks for today, this week, this month, or something else.
                 </p>
@@ -26,9 +26,9 @@
         </div>
 
         <!--div for the views section-->
-        <div class="row dash_margin task_border">
-            <div class="task_col dash_padding">
-                <h1>Views</h1>
+        <div class="row mb-3 blue_border">
+            <div class="date pb-2">
+                <h2>Views</h2>
                 <p>
                     There are 3 views that can be used to see your calendar. The first is the monthly view, which is
                     simply the traditional monthly calendar.
@@ -60,55 +60,16 @@
         </div>
 
         <!--div for the customization section-->
-        <div class="row dash_margin task_border">
-            <div class="task_col dash_padding">
-                <h1>Customization</h1>
+        <div class="row mb-3 blue_border">
+            <div class="date pb-2">
+                <h2>Customization</h2>
                 <p>
                     In order to be more personal, this planner can be customized to fit your needs!
                     You can customize the default colors, the task view, and the dashboard here.
                 </p>
 
-                <!--Color customization div-->
-                <div class="dash block">
-                    <h3>Color Customization</h3>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <label>Light: </label>
-                            </div>
-                            <div class="col">
-                                <input type="color" value="#EEF7FB">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label>Midtone 1: </label>
-                            </div>
-                            <div class="col">
-                                <input type="color" value="#FFE45E">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label>Midtone 2: </label>
-                            </div>
-                            <div class="col">
-                                <input type="color" value="#21B0C0">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label>Dark: </label>
-                            </div>
-                            <div class="col">
-                                <input type="color" value="#011A28">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!--Task View customization div-->
-                <div class="dash block">
+                <div class="date block">
                     <h3>Task View Customization</h3>
                     <div class="container">
                         <div class="row">
@@ -151,7 +112,7 @@
                 </div>
 
                 <!--Dashboard customization div-->
-                <div class="dash block">
+                <div class="date block">
                     <h3>Dashboard Customization</h3>
                     <div class="container">
                         <div class="row">
@@ -198,9 +159,9 @@
 
                 <!--Save button-->
                 <div class="my-3">
+                    <!--save button-->
                     <div class="d-flex float-end">
-                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='';"><i
-                                class="bi bi-save2-fill"></i> Save</button>
+                        <input class="btn btn-yellow me-3" type="submit">
                     </div>
                 </div>
 
@@ -208,20 +169,23 @@
         </div>
 
         <!--div for the help section-->
-        <div class="row dash_margin task_border">
-            <div class="task_col dash_padding">
-                <h1>Help</h1>
+        <div class="row mb-3 blue_border">
+            <div class="date pb-2">
+                <h2>About</h2>
                 <p>
-                    For help using this app, FAQs, and other information, check out these links.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
 
                 <!--Buttons-->
                 <div class="my-3">
                     <div class="d-flex float-end">
+                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='/settings';"><i
+                                class="bi bi-gear"></i> Settings</button>
                         <button type="button" class="btn btn-yellow me-3" onclick="location.href='';"><i
                                 class="bi bi-info-circle"></i> Information</button>
-                        <button type="button" class="btn btn-yellow me-3" onclick="location.href='';"><i
-                                class="bi bi-question-circle"></i> FAQs</button>
                         <button type="button" class="btn btn-yellow me-3" onclick="location.href='';"><i
                                 class="bi bi-envelope"></i> Contact</button>
                     </div>
