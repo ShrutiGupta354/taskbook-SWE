@@ -124,7 +124,7 @@ def update_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["id","description","completed", "date", "time"], f"Illegal key '{key}'"
+            assert key in ["id","description","completed", "date", "time", "important"], f"Illegal key '{key}'"
         assert type(data['id']) is int, f"id '{id}' is not int"
         if "description" in data:
             assert type(data['description']) is str, "Description is not a string."

@@ -32,6 +32,12 @@
                             <label for="time" class="form-label">Time</label>
                             <input class="form-control" id="time" name="time" type="time" required></input>
                         </div>
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input" type="checkbox" id="important" value="1" id="mark_important">
+                            <label class="form-check-label" for="mark_important" id="label_for_important">
+                                Mark as Important
+                            </label>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <!-- don't click submit for now -->
@@ -55,19 +61,16 @@
         var date_field = $('#date');
         var text_field = $('#exampleFormControlTextarea1');
         var time_field = $('#time');
-        if (date_field.val() == null || date_field.val() == "" || text_field.val() == null || text_field.val() == "") {
-            $('#add-task-form').reset();
-        }
-        else {
-            $("#close-add-task").click();
-            api_create_task({ description: text_field.val(), date: date_field.val(), time: time_field.val() },
-                // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
-                function (result) {
-                    // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
-                    // in other words, it removes the GET variables from the url
-                    let urlToSendTo = window.location.href.split("?")[0];
-                    window.location.replace(urlToSendTo);
-                });
+        var impo_field = $('#important')[0]
+        $("#close-add-task").click();
+        api_create_task({ description: text_field.val(), date: date_field.val(), time: time_field.val(), important: impo_field.checked},
+            // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
+            function (result) {
+                // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
+                // in other words, it removes the GET variables from the url
+                let urlToSendTo = window.location.href.split("?")[0];
+                window.location.replace(urlToSendTo);
+            });
         }
     });
 </script>
