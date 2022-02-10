@@ -3,59 +3,60 @@
 
 
 <div class="date text-center">
-    <h1>January 30 - February 5</h1>
+  <h1>January 30 - February 5</h1>
 </div>
-<div>
-  <!--Dropdown styles-->
-  <style>
-      .dropdown {
-        position: relative;
-        display: block;
-        font-size: 20px;
-        padding: 10px;
-        margin-bottom: 60px;
-        border: 2px solid #21b0c0;
-      }
-      
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #ffe45e;
-        font-size: 16px;
-        min-width: 100%;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        padding: 12px 16px;
-        
-      }
-      
-      .show {display:block;}
-      
-      </style>
   
-  <div class="container">
-    {% for day in ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %}
-    <div class="dropdown">
-      <p>{{day}}</p>
-      <div class="dropdown-content">
-        <p>[Insert task here]</p>
-        <!--Placeholder task - remove when backend is done-->
-      </div>
-      {% endfor %}
-    </div>
+<!--Dropdown styles-->
+<style>
+  .dropdown {
+    position: relative;
+    display: block;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 60px;
+    border: 2px solid #21b0c0;
+    border-radius: 10px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffe45e;
+    font-size: 16px;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
     
-    <div class="my-3">
-        <div class="d-flex float-start">
-            {% include 'add_task_button.html' %}
-        </div>
-        <div class="d-flex float-end">
-            <button type="button" class="btn btn-yellow me-3" onclick="location.href='/calendar';"><i
-                    class="bi bi-calendar3"></i> Monthly View</button>
-            <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/tasks';"><i
-                    class="bi bi-calendar3-event"></i> Task View</button>
-        </div>
+  }
+  
+  .show {display:block;}
+  
+</style>
+  
+<div class="container">
+  {% for day in ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %}
+  <div class="dropdown">
+    <p>{{day}}</p>
+    <div class="dropdown-content">
+      <p>[Insert task here]</p>
+      <!--Placeholder task - remove when backend is done-->
     </div>
+    {% endfor %}
   </div>
 </div>
+    
+<div class="my-3">
+    <div class="d-flex float-start">
+        {% include 'add_task_button.html' %}
+    </div>
+    <div class="d-flex float-end">
+        <button type="button" class="btn btn-yellow me-3" onclick="location.href='/calendar';"><i
+                class="bi bi-calendar3"></i> Monthly View</button>
+        <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/tasks';"><i
+                class="bi bi-calendar3-event"></i> Task View</button>
+    </div>
+</div>
+
 
 <script>
   let dropdown = document.querySelectorAll(".dropdown");
