@@ -91,7 +91,7 @@ def verify_application_processes(server):
 
 
 if __name__ == "__main__":
-    server = Server( host = "dev.taskbook.xyz", user="ubuntu", key_filename="/Users/Qtip/.ssh/DevServer.pem")
+    server = Server( host = "dev.taskbook.xyz", user="ubuntu", key_filename="/home/runner/.ssh/DevServer.pem")
 
     print("stopping application processes")
     stop_application_processes(server)
