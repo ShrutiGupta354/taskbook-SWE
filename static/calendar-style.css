@@ -272,6 +272,7 @@ input[type=number] {
     background-color: #fff;
     color: var(--primary-blue);
 
+}
 /*radio buttons*/
 /* Customize the label (the container) */
 .radio {
