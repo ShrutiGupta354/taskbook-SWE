@@ -11,7 +11,6 @@
   .dropdown {
     position: relative;
     display: block;
-    font-size: 20px;
     padding: 10px;
     margin-bottom: 60px;
     border: 2px solid #21b0c0;
@@ -23,7 +22,7 @@
     display: none;
     position: absolute;
     background-color: #ffe45e;
-    font-size: 16px;
+    font-size: 18px;
     min-width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
@@ -31,14 +30,21 @@
     
   }
   
-  .show {display:block;}
-  
+  .show {
+    display:block;
+  }
+  .days{
+    font-size: 28px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 </style>
   
 <div class="container">
   {% for day in ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %}
   <div class="dropdown">
-    <p>{{day}}</p>
+    <p class="days">{{day}}</p>
     <div class="dropdown-content">
       <p>[Insert task here]</p>
       <!--Placeholder task - remove when backend is done-->
