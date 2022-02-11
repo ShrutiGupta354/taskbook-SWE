@@ -144,8 +144,8 @@ _server = None
 
 def get_current_server():
     global _server
-    host = "www.taskbook.xyz"
-    _server = _server or Server(host,"ubuntu","/home/runner/.ssh/ProdServer.pem")
+    host = "dev.taskbook.xyz"
+    _server = _server or Server(host,"ubuntu","/home/runner/.ssh/DevServer.pem")
     return _server
 
 def test_instantiate_server():
