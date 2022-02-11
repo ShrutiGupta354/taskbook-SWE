@@ -40,36 +40,38 @@
                 <br>
                 <h3>Change Password</h3>
                 <!--grid for change password-->
-                <div class="container">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label>Current Password</label>
+                <form method="POST" action="/change_password">
+                    <div class="container">
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label>Current Password</label>
+                            </div>
+                            <div class="col">
+                                <input type="password" name="current_password" id="current_password">
+                            </div>
                         </div>
-                        <div class="col">
-                            <input type="password">
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label>New Password</label>
+                            </div>
+                            <div class="col">
+                                <input type="password" name="new_password" id="new_password">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label>Confirm New Password</label>
+                            </div>
+                            <div class="col">
+                                <input type="password" name="confirm_password" id="confirm_password">
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label>New Password</label>
-                        </div>
-                        <div class="col">
-                            <input type="password">
-                        </div>
+                    <!--save button-->
+                    <div class="d-flex float-end">
+                        <input class="btn btn-yellow me-3" type="submit">
                     </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label>Confirm New Password</label>
-                        </div>
-                        <div class="col">
-                            <input type="password">
-                        </div>
-                    </div>
-                </div>
-                <!--save button-->
-                <div class="d-flex float-end">
-                    <input class="btn btn-yellow me-3" type="submit">
-                </div>
+                </form>
                 <br>
             </div>
         </div>

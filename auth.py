@@ -104,3 +104,48 @@ def register():
     return render_template('register.html')
 
 
+@auth.route('/change_password', methods=['POST'])
+def password_change():
+    # if user is not logged in, then send back to login page
+    if not session.get('user_authenticated'):
+        flash('Please login first', category='error')
+        return redirect(url_for('auth.login'))
+    
+    # if user is logged in, then change password
+
+    try:
+        email = session['user_email']
+        current_password = request.form.get('current_password')
+        new_password = request.form.get('new_password')
+        confirm_password = request.form.get('confirm_password')
+
+        if(new_password != confirm_password):
+                flash('New passwords do not match', category='error')
+                return redirect(url_for('settings'))
+
+        if(len(new_password)<8):
+                flash('New password must be at least 8 characters long', category='error')
+                return redirect(url_for('settings'))
+
+        if(new_password == current_password):
+            flash('New password cannot be the same as the old password', category='error')
+            return redirect(url_for('settings'))
+
+        user_table = taskbook_db.get_table('user_cred')
+        user = user_table.find_one(email=email)
+        
+        if(user):
+            # check if current password is correct
+            if (not check_password_hash(user['password'], current_password)):
+                flash('Current password is incorrect', category='error')
+                return redirect(url_for('settings'))
+
+            user_table.update(dict(id=user['id'],password=generate_password_hash(new_password, method='sha256')), keys=['id'])
+            flash('Password changed successfully', category='success')
+            return redirect(url_for('settings'))
+
+    except Exception as e:
+        print(409, str(e))
+        return ("409 Bad Request: "+str(e), 409)
+
+    return redirect(url_for('settings'))
