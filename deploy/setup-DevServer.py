@@ -18,7 +18,7 @@ def install_pip3_packages(server):
     server.install_pip3_package("flask")
     packages = server.get_installed_pip3_packages()
     assert "dataset" in packages
-    assert "flask" in packages
+    assert "Flask" in packages
 
 def get_source_code(server):
 
@@ -37,15 +37,8 @@ def get_source_code(server):
     server.run("cd ~/projects/taskbook-SWE; rm -rf .git", hide=False)
     
     # transfer the code to the target machine
-    server.local("rm -rf /home/runner/work/taskbook-SWE/taskbook-SWE/.git")
-    server.local("rm -rf /home/runner/work/taskbook-SWE/taskbook-SWE/deploy/__pycache__")
-    server.local("pushd /home/runner/work/taskbook-SWE/taskbook-SWE; tar cvf /home/runner/taskbook-SWE.tar . ; popd", hide=False)
-    server.local("ls -la", hide=False)
-    server.local("tar tvf /home/runner/taskbook-SWE.tar", hide=False)
-    server.put("/home/runner/swift.tar","/home/ubuntu/taskbook-SWE.tar")
-    server.run("tar tvf /home/ubuntu/taskbook-SWE.tar", hide=False)
-    server.run("mkdir /home/ubuntu/projects/taskbook-SWE")
-    server.run("pushd /home/ubuntu/projects/taskbook-SWE; tar xvf /home/ubuntu/taskbook-SWE.tar ; popd", hide=False)
+    server.run("rm -rf /home/ubuntu/projects/taskbook-SWE/.git")
+    server.run("rm -rf /home/ubuntu/projects/taskbook-SWE/deploy/__pycache__")
 
     # verify the code was deployed
     stdout, _ = server.run("ls ~/projects/taskbook-SWE")
@@ -63,42 +56,42 @@ def get_process_id(process):
 
 
 def start_application(server):
-    server.run("cd ~/projects/taskbook-SWE; screen -S webapp -dm python3 app.py")
+    server.run("cd ~/projects/taskbook-SWE; screen -S webapp -dm flask run --host=0.0.0.0")
 
 def stop_application_processes(server):
     # find and kill the screen process
     processes = server.get_running_processes()
-    processes = [p for p in processes if "SCREEN" in p and "app.py" in p ]
+    processes = [p for p in processes if "SCREEN" in p and "flask" in p ]
     if len(processes) > 0:
         screen_id = get_process_id(processes[0])
         server.sudo(f"kill -9 {screen_id}")
 
     # find and kill remaining swift.py python process, if any.
     processes = server.get_running_processes()
-    processes = [p for p in processes if "SCREEN" not in p and "app.py" in p ]
+    processes = [p for p in processes if "SCREEN" not in p and "flask" in p ]
     if len(processes) > 0:
         screen_id = get_process_id(processes[0])
         server.sudo(f"kill -9 {screen_id}")
 
     # verify that processes aren't running
     processes = server.get_running_processes()
-    processes = [p for p in processes if "app.py" in p ]
+    processes = [p for p in processes if "flask" in p ]
     assert len(processes) == 0
 
 def verify_application_processes(server):
     # verify the screen process
     processes = server.get_running_processes()
-    processes = [p for p in processes if "SCREEN" in p and "app.py" in p ]
+    processes = [p for p in processes if "SCREEN" in p and "flask" in p ]
     assert len(processes) == 1, "Screen session process was not found."
 
     # verify the swift.py python process.
     processes = server.get_running_processes()
-    processes = [p for p in processes if "SCREEN" not in p and "app.py" in p ]
+    processes = [p for p in processes if "SCREEN" not in p and "flask" in p ]
     assert len(processes) == 1, "$ python3 app.py was not found"
 
 
 if __name__ == "__main__":
-    server = Server( host = "dev.taskbook.xyz", user="ubuntu", key_filename="/home/runner/.ssh/DevServer.pem")
+    server = Server( host = "dev.taskbook.xyz", user="ubuntu", key_filename="/Users/Qtip/.ssh/DevServer.pem")
 
     print("stopping application processes")
     stop_application_processes(server)
