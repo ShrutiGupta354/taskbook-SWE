@@ -24,8 +24,8 @@
                                 data-date-format="mm/dd/yyyy" required />
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Task</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description"
+                            <label for="desc" class="form-label">Task</label>
+                            <textarea class="form-control" id="desc" rows="2" name="description"
                                 required></textarea>
                         </div>
                         <div class="mb-3">
@@ -33,7 +33,7 @@
                             <input class="form-control" id="time" name="time" type="time" required></input>
                         </div>
                         <div class="mb-3 form-check">
-                            <input class="form-check-input" type="checkbox" id="important" value="1" id="mark_important">
+                            <input class="form-check-input" type="checkbox" id="important" value="1" name="important">
                             <label class="form-check-label" for="mark_important" id="label_for_important">
                                 Mark as Important
                             </label>
@@ -59,11 +59,11 @@
     $("#add-task").on('click', function () {
         // validate input client-side and then only send the data to create a task
         var date_field = $('#date');
-        var text_field = $('#exampleFormControlTextarea1');
+        var text_field = $('#desc');
         var time_field = $('#time');
-        var impo_field = $('#important')[0]
-        $("#close-add-task").click();
-        api_create_task({ description: text_field.val(), date: date_field.val(), time: time_field.val(), important: impo_field.checked},
+        var impo_field = $('#important')[0].checked;
+        
+        api_create_task({ description: text_field.val(), date: date_field.val(), time: time_field.val(), important: impo_field},
             // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
             function (result) {
                 // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
@@ -71,6 +71,7 @@
                 let urlToSendTo = window.location.href.split("?")[0];
                 window.location.replace(urlToSendTo);
             });
-        }
+        
+        $("#close-add-task").click();
     });
 </script>
