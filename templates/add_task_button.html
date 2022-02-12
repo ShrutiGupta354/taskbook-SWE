@@ -61,8 +61,8 @@
         var date_field = $('#date');
         var text_field = $('#desc');
         var time_field = $('#time');
-        var impo_field = $('#important')[0].checked;
-        
+        var impo_field = ($('#important')[0].checked) ? true : false;
+        $("#close-add-task").click();
         api_create_task({ description: text_field.val(), date: date_field.val(), time: time_field.val(), important: impo_field},
             // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
             function (result) {
@@ -71,7 +71,5 @@
                 let urlToSendTo = window.location.href.split("?")[0];
                 window.location.replace(urlToSendTo);
             });
-        
-        $("#close-add-task").click();
     });
 </script>
