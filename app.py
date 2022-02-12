@@ -45,6 +45,11 @@ def settings():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
+# About route
+@app.get('/about')
+def about():
+    return render_template("about.html")
+
 # Calendar Route
 @app.get('/calendar')
 def calendar():
