@@ -110,6 +110,7 @@ def create_task():
             "description":data['description'].strip(),
             "date":data['date'],
             "time":data['time'],
+            "important":data['important'],
             "completed":False
         })
     except Exception as e:
