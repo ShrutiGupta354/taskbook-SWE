@@ -18,10 +18,9 @@ function sendDataToModal(id,desc,date,time,important,completed){
 
 // since we are repeating code:
 function makeDescriptionHTML(task,taskDesc){
-    taskDesc += `<div class="toast show mb-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="cursor:pointer" onclick="sendDataToModal('${task.id}','${task.description}','${task.date}','${task.time}','${task.completed}')" data-bs-toggle="modal" data-bs-target="#edit_task_modal">`;
+    taskDesc += `<div class="toast show mb-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="cursor:pointer" onclick="sendDataToModal('${task.id}','${task.description}','${task.date}','${task.time}','${task.important}','${task.completed}')" data-bs-toggle="modal" data-bs-target="#edit_task_modal">`;
         taskDesc += `<div class="toast-header justify-content-between">`;
-            // for now I have added the blue sun as the icon but that will change depending on the tag (low, med, high)
-            if(task.important){ taskDesc += `<strong><i class="bi bi-brightness-high-fill" style="color:blue"></i></strong>`; }
+            taskDesc += (task.important) ? `<strong><i class="bi bi-brightness-high-fill" style="color:red"></i></strong>` : `<span></span>`
             taskDesc += `<span class="fs-6">${task.date} | ${task.time}</span>`;
         taskDesc += `</div>`;
         taskDesc += `<div class="toast-body fs-6 ${task.completed ? "completed" : "" }">`;
