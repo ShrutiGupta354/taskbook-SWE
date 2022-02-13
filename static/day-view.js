@@ -8,7 +8,7 @@ function sendDataToModal(id,desc,date,time,important,completed){
     document.getElementById("new_time").value=time;
     document.getElementById("mark_important").checked = important === 'true';
     if(important === 'true'){
-        document.getElementById("label_for_important").innerHTML = "Mark as Unimportant";
+        document.getElementById("label_for_important").innerHTML = "Mark as not important";
     }
     document.getElementById("mark_completed").checked = completed === 'true';
     if(completed === 'true'){
