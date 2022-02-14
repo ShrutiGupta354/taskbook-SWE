@@ -12,10 +12,10 @@
         <!-- if user is logged in then show logout button else show login button -->
         {% if(session['user_email']) %}
           <!--button for settings, only appears when logged in-->
-          <a class="btn btn-yellow" href="{{url_for('settings')}}">Settings</a>
-          <a class="btn btn-yellow" href="{{url_for('auth.logout')}}">Log Out</a>
+          <a class="btn btn-yellow mx-2" href="{{url_for('settings')}}">Settings</a>
+          <a class="btn btn-yellow mx-2" href="{{url_for('auth.logout')}}">Log Out</a>
         {% else %}
-        <a class="btn btn-yellow" href="{{url_for('auth.login')}}" >Login</a>
+        <a class="btn btn-yellow mx-2" href="{{url_for('auth.login')}}" >Login</a>
         {% endif %}
       </form> 
     </div>
