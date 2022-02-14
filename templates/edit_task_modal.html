@@ -27,9 +27,15 @@
                         </div>
                         <input type="hidden" name="task_id" id="task_id" />
                         <div class="mb-3 form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="mark_completed">
+                            <input class="form-check-input" type="checkbox" value="completed" id="mark_completed">
                             <label class="form-check-label" for="mark_completed" id="label_for_completed">
                                 Mark as Completed
+                            </label>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input" type="checkbox" value="important" id="mark_important">
+                            <label class="form-check-label" for="mark_important" id="label_for_important">
+                                Mark as Important
                             </label>
                         </div>
                 </div>
@@ -52,6 +58,7 @@
         let new_date = $("#new_date").val();
         let new_description = $("#new_description").val();
         let new_time = $("#new_time").val();
+        let mark_important = $("#mark_important")[0].checked;
         let mark_completed = $("#mark_completed")[0].checked;
 
         // send ajax request to update the task
@@ -61,6 +68,7 @@
             "date": new_date,
             "description": new_description,
             "time": new_time,
+            "important": mark_important,
             "completed": mark_completed
         };
         api_update_task(task, () => {
