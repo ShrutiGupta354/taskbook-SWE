@@ -1,0 +1,45 @@
+.view {
+    list-style: none;
+    padding: 1em;
+    padding-bottom: 5em;
+}
+
+.view li {
+    display: inline-block;
+    display: inline;
+    font-size: 18px;
+    color: var(--primary-black);
+    margin-right: 20px;
+}
+
+.view a {
+    font-size: 22px;
+    color: var(--primary-black);
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+/*for the progress bar in progress section*/
+.progress {
+    height: 20px;
+    width: 98%;
+    border: 2px solid var(--primary-yellow);
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+}
+
+.progress_bar {
+    height: 20px;
+    width: 25%;
+    background-color: var(--primary-yellow);
+    margin-left: 0;
+}
+
+.progress_bar h5 {
+    font-size: 1em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
