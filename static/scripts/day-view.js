@@ -1,36 +1,4 @@
 
-
-// this will take the data of the task and send it to the modal
-function sendDataToModal(id,desc,date,time,important,completed){
-    document.getElementById("task_id").value = id;
-    document.getElementById("new_description").value=desc;
-    document.getElementById("new_date").value=date;
-    document.getElementById("new_time").value=time;
-    document.getElementById("mark_important").checked = important === 'true';
-    if(important === 'true'){
-        document.getElementById("label_for_important").innerHTML = "Mark as not important";
-    }
-    document.getElementById("mark_completed").checked = completed === 'true';
-    if(completed === 'true'){
-        document.getElementById("label_for_completed").innerHTML = "Mark as incomplete";
-    }
-}
-
-// since we are repeating code:
-function makeDescriptionHTML(task,taskDesc){
-    taskDesc += `<div class="toast show mb-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="cursor:pointer" onclick="sendDataToModal('${task.id}','${task.description}','${task.date}','${task.time}','${task.important}','${task.completed}')" data-bs-toggle="modal" data-bs-target="#edit_task_modal">`;
-        taskDesc += `<div class="toast-header justify-content-between">`;
-            taskDesc += (task.important) ? `<strong><i class="bi bi-brightness-high-fill" style="color:red"></i></strong>` : `<span></span>`
-            taskDesc += `<span class="fs-6">${task.date} | ${task.time}</span>`;
-        taskDesc += `</div>`;
-        taskDesc += `<div class="toast-body fs-6 ${task.completed ? "completed" : "" }">`;
-            taskDesc += task.description;
-        taskDesc += `</div>`;
-    taskDesc += `</div>`;
-    return taskDesc;
-}
-
-
 //Function to display tasks in day view
 function displayDayTasks(key){
     let taskDesc = "";
@@ -40,7 +8,7 @@ function displayDayTasks(key){
         for(const task of result.tasks){
             //if task matches current day, display it
             if(task.date == key){
-                taskDesc = makeDescriptionHTML(task,taskDesc);
+                taskDesc = makeDescriptionHTML(task, taskDesc);
                 document.getElementById("toast-container-today").innerHTML = taskDesc;
                 count++;
             }
@@ -51,7 +19,7 @@ function displayDayTasks(key){
                 time:"-",
                 description:"<h4 class='ms-3'>No tasks for today!<h4>",
             }
-            taskDesc = makeDescriptionHTML(task,taskDesc);
+            taskDesc = makeDescriptionHTML(task, taskDesc);
             document.getElementById("toast-container-today").innerHTML =taskDesc;
         }
 
@@ -70,7 +38,7 @@ function displayNextTasks(key){
             if(count >= 10) break;
             if(task.date > key){
                 count++;
-                taskDesc = makeDescriptionHTML(task,taskDesc);
+                taskDesc = makeDescriptionHTML(task, taskDesc);
                 document.getElementById("toast-container-upcoming").innerHTML = taskDesc;
             }
         }
@@ -80,7 +48,7 @@ function displayNextTasks(key){
                 time:"-",
                 description:"<h4 class='ms-3'>No upcoming tasks!<h4>",
             }
-            taskDesc = makeDescriptionHTML(task,taskDesc);
+            taskDesc = makeDescriptionHTML(task, taskDesc);
             document.getElementById("toast-container-upcoming").innerHTML =taskDesc;
         }
     });
@@ -91,5 +59,15 @@ function displayNextTasks(key){
 // then, we need to display that date. So I had to look at the URL and then based on that, dynamically generate the date.
 // what is does is, if we are at a route /tasks/whatever, then we display that date. If we are at /task then we display today's date.
 var urlDate = window.location.href.split("?")[0];
-urlDate = urlDate.split("/").length > 4 ? new Date(urlDate.split("/")[4].replace(/-/g,'/')).toDateString() : new Date().toDateString();
-document.getElementById("today-date").innerHTML = urlDate;
+viewDate = (urlDate.split("/").length > 4) ? new Date(urlDate.split("/")[4].replace(/-/g,'/')) : new Date();
+document.getElementById("today-date").innerHTML = viewDate.toDateString();
+
+//key variable that represents the current day
+let dateKey = viewDate.getFullYear() + '-' + appendZero(viewDate.getMonth()+1) + '-' + appendZero(viewDate.getDate());
+
+//check if path is set to just today
+
+//displays tasks for today
+displayDayTasks(dateKey);
+//displays next 10 tasks
+displayNextTasks(dateKey);

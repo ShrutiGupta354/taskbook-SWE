@@ -45,26 +45,6 @@
 
   </div>
 {% include 'edit_task_modal.html' %}
-<script src="{{url_for('static', filename='day-view.js')}}"></script>
-<script>
-
-  //key variable that represents the current day
-  let currentDay;
-
-  if(window.location.href.search(/tasks\/\d{4}-\d{1,2}-\d{1,2}/) != -1) {
-    currentDay = '{{year}}-' + appendZero('{{month}}') + '-' +  appendZero('{{day}}');
-  } else {
-    let date = new Date();
-    currentDay = date.getFullYear() + '-' + appendZero(date.getMonth()+1) + '-' + appendZero(date.getDate());
-  }
-
-  //check if path is set to just today
-  
-  //displays tasks for today
-  displayDayTasks(currentDay);
-  //displays next 10 tasks
-  displayNextTasks(currentDay);
-
-</script>
+<script src="{{url_for('static', filename='scripts/day-view.js')}}"></script>
 
 {% include 'footer.html' %}
