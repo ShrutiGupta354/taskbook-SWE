@@ -1,11 +1,12 @@
 # SWIFT Taskbook
-# Web Application for Task Management 
+# Web Application for Task Management
 
 # flask web objects
 from auth import auth
 from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request, session, flash
+from werkzeug.exceptions import HTTPException
 import dataset
 
 taskbook_db = dataset.connect('sqlite:///taskbook.db')
@@ -60,6 +61,12 @@ def weekly():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
+#Error Page route
+@app.get('/errorpage')
+def errorpage():
+    #render the error template
+    return render_template("errorpage.html")
+
 
 #--------------------
 # For authentication
@@ -68,7 +75,7 @@ def weekly():
 app.register_blueprint(auth, url_prefix='/')
 
 # ---------------------------
-# task REST api 
+# task REST api
 # ---------------------------
 
 @app.get('/api/tasks')
@@ -121,7 +128,7 @@ def update_task():
     except Exception as e:
         print(400, str(e))
         return ("400 Bad Request:"+str(e), 400)
-    if 'date' in data: 
+    if 'date' in data:
         data['date'] = data['date']
     try:
         task_table = taskbook_db.get_table('task')
@@ -149,3 +156,10 @@ def delete_task():
         return ("409 Bad Request:"+str(e), 409)
     # return Success
     return {'status':200, 'success': True}
+
+    #methods to handle errors for HTTP errors such as file not found and server errors
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    #redirect the user to the error webpage
+    return render_template("errorpage.html"),400
+
