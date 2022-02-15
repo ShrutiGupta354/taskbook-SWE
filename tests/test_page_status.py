@@ -1,27 +1,29 @@
 import requests
 
-# credentials for testing account used to access protected pages
+# any legitimate credentials are needed for the tests to pass
 creds = {
-    'user_email': 'testing@gmail.com',
-    'user_password': 'TEMPTestingAccount'
+    'user_email': 'default@gmail.com',
+    'user_password': 'password'
 }
+
+host = 'http://127.0.0.1:5000/'
 
 # returns status of unprotected page
 def unprotected_page_status(route):
-    page = requests.get('http://127.0.0.1:5000/' + route)
+    page = requests.get(host + route)
     # makes sure that no protected page is accidentally input/tested as unprotected
-    assert page.url is ('http://127.0.0.1:5000/' + route) or 'http://127.0.0.1:5000/'
+    assert page.url is (host + route) or host
     return page.status_code
 
 # returns status of protected page
 def protected_page_status(route):
     with requests.Session() as s:
         # uses test account credentials to access protected pages
-        s.post('http://127.0.0.1:5000/login', data=creds)
+        s.post(host + 'login', data=creds)
 
-        page = s.get('http://127.0.0.1:5000/' + route)
+        page = s.get(host + route)
         # makes sure the page is not redirected back to login page or any other page
-        assert page.url != 'http://127.0.0.1:5000/login'
+        assert page.url != host + 'login'
         return page.status_code
 
 # tests pages making sure they return 200 code (OK)

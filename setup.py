@@ -17,7 +17,7 @@ if __name__ == "__main__":
     user_cred_table.drop()
     user_cred_table = taskbook_db.create_table('user_cred')
     user_cred_table.insert_many([
-        {"email": "default@gmail.com", "password": "sha256$MWSvDicsNpLC4mKz$767f39b1d4304c4e8d4c23a98b1d4a114c787aedfa6a9debd1cf91149e501c96", "view": "calendar"},
+        {"email": "default@gmail.com", "password": "pbkdf2:sha256:260000$Dip81lDmYQlwhThs$12ab6717e4482df3d905895e8b15bec8935a06a58c2d311bc3b13a8ba1884d0e", "view": "calendar"},
         {"email": "admin@gmail.com", "password": "sha256$e4KT8L8fawrboJm9$6aaffaf92b606400df0109d34c417d5dd9e588991487e0912a4cc28f73a0fd87", "view": "weekly"}
     ])
      
