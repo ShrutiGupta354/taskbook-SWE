@@ -45,6 +45,11 @@ def settings():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
+# About route
+@app.get('/about')
+def about():
+    return render_template("about.html")
+
 # Calendar Route
 @app.get('/calendar')
 def calendar():
@@ -157,7 +162,7 @@ def delete_task():
         return ("400 Bad Request:"+str(e), 400)
     try:
         task_table = taskbook_db.get_table('task')
-        task_table.delete(id=data['id'])
+        task_table.delete(id=data['id'], email=session['user_email'])
     except Exception as e:
         print(409, str(e))
         return ("409 Bad Request:"+str(e), 409)
