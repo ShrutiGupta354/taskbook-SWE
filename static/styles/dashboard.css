@@ -1,24 +1,3 @@
-.view {
-    list-style: none;
-    padding: 1em;
-    padding-bottom: 5em;
-}
-
-.view li {
-    display: inline-block;
-    display: inline;
-    font-size: 18px;
-    color: var(--primary-black);
-    margin-right: 20px;
-}
-
-.view a {
-    font-size: 22px;
-    color: var(--primary-black);
-    text-decoration: none;
-    margin-right: 5px;
-}
-
 /*for the progress bar in progress section*/
 .progress {
     height: 20px;
