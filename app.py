@@ -25,8 +25,14 @@ app.config['SECRET_KEY'] = 'walsh-swe'
 @app.get('/home')
 def homepage():
     if session.get('user_authenticated'):
-        flash('Log out first to log back in.')
-        return redirect(url_for('dashboard'))
+        user_db = taskbook_db.get_table('customization')
+        try:
+            cust_table = user_db.find_one(email=session['user_email'])
+            default_view = cust_table['view']
+            return render_template(default_view + ".html")
+        except Exception as e:
+            # No current View is set or view is stored incorrectly
+            return dashboard();
     return render_template("homepage.html")
 
 # Dashboard Route
@@ -168,3 +174,12 @@ def delete_task():
         return ("409 Bad Request:"+str(e), 409)
     # return Success
     return {'status':200, 'success': True}
+
+
+
+# ---------------------------
+# Customization API
+# ---------------------------
+
+# Example
+# @app.get('api/settings')

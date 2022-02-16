@@ -21,6 +21,6 @@ if __name__ == "__main__":
 
     customization_table = taskbook_db.get_table('customization')
     customization_table.insert_many([
-        {"email": "default@gmail.com", "view": "weekly", "dark_mode": False, "upcoming_shown": 10, "upcoming_type": "task", "week_view": "dropdown", "font_size": "medium"},
-        {"email": "admin@gmail.com", "view": "monthly", "dark_mode": True, "upcoming_shown": 5, "upcoming_type": "day", "week_view": "boxes", "font_size": "small"}
+        {"email": "default@gmail.com", "view": "tasks", "dark_mode": False, "upcoming_shown": 10, "upcoming_type": "task", "week_view": "dropdown", "font_size": "medium"},
+        {"email": "admin@gmail.com", "view": "calendar", "dark_mode": True, "upcoming_shown": 5, "upcoming_type": "day", "week_view": "boxes", "font_size": "small"}
     ])
