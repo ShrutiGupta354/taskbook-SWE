@@ -174,12 +174,3 @@ def delete_task():
         return ("409 Bad Request:"+str(e), 409)
     # return Success
     return {'status':200, 'success': True}
-
-
-
-# ---------------------------
-# Customization API
-# ---------------------------
-
-# Example
-# @app.get('api/settings')
