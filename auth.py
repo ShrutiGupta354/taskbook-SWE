@@ -19,7 +19,7 @@ def login():
         try:
             user_cust = cust_table.find_one(email=session['user_email'])
             default_view = user_cust['view']
-            return render_template(default_view + ".html")
+            return redirect(url_for(default_view))
         except Exception as e:
             # No current View is set
             return redirect(url_for('dashboard'))
@@ -44,7 +44,7 @@ def login():
                 try:
                     user_cust = cust_table.find_one(email=session['user_email'])
                     default_view = user_cust['view']
-                    return render_template(default_view + ".html")
+                    return redirect(url_for(default_view))
                 except Exception as e:
                     # No current View is set
                     return render_template('dashboard.html')
@@ -79,7 +79,7 @@ def register():
         try:
             user_cust = cust_table.find_one(email=session['user_email'])
             default_view = user_cust['view']
-            return render_template(default_view + ".html")
+            return redirect(url_for(default_view))
         except Exception as e:
             # No current View is set
             return redirect(url_for('dashboard'))
