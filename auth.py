@@ -27,7 +27,7 @@ def login():
         # first check if there is someone who is a user already
         user = user_table.find_one(email=email)
         if(user):
-            # check_password_has(a,b) will hash 'b' and check for equality with 'a', where 'a' is already hashed password
+            # check_password_hash(a,b) will hash 'b' and check for equality with 'a', where 'a' is already hashed password
             if (check_password_hash(user['password'], password)):
                 flash('Logged in successfully', category='success')
                 # if password is correct, set sessions
