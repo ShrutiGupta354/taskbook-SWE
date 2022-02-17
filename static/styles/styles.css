@@ -226,3 +226,21 @@ body{
     .radio input:checked ~ .checkmark {
       background-color: var(--primary-yellow);
     }
+    
+    .accordion {
+      margin-bottom: 60px;
+      border: 2px solid #21b0c0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.5s ease-in-out;
+    }
+  
+    .accordion:hover .days {
+      background-color: #21b0c0;
+    }
+    
+    .panel {
+      font-size: 18px;
+      border-radius: 10px;
+      border: 2px solid #21b0c0;
+    }
