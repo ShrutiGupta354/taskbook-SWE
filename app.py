@@ -45,6 +45,11 @@ def settings():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
+# About route
+@app.get('/about')
+def about():
+    return render_template("about.html")
+
 # Calendar Route
 @app.get('/calendar')
 def calendar():
@@ -97,7 +102,7 @@ def create_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["description", "date", "time"], f"Illegal key '{key}'"
+            assert key in ["description", "date", "time", "important"], f"Illegal key '{key}'"
         assert type(data['description']) is str, "Description is not a string."
         assert len(data['description'].strip()) > 0, "Description is length zero."
     except Exception as e:
@@ -110,6 +115,7 @@ def create_task():
             "description":data['description'].strip(),
             "date":data['date'],
             "time":data['time'],
+            "important":data['important'],
             "completed":False
         })
     except Exception as e:
@@ -124,7 +130,7 @@ def update_task():
     try:
         data = request.get_json()
         for key in data.keys():
-            assert key in ["id","description","completed", "date", "time"], f"Illegal key '{key}'"
+            assert key in ["id","description","completed", "date", "time", "important"], f"Illegal key '{key}'"
         assert type(data['id']) is int, f"id '{id}' is not int"
         if "description" in data:
             assert type(data['description']) is str, "Description is not a string."
@@ -156,7 +162,7 @@ def delete_task():
         return ("400 Bad Request:"+str(e), 400)
     try:
         task_table = taskbook_db.get_table('task')
-        task_table.delete(id=data['id'])
+        task_table.delete(id=data['id'], email=session['user_email'])
     except Exception as e:
         print(409, str(e))
         return ("409 Bad Request:"+str(e), 409)
