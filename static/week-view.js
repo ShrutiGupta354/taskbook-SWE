@@ -1,0 +1,29 @@
+const date = new Date();
+
+//get day of the week for current day
+const day = date.getDay();
+
+//array of each month to display the words for it
+const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+];
+
+//will return the first day of the week (Sundays)
+const firstDay = new Date(date.getTime() - 60*60*24*day*1000);
+
+//will return last day of the week (Saturday)
+const lastDay = new Date(firstDay.getTime() + 60*60*24*6*1000);
+
+//sets header to display the start and end day of the week
+document.querySelector(".current-week").innerHTML = month[firstDay.getMonth()] + " " + firstDay.getDate() + " - " + month[lastDay.getMonth()] + " " + lastDay.getDate();
