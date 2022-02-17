@@ -19,7 +19,7 @@ const month = [
     "December",
 ];
 
-//will return the first day of the week (Sundays)
+//will return the first day of the week (Sunday)
 const firstDay = new Date(date.getTime() - 60*60*24*day*1000);
 
 //will return last day of the week (Saturday)

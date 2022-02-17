@@ -183,11 +183,7 @@ body{
     animation: bounce .25s ease-in both;
 }
 
-/* Dropdown styles */
-  .dropdown {
-    position: relative;
-    display: block;
-    padding: 10px;
+  .accordion {
     margin-bottom: 60px;
     border: 2px solid #21b0c0;
     border-radius: 10px;
@@ -195,21 +191,12 @@ body{
     transition: 0.5s ease-in-out;
   }
 
-  .dropdown:hover {
+  .accordion:hover .days {
     background-color: #21b0c0;
   }
-
-  .dropdown:hover .days {
-    color: #fff;
-  }
   
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ffe45e;
+  .panel {
     font-size: 18px;
-    min-width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
     border-radius: 10px;
+    border: 2px solid #21b0c0;
   }
