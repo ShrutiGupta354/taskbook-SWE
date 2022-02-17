@@ -25,9 +25,9 @@ app.config['SECRET_KEY'] = 'walsh-swe'
 @app.get('/home')
 def homepage():
     if session.get('user_authenticated'):
-        user_db = taskbook_db.get_table('customization')
+        cust_db = taskbook_db.get_table('customization')
         try:
-            cust_table = user_db.find_one(email=session['user_email'])
+            cust_table = cust_db.find_one(email=session['user_email'])
             default_view = cust_table['view']
             return render_template(default_view + ".html")
         except Exception as e:
