@@ -1,17 +1,28 @@
 .accordion {
     margin-bottom: 60px;
-    border: 1px solid #21b0c0;
-    background-color: #21b0c0;
+    border: 1px solid var(--primary-blue);
+    background-color: var(--primary-blue);
     border-radius: 5px;
+    font-size: 18px;
     cursor: pointer;
     
 }
 
-.accordion-button:active {
-    background-color: #21b0c0;
+.accordion-button {
+    font-size: 18px;
+}
+
+.accordion-button:hover {
+    background-color: var(--primary-blue);
+    transition: background-color 0.3s ease-in;
+    
 }
 
 .accordion-item  {
-    background-color: #21b0c0;
-    
+    border-color: var(--primary-blue);
+}
+
+.task-header {
+    text-align: right;
+    color: #6c757d;
 }
