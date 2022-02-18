@@ -1,0 +1,17 @@
+.accordion {
+    margin-bottom: 60px;
+    border: 1px solid #21b0c0;
+    background-color: #21b0c0;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.accordion-button:active {
+    background-color: #21b0c0;
+}
+
+.accordion-item  {
+    background-color: #21b0c0;
+    
+}
