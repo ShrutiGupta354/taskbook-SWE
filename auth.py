@@ -149,3 +149,55 @@ def password_change():
         return ("409 Bad Request: "+str(e), 409)
 
     return redirect(url_for('settings'))
+
+@auth.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    # if user is logged in, then send back to login page
+    if(request.method == 'GET'):
+        if session.get('user_authenticated'):
+            flash('Change your password here or log out and click and forgot password on the login page', category='error')
+            return redirect(url_for('settings'))
+    
+    if(request.method == 'POST'):
+        if(request.form["forgot_password"] == "get_user_question"):
+            email = request.form.get('user_email')
+            print(email)
+
+        if(request.form["forgot_password"] == "check_user_answer"):
+
+        
+    #if(request.method == 'POST'):        
+        # user_answer = request.form.get('user_answer')
+        # user_table = taskbook_db.get_table('user_cred')
+        # user = user_table.find_one(email=user_email)
+        # if(user):
+        #     if(user_answer.lower() == user['answer'].lower()):
+        #         return {"isValid" : True}
+        #     else:
+        #         return {"isValid" : False}
+    
+    return render_template("forgot_password.html")
+
+# @auth.post('/get_user_question')
+# def get_user_question():
+
+#     print(request.form.get("user_email_for_pwd_reset"))
+            # try:
+            #     data = request.get_json()
+            #     user_email = data['email']
+            #     user_table = taskbook_db.get_table('user_cred')
+            #     user = user_table.find_one(email=user_email)
+            #     if(user):
+            #         # if user exists, then send that person's question back
+            #         # for now dummy data
+            #         # get the question from the user table
+            #         # question = user['security_question']
+            #         # return {"user_question": question}
+            #         return {"user_question": "Which phone manufacturer is the best in the world?"}
+            #     else:
+            #         # if user does not exist, then send back error
+            #         return {"error": "User does not exist"}
+            # except Exception as e:
+            #     print(409, str(e))
+            #     return ("409 Bad Request: "+str(e), 409)
+
