@@ -18,10 +18,12 @@
         </h2>
         <div id="collapse{{day}}" class="accordion-collapse collapse" aria-labelledby="heading{{day}}" data-bs-parent="#accordionWeek">
           <div class="accordion-body">
-            <strong><i class="bi bi-brightness-high-fill" style="color:red"></i></strong>
-            <p class="task-header">yyyy-mm-dd | hh:mm</p>
-            <hr>
-            <p>Task description</p>
+            <div class="task">
+              <strong><i class="bi bi-brightness-high-fill" style="color:red"></i></strong>
+              <p class="task-header">yyyy-mm-dd | hh:mm</p>
+              <hr>
+              <p>Task description</p>
+            </div>
           </div>
         </div>
       </div>
@@ -47,5 +49,5 @@
 
 <!-- Individual page stylesheet and script -->
 <link rel="stylesheet" href="{{url_for('static', filename='styles/weekly.css')}}">
-<script src="{{url_for('static', filename='week-view.js')}}"></script>
+<script src="{{url_for('static', filename='scripts/week-view.js')}}"></script>
 {% include 'footer.html' %}

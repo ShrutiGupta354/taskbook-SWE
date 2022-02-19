@@ -26,3 +26,11 @@
     text-align: right;
     color: #6c757d;
 }
+
+.task {
+    border: 1px solid var(--primary-black);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+    
+}

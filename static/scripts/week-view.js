@@ -1,7 +1,7 @@
 const date = new Date();
 
 //get day of the week for current day
-const day = date.getDay();
+const currentDay = date.getDay();
 
 //array of each month to display the words for it
 const month = [
@@ -20,7 +20,7 @@ const month = [
 ];
 
 //will return the first day of the week (Sunday)
-const firstDay = new Date(date.getTime() - 60*60*24*day*1000);
+const firstDay = new Date(date.getTime() - 60*60*24*currentDay*1000);
 
 //will return last day of the week (Saturday)
 const lastDay = new Date(firstDay.getTime() + 60*60*24*6*1000);
