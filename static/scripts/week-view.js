@@ -19,10 +19,10 @@ const month = [
     "December",
 ];
 
-//will return the first day of the week (Sunday)
+//will return the first day of the week in milliseconds (Sunday)
 const firstDay = new Date(date.getTime() - 60*60*24*currentDay*1000);
 
-//will return last day of the week (Saturday)
+//will return last day of the week in milliseconds (Saturday)
 const lastDay = new Date(firstDay.getTime() + 60*60*24*6*1000);
 
 //sets header to display the start and end day of the week
