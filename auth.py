@@ -12,17 +12,10 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    # if user is already logged in and goes to /login, then send back to their default view
+    # if user is already logged in and goes to /login, then send back to tasks.html
     if session.get('user_authenticated'):
         flash('Log out first to log back in.')
-        cust_table = taskbook_db.get_table('customization')
-        try:
-            user_cust = cust_table.find_one(email=session['user_email'])
-            default_view = user_cust['view']
-            return redirect(url_for(default_view))
-        except Exception as e:
-            # No current View is set
-            return redirect(url_for('dashboard'))
+        return redirect(url_for('tasks'))
 
     if(request.method == 'GET'):
         return render_template("login.html")
@@ -34,20 +27,15 @@ def login():
         # first check if there is someone who is a user already
         user = user_table.find_one(email=email)
         if(user):
-            # check_password_hash(a,b) will hash 'b' and check for equality with 'a', where 'a' is already hashed password
+            # check_password_has(a,b) will hash 'b' and check for equality with 'a', where 'a' is already hashed password
             if (check_password_hash(user['password'], password)):
                 flash('Logged in successfully', category='success')
                 # if password is correct, set sessions
                 session['user_authenticated'] = True
                 session['user_email'] = email
-                cust_table = taskbook_db.get_table('customization')
-                try:
-                    user_cust = cust_table.find_one(email=session['user_email'])
-                    default_view = user_cust['view']
-                    return redirect(url_for(default_view))
-                except Exception as e:
-                    # No current View is set
-                    return render_template('dashboard.html')
+                to_go = user['view']
+                # send the user to whatever their "view" column has
+                return redirect(url_for(to_go))
             else:
                 flash('Incorrect password. Try again!', category='error')
         else:
@@ -74,15 +62,8 @@ def logout():
 def register():
     # if user tries to sign up while logged in:
     if session.get('user_authenticated'):
-        flash('Account already created')
-        cust_table = taskbook_db.get_table('customization')
-        try:
-            user_cust = cust_table.find_one(email=session['user_email'])
-            default_view = user_cust['view']
-            return redirect(url_for(default_view))
-        except Exception as e:
-            # No current View is set
-            return redirect(url_for('dashboard'))
+        flash('Log out first to sign up.', category='error')
+        return redirect(url_for('tasks'))
 
     if(request.method == 'GET'):
         return render_template("register.html")
@@ -92,12 +73,19 @@ def register():
         email = request.form.get('user_email')
         password1 = request.form.get('user_password')
         password2 = request.form.get('confirm_password')
+        security_question = request.form.get('security_question')
+        security_answer = request.form.get('security_answer')
+
         if(len(email)<1):
             flash('Email cannot be empty', category='error')
         elif(password1 != password2):
             flash('Password do not match', category='error')
-        elif(len(password1)<8):
+        elif(len(password1)<8 or len(password2)<8):
             flash('Password must be at least 8 characters long', category='error')
+        elif(len(security_question)<1):
+            flash('Security question cannot be empty', category='error')
+        elif(len(security_answer)<1):
+            flash('Security answer cannot be empty', category='error')
         else:
             try:
                 user_table = taskbook_db.get_table('user_cred')
@@ -109,17 +97,13 @@ def register():
                 else:
                     # if new user, then hash the password, insert to table and log them in
                     hashed_password = generate_password_hash(password1, method='sha256')
-                    user = dict(email=email, password=hashed_password)
+                    user = dict(email=email, password=hashed_password, view='calendar', security_question=security_question, security_answer=security_answer)
                     user_table.insert(user)
                     flash('Sign up successful', category='success')
                     session['user_authenticated'] = True
                     session['user_email'] = email
-                    # create customization entry for new user
-                    cust_table = taskbook_db.get_table('customization')
-                    user_cust = dict(email=email, view="dashboard", dark_mode=False, upcoming_shown=10, upcoming_type="task", week_view="dropdown", font_size="medium")
-                    cust_table.insert(user_cust)
-                    # redirect to dashboard page
-                    return redirect(url_for('dashboard'))
+                    # redirect to tasks page
+                    return redirect(url_for('tasks'))
             except Exception as e:
                 print(409, str(e))
                 return ("409 Bad Request:"+str(e), 409)
@@ -182,45 +166,49 @@ def forgot_password():
             return redirect(url_for('settings'))
     
     if(request.method == 'POST'):
-        if(request.form["forgot_password"] == "get_user_question"):
-            email = request.form.get('user_email')
-            print(email)
+        try:
+            user_email = request.form.get('email_to_change_password')
+            security_answer = request.form.get('security_answer')
+            new_password = request.form.get('new_password_1')
+            confirm_password = request.form.get('new_password_2')
 
-        if(request.form["forgot_password"] == "check_user_answer"):
+            if(new_password != confirm_password):
+                flash('New passwords do not match', category='error')
+                return redirect(url_for('auth.forgot_password'))
 
-        
-    #if(request.method == 'POST'):        
-        # user_answer = request.form.get('user_answer')
-        # user_table = taskbook_db.get_table('user_cred')
-        # user = user_table.find_one(email=user_email)
-        # if(user):
-        #     if(user_answer.lower() == user['answer'].lower()):
-        #         return {"isValid" : True}
-        #     else:
-        #         return {"isValid" : False}
-    
+            if(len(new_password)<8):
+                flash('New password must be at least 8 characters long', category='error')
+                return redirect(url_for('auth.forgot_password'))
+
+            user_table = taskbook_db.get_table('user_cred')
+            user = user_table.find_one(email=user_email)
+            if(not(user)):
+                flash('User does not exist!',category='error')
+                return redirect(url_for('auth.forgot_password'))
+            
+            if(not(user['security_answer'] == security_answer)):
+                flash('Security answer is incorrect', category='error')
+                return redirect(url_for('auth.forgot_password'))
+
+            user_table.update(dict(id=user['id'], password=generate_password_hash(new_password, method='sha256')), keys=['id'])
+            flash('Password changed successfully', category='success')
+            return redirect(url_for('auth.login'))
+
+
+        except Exception as e:
+            print(409, str(e))
+            return ("409 Bad Request: "+str(e), 409)
+
     return render_template("forgot_password.html")
 
-# @auth.post('/get_user_question')
-# def get_user_question():
+@auth.get('/get_question')
+def get_question():
+    user_email = request.args.get('user_email')
+    user_table = taskbook_db.get_table('user_cred')
+    user = user_table.find_one(email=user_email)
+    if(user):
+        return {"question": user['security_question']}
+    else:
+        return {"question": "NA"}
 
-#     print(request.form.get("user_email_for_pwd_reset"))
-            # try:
-            #     data = request.get_json()
-            #     user_email = data['email']
-            #     user_table = taskbook_db.get_table('user_cred')
-            #     user = user_table.find_one(email=user_email)
-            #     if(user):
-            #         # if user exists, then send that person's question back
-            #         # for now dummy data
-            #         # get the question from the user table
-            #         # question = user['security_question']
-            #         # return {"user_question": question}
-            #         return {"user_question": "Which phone manufacturer is the best in the world?"}
-            #     else:
-            #         # if user does not exist, then send back error
-            #         return {"error": "User does not exist"}
-            # except Exception as e:
-            #     print(409, str(e))
-            #     return ("409 Bad Request: "+str(e), 409)
 
