@@ -201,8 +201,8 @@ def forgot_password():
 
     return render_template("forgot_password.html")
 
-@auth.get('/get_question')
-def get_question():
+@auth.get('/get_security_question')
+def get_security_question():
     user_email = request.args.get('user_email')
     user_table = taskbook_db.get_table('user_cred')
     user = user_table.find_one(email=user_email)
