@@ -211,4 +211,39 @@ def get_security_question():
     else:
         return {"question": "NA"}
 
+@auth.post('/change_security_qa')
+def change_security_qa():
+    try:
+        current_answer_from_user = request.form.get('current_answer')
+        new_security_question = request.form.get('new_question')
+        new_security_answer = request.form.get('new_answer')
 
+        if(len(new_security_question) < 1):
+            flash('Security question cannot be empty', category='error')
+            return redirect(url_for('settings'))
+
+        elif(len(new_security_answer) < 1):
+            flash('Security answer cannot be empty', category='error')
+            return redirect(url_for('settings'))
+
+        user_table = taskbook_db.get_table('user_cred')
+        user = user_table.find_one(email=session['user_email'])
+        if(user):
+            # check if current password is correct
+            current_answer = user['security_answer']
+            if (not current_answer == current_answer_from_user):
+                flash('Incorrect answer. Try again.', category='error')
+                return redirect(url_for('settings'))
+            
+            user_table.update(dict(
+                id=user['id'], security_question=new_security_question, security_answer=new_security_answer), keys=['id'])
+            flash('Security question and answer updated!', category='success')
+            return redirect(url_for('settings'))
+
+        else:
+            flash('Something went wrong. Try again!', category='error')
+            return redirect(url_for('settings'))
+
+    except Exception as e:
+        print(409, str(e))
+        return ("409 Bad Request: "+str(e), 409)
