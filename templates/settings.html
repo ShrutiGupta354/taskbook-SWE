@@ -64,6 +64,7 @@
                                 <label>Current Question</label>
                             </div>
                             <div class="col">
+                                <!-- need this hidden input for JS to get access to email to get the security question -->
                                 <input type="hidden" name="current_user" id="current_user" value="{{session['user_email']}}">
                                 <textarea type="text" name="current_question" id="current_question" readonly></textarea>
                             </div>

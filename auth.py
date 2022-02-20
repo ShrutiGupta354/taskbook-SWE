@@ -235,8 +235,7 @@ def change_security_qa():
                 flash('Incorrect answer. Try again.', category='error')
                 return redirect(url_for('settings'))
             
-            user_table.update(dict(
-                id=user['id'], security_question=new_security_question, security_answer=new_security_answer), keys=['id'])
+            user_table.update(dict(id=user['id'], security_question=new_security_question, security_answer=new_security_answer), keys=['id'])
             flash('Security question and answer updated!', category='success')
             return redirect(url_for('settings'))
 
