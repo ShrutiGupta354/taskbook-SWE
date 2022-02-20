@@ -34,7 +34,7 @@ def login():
         # first check if there is someone who is a user already
         user = user_table.find_one(email=email)
         if(user):
-            # check_password_has(a,b) will hash 'b' and check for equality with 'a', where 'a' is already hashed password
+            # check_password_hash(a,b) will hash 'b' and check for equality with 'a', where 'a' is already hashed password
             if (check_password_hash(user['password'], password)):
                 flash('Logged in successfully', category='success')
                 # if password is correct, set sessions
@@ -99,7 +99,7 @@ def register():
             flash('Email cannot be empty', category='error')
         elif(password1 != password2):
             flash('Password do not match', category='error')
-        elif(len(password1)<8 or len(password2)<8):
+        elif(len(password1)<8):
             flash('Password must be at least 8 characters long', category='error')
         elif(len(security_question)<1):
             flash('Security question cannot be empty', category='error')
@@ -123,7 +123,7 @@ def register():
                     session['user_email'] = email
                     # create customization entry for new user
                     cust_table = taskbook_db.get_table('customization')
-                    user_cust = dict(email=email, view="dashboard", dark_mode=False, upcoming_shown=10,upcoming_type="task", week_view="dropdown", font_size="medium")
+                    user_cust = dict(email=email, view="dashboard", dark_mode=False, upcoming_shown=10, upcoming_type="task", week_view="dropdown", font_size="medium")
                     cust_table.insert(user_cust)
                     # redirect to dashboard page
                     return redirect(url_for('dashboard'))
