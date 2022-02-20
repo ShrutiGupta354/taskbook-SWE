@@ -15,7 +15,14 @@ def login():
     # if user is already logged in and goes to /login, then send back to tasks.html
     if session.get('user_authenticated'):
         flash('Log out first to log back in.')
-        return redirect(url_for('tasks'))
+        cust_table = taskbook_db.get_table('customization')
+        try:
+            user_cust = cust_table.find_one(email=session['user_email'])
+            default_view = user_cust['view']
+            return redirect(url_for(default_view))
+        except Exception as e:
+            # No current View is set
+            return redirect(url_for('dashboard'))
 
     if(request.method == 'GET'):
         return render_template("login.html")
@@ -33,9 +40,14 @@ def login():
                 # if password is correct, set sessions
                 session['user_authenticated'] = True
                 session['user_email'] = email
-                to_go = user['view']
-                # send the user to whatever their "view" column has
-                return redirect(url_for(to_go))
+                cust_table = taskbook_db.get_table('customization')
+                try:
+                    user_cust = cust_table.find_one(email=session['user_email'])
+                    default_view = user_cust['view']
+                    return redirect(url_for(default_view))
+                except Exception as e:
+                    # No current View is set
+                    return render_template('dashboard.html')
             else:
                 flash('Incorrect password. Try again!', category='error')
         else:
@@ -62,8 +74,15 @@ def logout():
 def register():
     # if user tries to sign up while logged in:
     if session.get('user_authenticated'):
-        flash('Log out first to sign up.', category='error')
-        return redirect(url_for('tasks'))
+        flash('Account already created')
+        cust_table = taskbook_db.get_table('customization')
+        try:
+            user_cust = cust_table.find_one(email=session['user_email'])
+            default_view = user_cust['view']
+            return redirect(url_for(default_view))
+        except Exception as e:
+            # No current View is set
+            return redirect(url_for('dashboard'))
 
     if(request.method == 'GET'):
         return render_template("register.html")
@@ -102,8 +121,12 @@ def register():
                     flash('Sign up successful', category='success')
                     session['user_authenticated'] = True
                     session['user_email'] = email
-                    # redirect to tasks page
-                    return redirect(url_for('tasks'))
+                    # create customization entry for new user
+                    cust_table = taskbook_db.get_table('customization')
+                    user_cust = dict(email=email, view="dashboard", dark_mode=False, upcoming_shown=10,upcoming_type="task", week_view="dropdown", font_size="medium")
+                    cust_table.insert(user_cust)
+                    # redirect to dashboard page
+                    return redirect(url_for('dashboard'))
             except Exception as e:
                 print(409, str(e))
                 return ("409 Bad Request:"+str(e), 409)
