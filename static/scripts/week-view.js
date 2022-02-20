@@ -27,3 +27,19 @@ const lastDay = new Date(firstDay.getTime() + 60*60*24*6*1000);
 
 //sets header to display the start and end day of the week
 document.querySelector(".current-week").innerHTML = month[firstDay.getMonth()] + " " + firstDay.getDate() + " - " + month[lastDay.getMonth()] + " " + lastDay.getDate();
+
+let task = {
+    "description": "Test",
+    "date": "2020-01-01",
+    "time": "12:00",
+    "important": true,
+    "completed": false,
+}
+let taskDesc = "";
+taskDesc = makeDescriptionHTML(task, taskDesc);
+$("#tasksForSunday").html(taskDesc);
+$("#tasksForSunday").append(taskDesc);
+$("#tasksForSunday").append(taskDesc);
+$("#tasksForSunday").append(taskDesc);
+$("#tasksForSunday").append(taskDesc);
+
