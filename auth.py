@@ -12,7 +12,7 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    # if user is already logged in and goes to /login, then send back to tasks.html
+    # if user is already logged in and goes to /login, then send back to their default view
     if session.get('user_authenticated'):
         flash('Log out first to log back in.')
         cust_table = taskbook_db.get_table('customization')
