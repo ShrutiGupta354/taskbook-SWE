@@ -1,11 +1,32 @@
 {% include 'header.html' %}
 {% include 'banner.html' %}
 
-<div class="calendar mb-3">
-    <div class="date text-center">
-        <h1>January 29 - February 5</h1>
-    </div>
+<div class="content-margin mb-3">
+  <div class="date text-center">
+    <h1 class="current-week"></h1>
+  </div>
 
+  <div class="container">
+    <div class="accordion" id="accordionWeek">
+
+      {% for day in ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]%}
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="heading{{day}}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{day}}" aria-expanded="false" aria-controls="collapse{{day}}">
+            {{day}}
+          </button>
+        </h2>
+        <div id="collapse{{day}}" class="accordion-collapse collapse" aria-labelledby="heading{{day}}" data-bs-parent="#accordionWeek">
+          <div class="accordion-body d-flex justify-items-center align-items-center flex-wrap" id="tasksFor{{day}}">
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      
+    </div>
+  </div>
+
+  <div class="container">
     <div class="my-3">
         <div class="d-flex float-start">
             {% include 'add_task_button.html' %}
@@ -17,6 +38,10 @@
                     class="bi bi-calendar3-event"></i> Task View</button>
         </div>
     </div>
+  </div>
 </div>
 
+<!-- Individual page stylesheet and script -->
+<link rel="stylesheet" href="{{url_for('static', filename='styles/weekly.css')}}">
+<script src="{{url_for('static', filename='scripts/week-view.js')}}"></script>
 {% include 'footer.html' %}

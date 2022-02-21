@@ -1,7 +1,7 @@
 {% include 'header.html' %}
 {% include 'banner.html' %}
 
-<div class="calendar mb-3">
+<div class="content-margin mb-3">
     <div class="month">
         <i class="bi bi-caret-left-fill prev"></i>
         <div class="date">
@@ -30,8 +30,12 @@
             <button type="button" class="btn btn-yellow ms-3" onclick="location.href='/tasks';"><i class="bi bi-calendar3-event"></i> Task View</a>
         </div>
     </div>
-</div> <!-- End Calendar-->
-<script src="../static/calendar.js"></script>
+</div> 
+<!-- End Calendar-->
+
+<!-- Individual page stylesheet and script -->
+<link rel="stylesheet" href="{{url_for('static', filename='styles/calendar.css')}}">
+<script src="{{url_for('static', filename='scripts/calendar.js')}}"></script>
 
 
 {% include 'footer.html' %}
