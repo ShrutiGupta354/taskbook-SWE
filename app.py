@@ -6,7 +6,7 @@ from auth import auth
 from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request, session, flash
-from werkzeug.exceptions import HTTPException
+from werkzeug.exceptions import HTTPException,BadRequest,NotFound,InternalServerError
 import dataset
 
 taskbook_db = dataset.connect('sqlite:///taskbook.db')
@@ -61,12 +61,34 @@ def weekly():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
-#Error Page route
+#Generic Error Page route
 @app.get('/errorpage')
 def errorpage():
     #render the error template
     return render_template("errorpage.html")
 
+#Routes for specific error pages
+#-------------------------------
+
+#400
+@app.get('/error400')
+def error400():
+    #render the error template
+    return render_template("error400.html")
+
+#404
+@app.get('/error404')
+def error404():
+    #render the error template
+    return render_template("error404.html")
+
+#500
+@app.get('/error500')
+def error500():
+    #render the error template
+    return render_template("error500.html")
+
+#-------------------------------
 
 #--------------------
 # For authentication
@@ -160,6 +182,14 @@ def delete_task():
     #methods to handle errors for HTTP errors such as file not found and server errors
 @app.errorhandler(HTTPException)
 def handle_exception(e):
-    #redirect the user to the error webpage
-    return render_template("errorpage.html"),400
+    #determine which type of exception occured and redirect the user to the appropriate webpage
+    if(isinstance(e,BadRequest)):
+        return render_template("error400.html"),400
+    elif(isinstance(e,NotFound)):
+        return render_template("error404.html"),404
+    elif(isinstance(e,InternalServerError)):
+        return render_template("error500.html"),500
+    else:
+        return render_template("errorpage.html"),e
+
 
