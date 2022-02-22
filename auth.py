@@ -116,7 +116,7 @@ def register():
                 else:
                     # if new user, then hash the password, insert to table and log them in
                     hashed_password = generate_password_hash(password1, method='sha256')
-                    user = dict(email=email, password=hashed_password, view='calendar', security_question=security_question, security_answer=security_answer)
+                    user = dict(email=email, password=hashed_password, security_question=security_question, security_answer=security_answer)
                     user_table.insert(user)
                     flash('Sign up successful', category='success')
                     session['user_authenticated'] = True
