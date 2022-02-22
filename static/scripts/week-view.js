@@ -78,20 +78,3 @@ function displayWeeklyTasks(key){
     });
 }
 
-// let task = {
-//     "description": "Test",
-//     "date": "2020-01-01",
-//     "time": "12:00",
-//     "important": true,
-//     "completed": false,
-// }
-
-
-// let taskDesc = "";
-// taskDesc = makeDescriptionHTML(task, taskDesc);
-// $("#tasksForSunday").html(taskDesc);
-// $("#tasksForSunday").append(taskDesc);
-// $("#tasksForSunday").append(taskDesc);
-// $("#tasksForSunday").append(taskDesc);
-// $("#tasksForSunday").append(taskDesc);
-
