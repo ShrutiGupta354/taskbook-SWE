@@ -6,6 +6,7 @@
     --primary-yellow: #ffe45e;
     --primary-black: #011a2b;
     --primary-white: #eef7fb;
+    --danger-color: #cf222e;
     --triadic-color:#42d1e1;
 }
 
@@ -58,6 +59,19 @@ header{
 .btn-blue:hover{
     background-color: var(--primary-blue);
     transition: background-color 0.3s ease-in;
+}
+
+.btn-danger{
+  background-color: transparent;
+  color: var(--danger-color);
+  border-radius: 8px;
+  border: 2px solid var(--danger-color);
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+.btn-danger:hover{
+  background-color: var(--danger-color);
+  transition: background-color 0.3s ease-in;
 }
 
 /* overriding navbar brand */
