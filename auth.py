@@ -54,7 +54,7 @@ def login():
             # if user does not exist then:
             flash('Email not registered. Please sign up first.', category='error')
 
-    return render_template("login.html")
+    return render_template("login.html", email=email, password=password)
 
 
 @auth.route('/logout')
