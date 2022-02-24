@@ -1,4 +1,5 @@
 <!--This div is for the left aligned elements below the calendar-->
+<link rel="stylesheet" href="{{url_for('static', filename='styles/add_task.css')}}">
 <div class="">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -19,9 +20,13 @@
                     <!-- output for date is MM-DD-YYYY -->
                     <form id="add-task-form" method="POST">
                         <div class="mb-3">
+                            <div class="alert alert-danger mt-2 hide" role="alert" id="add_task_alerts">
+                                
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control datepicker" id="date" name="date" type="date" value=""
-                                data-date-format="mm/dd/yyyy" required />
+                            <input class="form-control datepicker" id="date" name="date" type="date" data-date-format="mm/dd/yyyy" required />
                         </div>
                         <div class="mb-3">
                             <label for="desc" class="form-label">Task</label>
@@ -62,8 +67,14 @@
         var text_field = $('#desc');
         var time_field = $('#time');
         var impo_field = ($('#important')[0].checked) ? true : false;
-        $("#close-add-task").click();
-        api_create_task({ description: text_field.val(), date: date_field.val(), time: time_field.val(), important: impo_field},
+
+        if(date_field.val() == "" || text_field.val() == "" || time_field.val() == ""){
+            $("#add_task_alerts").html("Cannot have empty fields");
+            $("#add_task_alerts").removeClass("hide");
+            $("#staticBackdrop").addClass("shake");
+
+        }else{
+            api_create_task({ description: text_field.val(), date: date_field.val(), time: time_field.val(), important: impo_field},
             // for the success function, instead of console log, just redirect user to whatever page they are currently on (excluding the GET variables)
             function (result) {
                 // this function turns https://www.test.com?id=123&name=abc into https://www.test.com only because that is what the redirect function is expecting
@@ -71,5 +82,12 @@
                 let urlToSendTo = window.location.href.split("?")[0];
                 window.location.replace(urlToSendTo);
             });
+        }
     });
+
+    $("#close-add-task").on('click', function () {
+        $("#staticBackdrop").removeClass("shake");
+        $("#add_task_alerts").addClass("hide");
+    });
+
 </script>
