@@ -267,8 +267,27 @@
                 </div>
             </div>
         </div>
-
+        <div class="row blue_border mb-3 pb-2">
+            <h2>Danger Zone</h2>
+            <div class="container">
+                <div class="row">
+                    <p>WARNING: THESE ARE IRREVERSIBLE ACTIONS!!<br>Take care when using options in this section</p>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Account</button>
+                    </div>
+                    <div class="col-4 text-center">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Tasks</button>
+                    </div>
+                    <div class="col-4 text-center">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Customizations</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+{% include 'verify_intent_modal.html' %}
 <script src="{{url_for('static',filename='scripts/settings.js')}}"></script>
 {% include 'footer.html' %}
