@@ -58,8 +58,9 @@ function displayNextTasks(key, num){
 function displayNextDays(key, num) {
     let taskDesc = "";  //building the tasks into this variable
     let empty = true; //keeping track of whether we have a task or not
-    end_date = new Date() //date to store the end date for tasks to get
-    end_date.setDate(key.getDate() + num) //calculate end date (num days after current date)
+    end_date = new Date() //varibale to hold end date
+    end_date.setDate(new Date(key).getDate() + num) //calculate end date (num days after current date)
+    end_date = end_date.getFullYear() + '-' + appendZero(end_date.getMonth() + 1) + '-' + appendZero(end_date.getDate()) //conveert to string for comparison
 
     //fetches tasks and stores them into array to be sorted by date
     api_get_tasks(function (result) {
@@ -109,8 +110,8 @@ function api_get_settings(success_function) {
 }
 
 api_get_settings(function (result) {
-    let type = "task";
-    let shown = 10;
+    let type = "day";
+    let shown = 3;
 
     for (const setting of result.settings) {
         type = setting.upcoming_type
