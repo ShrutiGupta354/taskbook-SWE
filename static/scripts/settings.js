@@ -42,7 +42,8 @@ api_get_settings(function(result){
         shown = setting.upcoming_shown
     }
 
-    console.log("type: " + type + " shown: " + shown)
+    document.getElementById("upcoming_shown").value = shown;
+    document.getElementById("upcoming_type").value = type;
 })
 
 
