@@ -45,7 +45,3 @@ api_get_settings(function(result){
     document.getElementById("upcoming_shown").value = shown;
     document.getElementById("upcoming_type").value = type;
 })
-
-//when the user clicks the submit button on task view customzation div:
-//put the values selected into the databse
-//now go to task view and display tasks according to those values

@@ -142,7 +142,7 @@
         <!--default view, task view settings, week view settings-->
         <div class="row blue_border mb-3 pb-2">
             <div class="date">
-            <form>
+            <form action = "/api/settings" method = "PUT">
                 <h2>View Customization</h2>
                 <h3>Default View</h3>
                 <div class="container">
@@ -180,10 +180,10 @@
                             <p>Upcoming</p>
                         </div>
                         <div class="col">
-                            <input id = "upcoming_shown" name = "upcoming_shown" type="number">
+                            <input id = "upcoming_shown" name = "new_upcoming_shown" type="number">
                         </div>
                         <div class="col">
-                            <select id = "upcoming_type" name="upcoming_type">
+                            <select id = "upcoming_type" name="new_upcoming_type">
                                 <option value="task">Task(s)</option>
                                 <option value="day">Day(s)</option>
                             </select>

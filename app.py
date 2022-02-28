@@ -184,5 +184,11 @@ def get_settings():
     return { "settings": settings }
 
 #change customization settings for settings page
-# @app.put('/api/settings')
-# def update_settings():
+@app.put('/api/settings')
+def update_settings():
+    'update customization settings in database'
+    customization_table = taskbook_db.get_table('customization')
+    new_upcoming_type = request.form.get('new_upcoming_type')
+    new_upcoming_shown = request.form.get('new_upcoming_shown')
+    user = session['user_email']
+    customization_table.update(dict(id=user['id'], upcoming_type=new_upcoming_type, upcoming_shown=new_upcoming_shown), keys=[id])
