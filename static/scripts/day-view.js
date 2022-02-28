@@ -65,7 +65,7 @@ function displayNextDays(key, num) {
     //fetches tasks and stores them into array to be sorted by date
     api_get_tasks(function (result) {
         for (const task of result.tasks) {
-            if ((task.date > key) && (task.date < end_date)) {
+            if ((task.date > key) && (task.date <= end_date)) {
                 taskDesc = makeDescriptionHTML(task, taskDesc);
                 document.getElementById("toast-container-upcoming").innerHTML = taskDesc;
                 empty = false;
@@ -110,8 +110,8 @@ function api_get_settings(success_function) {
 }
 
 api_get_settings(function (result) {
-    let type = "day";
-    let shown = 3;
+    let type = "task";
+    let shown = 10;
 
     for (const setting of result.settings) {
         type = setting.upcoming_type
