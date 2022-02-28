@@ -24,7 +24,7 @@ jQuery.when(jQuery.getJSON("/get_security_question?user_email=" + current_user_e
 
 
 
-//check database to see what customization options the user set
+//check database to see what customization options the user set, display the current settings
 function api_get_settings(success_function) {
 
     $.ajax({
@@ -45,9 +45,6 @@ api_get_settings(function(result){
     document.getElementById("upcoming_shown").value = shown;
     document.getElementById("upcoming_type").value = type;
 })
-
-
-//display the customization options that the user has set on the settings page
 
 //when the user clicks the submit button on task view customzation div:
 //put the values selected into the databse
