@@ -34,8 +34,8 @@ function api_get_settings(success_function) {
 }
 
 api_get_settings(function(result){
-    let type = "";
-    let shown = 0;
+    let type = "Tasks";
+    let shown = 10;
 
     for(const setting of result.settings) {
         type = setting.upcoming_type

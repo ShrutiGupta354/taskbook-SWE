@@ -142,6 +142,7 @@
         <!--default view, task view settings, week view settings-->
         <div class="row blue_border mb-3 pb-2">
             <div class="date">
+            <form>
                 <h2>View Customization</h2>
                 <h3>Default View</h3>
                 <div class="container">
@@ -179,11 +180,11 @@
                             <p>Upcoming</p>
                         </div>
                         <div class="col">
-                            <input id = "upcoming_shown" type="number">
+                            <input id = "upcoming_shown" name = "upcoming_shown" type="number">
                         </div>
                         <div class="col">
-                            <select id = "upcoming_type">
-                                <option value="Tasks" selected>Task(s)</option>
+                            <select id = "upcoming_type" name="upcoming_type">
+                                <option value="Tasks">Task(s)</option>
                                 <option value="Days">Day(s)</option>
                             </select>
                         </div>
@@ -213,6 +214,7 @@
                 <div class="d-flex float-end">
                     <input class="btn btn-yellow me-3" type="submit">
                 </div>
+            </form>
             </div>
         </div>
 
