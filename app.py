@@ -183,14 +183,6 @@ def get_settings():
     settings = [dict(x) for x in customization_table.find(email=session['user_email'])]
     return { "settings": settings }
 
-#get customization settings for tasks page
-@app.get('/api/tasks')
-def get_settings():
-    'return customization settings for the user'
-    customization_table = taskbook_db.get_table('customization')
-    settings = [dict(x) for x in customization_table.find(email=session['user_email'])]
-    return { "customization_settings": settings }
-
 #change customization settings for settings page
 # @app.put('/api/settings')
 # def update_settings():

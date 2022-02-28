@@ -103,7 +103,7 @@ displayDayTasks(dateKey);
 function api_get_settings(success_function) {
 
     $.ajax({
-        url: '/api/tasks', type: "GET",
+        url: '/api/settings', type: "GET",
         success: success_function
     });
 }
