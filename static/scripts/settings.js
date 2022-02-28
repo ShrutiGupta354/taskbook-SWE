@@ -34,7 +34,7 @@ function api_get_settings(success_function) {
 }
 
 api_get_settings(function(result){
-    let type = "Tasks";
+    let type = "task";
     let shown = 10;
 
     for(const setting of result.settings) {
