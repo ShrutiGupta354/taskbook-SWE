@@ -54,7 +54,7 @@ def login():
             # if user does not exist then:
             flash('Email not registered. Please sign up first.', category='error')
 
-    return render_template("login.html")
+    return render_template("login.html", email=email, password=password)
 
 
 @auth.route('/logout')
@@ -97,14 +97,19 @@ def register():
 
         if(len(email)<1):
             flash('Email cannot be empty', category='error')
+
         elif(password1 != password2):
             flash('Password do not match', category='error')
+
         elif(len(password1)<8):
             flash('Password must be at least 8 characters long', category='error')
+
         elif(len(security_question)<1):
             flash('Security question cannot be empty', category='error')
+
         elif(len(security_answer)<1):
             flash('Security answer cannot be empty', category='error')
+
         else:
             try:
                 user_table = taskbook_db.get_table('user_cred')
@@ -113,6 +118,7 @@ def register():
                 if(user):
                     # flash alert and make them sign in again
                     flash('A user exists with that email address.', category='error')
+
                 else:
                     # if new user, then hash the password, insert to table and log them in
                     hashed_password = generate_password_hash(password1, method='sha256')
@@ -131,7 +137,7 @@ def register():
                 print(409, str(e))
                 return ("409 Bad Request:"+str(e), 409)
 
-    return render_template('register.html')
+    return render_template('register.html', email=email, password1=password1, password2=password2, security_question=security_question, security_answer=security_answer)
 
 
 @auth.route('/change_password', methods=['POST'])

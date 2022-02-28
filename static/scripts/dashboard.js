@@ -50,7 +50,7 @@ function displayDayTasks(key) {
                 time: "-",
                 description: "<h4 class='ms-3'>No tasks for today!<h4>",
             }
-            taskDesc = makeDescriptionHTML(task, taskDesc);
+            taskDesc = makeDescriptionHTML(task, taskDesc, false);
             document.getElementById("today_dashboard").innerHTML = taskDesc;
         }
 
@@ -64,3 +64,6 @@ let dateKey = viewDate.getFullYear() + '-' + appendZero(viewDate.getMonth() + 1)
 //displays tasks for today
 displayDayTasks(dateKey);
 displayProgress(dateKey)
+
+// hide the add task button on the dashboard because we want the modal to pop up on clicking the toast, not the button
+document.getElementById("add-task-button").style.display = "none";

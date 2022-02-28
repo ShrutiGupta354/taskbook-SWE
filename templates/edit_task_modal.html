@@ -1,4 +1,5 @@
 <!-- Modal -->
+<link rel="stylesheet" href="{{url_for('static', filename='styles/add_task.css')}}">
     <div class="modal fade" id="edit_task_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="edit_task_modal_label" aria-hidden="true">
         <div class="modal-dialog">
@@ -7,37 +8,39 @@
                     <h5 class="modal-title" id="edit_task_modal_label">Edit Task</h5>
                     <button type="button" id="close_button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <!-- let user input date and data for the task -->
-                    <!-- the form body to insert the task with date and content -->
-                    <!-- output for date is MM-DD-YYYY -->
-                        <div class="mb-3">
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control datepicker" id="new_date" name="new_date" type="date" value=""
-                                data-date-format="mm/dd/yyyy" required />
+            <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="alert alert-danger mt-2 hide" role="alert" id="update_task_alerts">
+                    
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Task</label>
-                            <textarea class="form-control" id="new_description" rows="2" name="new_description"
-                                required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="time" class="form-label">Time</label>
-                            <input class="form-control" id="new_time" name="new_time" type="time" required></input>
-                        </div>
-                        <input type="hidden" name="task_id" id="task_id" />
-                        <div class="mb-3 form-check">
-                            <input class="form-check-input" type="checkbox" value="completed" id="mark_completed">
-                            <label class="form-check-label" for="mark_completed" id="label_for_completed">
-                                Mark as Completed
-                            </label>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input class="form-check-input" type="checkbox" value="important" id="mark_important">
-                            <label class="form-check-label" for="mark_important" id="label_for_important">
-                                Mark as Important
-                            </label>
-                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="control-label" for="date">Date</label>
+                        <input class="form-control datepicker" id="new_date" name="new_date" type="date" value=""
+                            data-date-format="mm/dd/yyyy" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Task</label>
+                        <textarea class="form-control" id="new_description" rows="2" name="new_description"
+                            required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="time" class="form-label">Time</label>
+                        <input class="form-control" id="new_time" name="new_time" type="time" required></input>
+                    </div>
+                    <input type="hidden" name="task_id" id="task_id" />
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" value="completed" id="mark_completed">
+                        <label class="form-check-label" for="mark_completed" id="label_for_completed">
+                            Mark as Completed
+                        </label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" value="important" id="mark_important">
+                        <label class="form-check-label" for="mark_important" id="label_for_important">
+                            Mark as Important
+                        </label>
+                    </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <!-- don't click submit for now -->
@@ -60,6 +63,12 @@
         let new_time = $("#new_time").val();
         let mark_important = $("#mark_important")[0].checked;
         let mark_completed = $("#mark_completed")[0].checked;
+
+        if (new_description == "") {
+            $("#update_task_alerts").html("Cannot have empty fields!!!");
+            $("#update_task_alerts").removeClass("hide");
+            $("#edit_task_modal").addClass("shake");
+        }
 
         // send ajax request to update the task
         // create the task object first

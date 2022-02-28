@@ -72,7 +72,7 @@ function displayWeeklyTasks(key){
                 time:"-",
                 description:"<h4 class='ms-3'>No tasks for today!<h4>",
             }
-            taskDesc = makeDescriptionHTML(task, taskDesc);
+            taskDesc = makeDescriptionHTML(task, taskDesc,false);
             document.getElementById(key).innerHTML =taskDesc;
         }
     });
