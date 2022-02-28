@@ -26,6 +26,9 @@ function displayDayTasks(key){
     });
 }
 
+//check customizations in the database
+//now we will have to modify this function to display what the customizations are set at
+
 //Function to display next 10 tasks
 function displayNextTasks(key){
     let taskDesc = "";  //building the tasks into this variable

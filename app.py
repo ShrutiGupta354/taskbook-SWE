@@ -174,3 +174,23 @@ def delete_task():
         return ("409 Bad Request:"+str(e), 409)
     # return Success
     return {'status':200, 'success': True}
+
+#get customization settings for settings page
+@app.get('/api/settings')
+def get_settings():
+    'return customization settings for the user'
+    customization_table = taskbook_db.get_table('customization')
+    settings = [dict(x) for x in customization_table.find(email=session['user_email'])]
+    return { "settings": settings }
+
+#get customization settings for tasks page?
+# @app.get('/api/tasks')
+# def get_settings():
+#     'return customization settings for the user'
+#     customization_table = taskbook_db.get_table('customization')
+#     settings = [dict(x) for x in customization_table.find(email=session['user_email'])]
+#     return { "customization_settings": settings }
+
+#change customization settings for settings page
+# @app.put('/api/settings')
+# def update_settings():
