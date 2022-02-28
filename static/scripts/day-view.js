@@ -59,7 +59,7 @@ function displayNextDays(key, num) {
     let taskDesc = "";  //building the tasks into this variable
     let empty = true; //keeping track of whether we have a task or not
     end_date = new Date() //varibale to hold end date
-    end_date.setDate(new Date(key).getDate() + num) //calculate end date (num days after current date)
+    end_date.setDate(new Date(key).getDate() + num + 1) //calculate end date (num days after current date)
     end_date = end_date.getFullYear() + '-' + appendZero(end_date.getMonth() + 1) + '-' + appendZero(end_date.getDate()) //conveert to string for comparison
 
     //fetches tasks and stores them into array to be sorted by date
@@ -68,7 +68,7 @@ function displayNextDays(key, num) {
             if ((task.date > key) && (task.date < end_date)) {
                 taskDesc = makeDescriptionHTML(task, taskDesc);
                 document.getElementById("toast-container-upcoming").innerHTML = taskDesc;
-                empy = false;
+                empty = false;
             }
         }
         if (empty) {
