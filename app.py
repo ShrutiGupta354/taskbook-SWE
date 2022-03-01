@@ -174,3 +174,42 @@ def delete_task():
         return ("409 Bad Request:"+str(e), 409)
     # return Success
     return {'status':200, 'success': True}
+
+# ---------------------------
+# account API
+# ---------------------------
+
+@app.post('/api/account')
+def verify_account():
+    creds = request.get_json()
+    user_table = taskbook_db.get_table('user_cred')
+    if creds.email != session['email']:
+        return ("409 Bad Request: Incorrect Email", 409)
+    try:
+        user_table.find_one(email=creds.email, password=creds.hash)
+    except Exception as e:
+        print(409, str(e))
+        return ("409 Bad Request:"+str(e), 409)
+
+@app.delete('/api/account')
+def delete_account():
+    'Delete a users account (After verification)'
+    task_table = taskbook_db.get_table('task')
+    user_table = taskbook_db.get_table('user_cred')
+    cust_table = taskbook_db.get_table('customization')
+    
+    try:
+        user_table.delete(email=session['user_email'])
+    except Exception as e:
+        print(409, str(e))
+    try:
+        task_table.delete(email=session['user_email'])
+    except Exception as e:
+        print(409, str(e))
+    try:
+        task_table.delete(email=session['user_email'])
+    except Exception as e:
+        print(409, str(e))
+    
+    session.clear()
+    return {'status':200, 'success': True}
