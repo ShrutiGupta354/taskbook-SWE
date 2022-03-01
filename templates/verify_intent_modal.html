@@ -13,8 +13,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="mb-3 hide">
-                        <div class="alert alert-danger mt-2" role="alert" id="add_task_alerts">
+                    <div id="verify_error" class="mb-3 hide">
+                        <div class="alert alert-danger mt-2" role="alert" id="verify_alerts">
                             <!-- this is where you would trigger errors if they leave sth empty for example -->
                         </div>
                     </div>
@@ -24,25 +24,23 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="control-label" for="user_email">Email</label>
-                        <input class="form-control" id="user_email" name="user_email" type="email" required />
+                        <label class="control-label" for="verify_user_email">Email</label>
+                        <input class="form-control" id="verify_user_email" name="verify_user_email" type="email" required />
                     </div>
 
                     <div class="mb-3">
-                        <label class="control-label" for="user_password">Password</label>
-                        <input class="form-control" id="user_password" name="user_password" type="password" required />
+                        <label class="control-label" for="verify_user_password">Password</label>
+                        <input class="form-control" id="verify_user_password" name="verify_user_password" type="password" required />
                     </div>
-
+                    <input type="hidden" id="delete_type" name="delete_type" value="none">
                 </div>
 
                 <div class="modal-footer d-flex justify-content-between align-items-center ">
-                    <!-- don't click submit for now -->
-                    <button type="button" class="btn btn-outline-danger" id="add-task">Submit</button>
-                    <button type="button" id="close-add-task" class="btn btn-outline-success"
+                    <button type="button" class="btn btn-outline-danger" id="verify">Submit</button>
+                    <button type="button" id="close-verify" class="btn btn-outline-success"
                         data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
