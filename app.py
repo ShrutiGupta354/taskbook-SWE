@@ -1,12 +1,16 @@
 # SWIFT Taskbook
-# Web Application for Task Management 
+# Web Application for Task Management
 
 # flask web objects
 from auth import auth
 from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request, session, flash
+<<<<<<< HEAD
 from werkzeug.security import generate_password_hash, check_password_hash
+=======
+from werkzeug.exceptions import HTTPException,BadRequest,NotFound,InternalServerError
+>>>>>>> main
 from datetime import date
 import dataset
 
@@ -85,7 +89,6 @@ def weekly():
     flash('You need to be logged in first', category='error')
     return redirect(url_for('auth.login'))
 
-
 #--------------------
 # For authentication
 #-------------------
@@ -93,7 +96,7 @@ def weekly():
 app.register_blueprint(auth, url_prefix='/')
 
 # ---------------------------
-# task REST api 
+# task REST api
 # ---------------------------
 
 @app.get('/api/tasks')
@@ -147,7 +150,7 @@ def update_task():
     except Exception as e:
         print(400, str(e))
         return ("400 Bad Request:"+str(e), 400)
-    if 'date' in data: 
+    if 'date' in data:
         data['date'] = data['date']
     try:
         task_table = taskbook_db.get_table('task')
@@ -226,3 +229,38 @@ def delete_account():
             print(409, str(e))
     
     return ("409 Bad Request: Invalid selection" + data['del_type'], 409)
+#get customization settings for settings page
+@app.get('/api/settings')
+def get_settings():
+    'return customization settings for the user'
+    customization_table = taskbook_db.get_table('customization')
+    settings = [dict(x) for x in customization_table.find(email=session['user_email'])]
+    return { "settings": settings }
+
+#change customization settings for settings page
+@app.post('/api/settings')
+def update_settings():
+    'update customization settings in database'
+    customization_table = taskbook_db.get_table('customization')
+    new_upcoming_type = request.form.get('new_upcoming_type')
+    new_upcoming_shown = request.form.get('new_upcoming_shown')
+    new_view = request.form.get('default_view')
+    user = customization_table.find_one(email=session['user_email'])
+    if(user):
+        customization_table.update(dict(id=user['id'], view=new_view, upcoming_type=new_upcoming_type, upcoming_shown=new_upcoming_shown), keys=['id'])
+    return redirect(url_for('settings'))
+
+#methods to handle errors for HTTP errors such as file not found and server errors
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    #determine which type of exception occurred and redirect the user to the appropriate webpage
+    if(isinstance(e,BadRequest)):
+        return render_template("errorpage.html", data="Error 400: Bad Request"),400
+    elif(isinstance(e,NotFound)):
+        return render_template("errorpage.html", data="Error 404: Page Not Found"),404
+    elif(isinstance(e,InternalServerError)):
+        return render_template("errorpage.html", data="Error 500: Internal Server Error"),500
+    else:
+        return render_template("errorpage.html", data="Sorry, Something Went Wrong!"),e
+
+
