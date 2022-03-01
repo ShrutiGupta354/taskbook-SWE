@@ -50,7 +50,7 @@ api_get_settings(function(result){
     if(view === "dashboard") {
         document.getElementById("default_view_dashboard").checked = true;
     }
-    else if(view === "monthly") {
+    else if(view === "calendar") {
         document.getElementById("default_view_monthly").checked = true;
     }
     else if (view === "weekly") {
