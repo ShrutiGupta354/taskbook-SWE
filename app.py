@@ -6,11 +6,8 @@ from auth import auth
 from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request, session, flash
-<<<<<<< HEAD
 from werkzeug.security import generate_password_hash, check_password_hash
-=======
 from werkzeug.exceptions import HTTPException,BadRequest,NotFound,InternalServerError
->>>>>>> main
 from datetime import date
 import dataset
 
