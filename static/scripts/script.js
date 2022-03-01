@@ -83,8 +83,3 @@ function api_delete_account(data, success_function, error_function) {
           success:success_function,
           error:error_function});
 }
-
-//Test function
-function test_success_function(){
-  console.log("TEST SUCCESS")
-}
