@@ -186,6 +186,6 @@ def handle_exception(e):
     elif(isinstance(e,InternalServerError)):
         return render_template("error500.html", data="Error 500: Internal Server Error"),500
     else:
-        return render_template("errorpage.html", datat="Sorry, Something Went Wrong!"),e
+        return render_template("errorpage.html", data="Sorry, Something Went Wrong!"),e
 
 
