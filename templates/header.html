@@ -16,7 +16,10 @@
   <!-- Custom Scripts -->
   <script src="{{url_for('static', filename='scripts/script.js')}}"></script>
   <!-- API Access Variables -->
-  <script> $API_PATH = "{{url_for('get_tasks')}}"; </script>
+  <script> 
+    $TASK_API_PATH = "{{url_for('get_tasks')}}"; 
+    $ACCOUNT_API_PATH = "{{url_for('delete_account')}}"
+  </script>
 </head>
 <body>
   <main>

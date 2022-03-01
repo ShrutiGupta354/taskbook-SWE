@@ -49,12 +49,12 @@ function makeDescriptionHTML(task, taskDesc, isATask=true){
 
 function api_get_tasks(success_function) {
 
-  $.ajax({url:$API_PATH, type:"GET", 
+  $.ajax({url:$TASK_API_PATH, type:"GET", 
           success:success_function});
 }
 
 function api_create_task(task, success_function) {
-  $.ajax({url:$API_PATH, type:"POST", 
+  $.ajax({url:$TASK_API_PATH, type:"POST", 
           data:JSON.stringify(task), 
           contentType:"application/json; charset=utf-8",
           success:success_function});
@@ -62,7 +62,7 @@ function api_create_task(task, success_function) {
 
 function api_update_task(task, success_function) {
   task.id = parseInt(task.id)
-  $.ajax({url:$API_PATH, type:"PUT", 
+  $.ajax({url:$TASK_API_PATH, type:"PUT", 
           data:JSON.stringify(task), 
           contentType:"application/json; charset=utf-8",
           success:success_function});
@@ -70,9 +70,16 @@ function api_update_task(task, success_function) {
 
 function api_delete_task(task, success_function) {
   task.id = parseInt(task.id)
-  $.ajax({url:$API_PATH, type:"DELETE", 
+  $.ajax({url:$TASK_API_PATH, type:"DELETE", 
           data:JSON.stringify(task), 
           contentType:"application/json; charset=utf-8",
           success:success_function});
 }
 
+function api_delete_account(data, success_function, error_function) {
+  $.ajax({url:$ACCOUNT_API_PATH, type:"DELETE",
+          data:JSON.stringify(data),
+          contentType:"application/json; charset=utf-8",
+          success:success_function,
+          error:error_function});
+}
