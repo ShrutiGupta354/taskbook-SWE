@@ -6,6 +6,7 @@ from auth import auth
 from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request, session, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
 import dataset
 
@@ -179,38 +180,49 @@ def delete_task():
 # account API
 # ---------------------------
 
-@app.post('/api/account')
-def verify_account():
-    creds = request.get_json()
+@app.delete('/api/account')
+def delete_account():
+    'verification'
+    data = request.get_json()
     user_table = taskbook_db.get_table('user_cred')
-    if creds.email != session['email']:
-        return ("409 Bad Request: Incorrect Email", 409)
+    if data['email'] != session['user_email']:
+        return ("Incorrect Email", 409)
     try:
-        user_table.find_one(email=creds.email, password=creds.hash)
+        user = user_table.find_one(email=data['email'])
+        if(not check_password_hash(user['password'], data['passwd'])):
+            return("Invalid Credentials", 409)
     except Exception as e:
         print(409, str(e))
         return ("409 Bad Request:"+str(e), 409)
-    return {'status':200, 'success': True}
-
-@app.delete('/api/account')
-def delete_account():
-    'Delete a users account (After verification)'
+    
     task_table = taskbook_db.get_table('task')
-    user_table = taskbook_db.get_table('user_cred')
     cust_table = taskbook_db.get_table('customization')
     
-    try:
-        user_table.delete(email=session['user_email'])
-    except Exception as e:
-        print(409, str(e))
-    try:
-        task_table.delete(email=session['user_email'])
-    except Exception as e:
-        print(409, str(e))
-    try:
-        task_table.delete(email=session['user_email'])
-    except Exception as e:
-        print(409, str(e))
+    # Deletion Selection, then droping entrys from the table
+    if data['del_type'] == "settings":
+        try:
+            user_cust = dict(email=session['user_email'], view="dashboard", dark_mode=False, upcoming_shown=10, upcoming_type="task", week_view="dropdown", font_size="medium")
+            cust_table.update(user_cust, ['email'])
+            flash("All settings reset")
+            return {'status':200, 'success': True}
+        except Exception as e:
+            print(409, str(e))
+    elif data['del_type'] == "tasks":
+        try:
+            task_table.delete(email=session['user_email'])
+            flash("All tasks deleted")
+            return {'status':200, 'success': True}
+        except Exception as e:
+            print(409, str(e))
+    elif data['del_type'] == "account":
+        try:
+            cust_table.delete(email=session['user_email'])
+            task_table.delete(email=session['user_email'])
+            user_table.delete(email=session['user_email'])
+            session.clear()
+            flash("Account successfully deleted!")
+            return {'status':200, 'success': True}
+        except Exception as e:
+            print(409, str(e))
     
-    session.clear()
-    return {'status':200, 'success': True}
+    return ("409 Bad Request: Invalid selection" + data['del_type'], 409)

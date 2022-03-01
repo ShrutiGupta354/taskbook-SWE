@@ -15,3 +15,21 @@ jQuery.when(jQuery.getJSON("/get_security_question?user_email=" + current_user_e
         $("#current_question").val(data.question);
     }
 });
+
+document.getElementById('verify').addEventListener("click", function() {
+    us_email = $("#verify_user_email").val();
+    us_pass = $("#verify_user_password").val();
+    del_type = $("#delete_type").val();
+    
+    data = {
+        "email":us_email,
+        "passwd":us_pass,
+        "del_type":del_type
+    }
+    
+    api_delete_account(data, function(){ window.location = window.location.origin }, function(result) {    
+        $('#verify_error').removeClass('hide');
+        document.getElementById('verify_alerts').innerHTML = result.responseText;
+        console.log(result);
+    });
+});
