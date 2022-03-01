@@ -190,6 +190,7 @@ def verify_account():
     except Exception as e:
         print(409, str(e))
         return ("409 Bad Request:"+str(e), 409)
+    return {'status':200, 'success': True}
 
 @app.delete('/api/account')
 def delete_account():
