@@ -275,13 +275,13 @@
                 </div>
                 <div class="row">
                     <div class="col-4 text-center">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Account</button>
+                        <button type="button" onclick="$('#delete_type').value='account'" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Account</button>
                     </div>
                     <div class="col-4 text-center">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Tasks</button>
+                        <button type="button" onclick="$('#delete_type').value='tasks'" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Tasks</button>
                     </div>
                     <div class="col-4 text-center">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Customizations</button>
+                        <button type="button" onclick="$('#delete_type').value='settings'" data-bs-toggle="modal" data-bs-target="#verify_intent_modal" class="btn btn-danger me-3">Delete Customizations</button>
                     </div>
                 </div>
             </div>
