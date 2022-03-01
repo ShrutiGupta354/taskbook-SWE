@@ -190,7 +190,8 @@ def update_settings():
     customization_table = taskbook_db.get_table('customization')
     new_upcoming_type = request.form.get('new_upcoming_type')
     new_upcoming_shown = request.form.get('new_upcoming_shown')
+    new_view = request.form.get('default_view')
     user = customization_table.find_one(email=session['user_email'])
     if(user):
-        customization_table.update(dict(id=user['id'], upcoming_type=new_upcoming_type, upcoming_shown=new_upcoming_shown), keys=['id'])
+        customization_table.update(dict(id=user['id'], view=new_view, upcoming_type=new_upcoming_type, upcoming_shown=new_upcoming_shown), keys=['id'])
     return redirect(url_for('settings'))

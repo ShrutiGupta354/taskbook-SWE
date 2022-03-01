@@ -36,12 +36,28 @@ function api_get_settings(success_function) {
 api_get_settings(function(result){
     let type = "task";
     let shown = 10;
+    let view = "dashboard"
 
     for(const setting of result.settings) {
         type = setting.upcoming_type
         shown = setting.upcoming_shown
+        view = setting.view
     }
 
     document.getElementById("upcoming_shown").value = shown;
     document.getElementById("upcoming_type").value = type;
+    
+    if(view === "dashboard") {
+        document.getElementById("default_view_dashboard").checked = true;
+    }
+    else if(view === "monthly") {
+        document.getElementById("default_view_monthly").checked = true;
+    }
+    else if (view === "weekly") {
+        document.getElementById("default_view_weekly").checked = true;
+    }
+    else {
+        document.getElementById("default_view_task").checked = true;
+    }
+
 })

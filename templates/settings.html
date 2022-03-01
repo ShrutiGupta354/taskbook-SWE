@@ -107,32 +107,32 @@
         <!--default view, task view settings, week view settings-->
         <div class="row blue_border mb-3 pb-2">
             <div class="date">
-            <form action = "/api/settings" method = "PUT">
+            <form action = "/api/settings" method = "POST">
                 <h2>View Customization</h2>
                 <h3>Default View</h3>
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <label class="radio">Dashboard
-                                <input name="default_view" type="radio" class="checkbox" checked="checked">
+                                <input id="default_view_dashboard" value = "dashboard" name="default_view" type="radio" class="checkbox" >
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                         <div class="col">
                             <label class="radio">Monthly View
-                                <input name="default_view" type="radio" class="checkbox">
+                                <input id="default_view_monthly" value = "monthly" name="default_view" type="radio" class="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                         <div class="col">
                             <label class="radio">Weekly View
-                                <input name="default_view" type="radio" class="checkbox">
+                                <input id="default_view_weekly" value = "weekly" name="default_view" type="radio" class="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                         <div class="col">
                             <label class="radio">Task View
-                                <input name="default_view" type="radio" class="checkbox">
+                                <input id="default_view_task" value = "task" name="default_view" type="radio" class="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
