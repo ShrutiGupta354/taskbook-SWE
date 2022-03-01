@@ -175,7 +175,28 @@ def delete_task():
     # return Success
     return {'status':200, 'success': True}
 
-    #methods to handle errors for HTTP errors such as file not found and server errors
+#get customization settings for settings page
+@app.get('/api/settings')
+def get_settings():
+    'return customization settings for the user'
+    customization_table = taskbook_db.get_table('customization')
+    settings = [dict(x) for x in customization_table.find(email=session['user_email'])]
+    return { "settings": settings }
+
+#change customization settings for settings page
+@app.post('/api/settings')
+def update_settings():
+    'update customization settings in database'
+    customization_table = taskbook_db.get_table('customization')
+    new_upcoming_type = request.form.get('new_upcoming_type')
+    new_upcoming_shown = request.form.get('new_upcoming_shown')
+    new_view = request.form.get('default_view')
+    user = customization_table.find_one(email=session['user_email'])
+    if(user):
+        customization_table.update(dict(id=user['id'], view=new_view, upcoming_type=new_upcoming_type, upcoming_shown=new_upcoming_shown), keys=['id'])
+    return redirect(url_for('settings'))
+
+#methods to handle errors for HTTP errors such as file not found and server errors
 @app.errorhandler(HTTPException)
 def handle_exception(e):
     #determine which type of exception occurred and redirect the user to the appropriate webpage
