@@ -180,11 +180,11 @@ def delete_task():
 def handle_exception(e):
     #determine which type of exception occurred and redirect the user to the appropriate webpage
     if(isinstance(e,BadRequest)):
-        return render_template("error400.html", data="Error 400: Page Not Found"),400
+        return render_template("errorpage.html", data="Error 400: Bad Request"),400
     elif(isinstance(e,NotFound)):
-        return render_template("error404.html", data="Error 404: Bad Request"),404
+        return render_template("errorpage.html", data="Error 404: Page Not Found"),404
     elif(isinstance(e,InternalServerError)):
-        return render_template("error500.html", data="Error 500: Internal Server Error"),500
+        return render_template("errorpage.html", data="Error 500: Internal Server Error"),500
     else:
         return render_template("errorpage.html", data="Sorry, Something Went Wrong!"),e
 
