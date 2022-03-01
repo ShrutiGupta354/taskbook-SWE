@@ -19,7 +19,7 @@ function displayDayTasks(key){
                 time:"-",
                 description:"<h4 class='ms-3'>No tasks for today!<h4>",
             }
-            taskDesc = makeDescriptionHTML(task, taskDesc);
+            taskDesc = makeDescriptionHTML(task, taskDesc,false);
             document.getElementById("toast-container-today").innerHTML =taskDesc;
         }
 
@@ -48,7 +48,7 @@ function displayNextTasks(key, num){
                 time:"-",
                 description:"<h4 class='ms-3'>No upcoming tasks!<h4>",
             }
-            taskDesc = makeDescriptionHTML(task, taskDesc);
+            taskDesc = makeDescriptionHTML(task, taskDesc, false);
             document.getElementById("toast-container-upcoming").innerHTML =taskDesc;
         }
     });

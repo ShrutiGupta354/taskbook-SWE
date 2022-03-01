@@ -26,8 +26,14 @@ function sendDataToModal(id,desc,date,time,important,completed){
 }
 
 //Function to display tasks in a box view
-function makeDescriptionHTML(task, taskDesc){
-  taskDesc += `<div class="toast show mb-3 mt-3 mx-3" role="alert" aria-live="assertive" aria-atomic="true" style="cursor:pointer" onclick="sendDataToModal('${task.id}','${task.description}','${task.date}','${task.time}','${task.important}','${task.completed}')" data-bs-toggle="modal" data-bs-target="#edit_task_modal">`;
+function makeDescriptionHTML(task, taskDesc, isATask=true){
+  taskDesc += `<div class="toast show mb-3 mt-3 mx-3" role="alert" aria-live="assertive" aria-atomic="true" style="cursor:pointer"`;
+  if(isATask){
+    taskDesc += ` onclick="sendDataToModal('${task.id}','${task.description}','${task.date}','${task.time}','${task.important}','${task.completed}')" data-bs-toggle="modal" data-bs-target="#edit_task_modal"`;
+  }else{
+    taskDesc += ` data-bs-toggle="modal" data-bs-target="#staticBackdrop"`;
+  }
+  taskDesc += `>`;
       taskDesc += `<div class="toast-header justify-content-between">`;
           taskDesc += (task.important) ? `<strong><i class="bi bi-brightness-high-fill" style="color:red"></i></strong>` : `<span></span>`
           taskDesc += `<span class="fs-6">${task.date} | ${task.time}</span>`;
