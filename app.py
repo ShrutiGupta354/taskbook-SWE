@@ -178,14 +178,14 @@ def delete_task():
     #methods to handle errors for HTTP errors such as file not found and server errors
 @app.errorhandler(HTTPException)
 def handle_exception(e):
-    #determine which type of exception occured and redirect the user to the appropriate webpage
+    #determine which type of exception occurred and redirect the user to the appropriate webpage
     if(isinstance(e,BadRequest)):
-        return render_template("error400.html"),400
+        return render_template("error400.html", data="Error 400: Page Not Found"),400
     elif(isinstance(e,NotFound)):
-        return render_template("error404.html"),404
+        return render_template("error404.html", data="Error 404: Bad Request"),404
     elif(isinstance(e,InternalServerError)):
-        return render_template("error500.html"),500
+        return render_template("error500.html", data="Error 500: Internal Server Error"),500
     else:
-        return render_template("errorpage.html"),e
+        return render_template("errorpage.html", datat="Sorry, Something Went Wrong!"),e
 
 
