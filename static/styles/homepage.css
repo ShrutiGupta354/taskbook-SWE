@@ -33,8 +33,6 @@
     font-size: 80px;
     letter-spacing: 5px;
     margin-top: 10%;
-    background: linear-gradient(to right,#F44336,black);
-    color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
     -moz-background-clip: text;
